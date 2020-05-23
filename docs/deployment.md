@@ -1,6 +1,5 @@
 ## 部署文档
 
-
 ## 安装数据库
 
 ```bash
@@ -29,3 +28,12 @@ CREATE USER 'covid19'@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'covid19'@'%' WITH GRANT OPTION;
 flush privileges;
 ```
+
+private sub command1(){
+    click()'
+}
+
+
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+flush privileges;
