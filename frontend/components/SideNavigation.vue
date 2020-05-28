@@ -80,9 +80,14 @@ export default {
     items() {
       return [
         {
+          icon: 'mdi-home',
+          title: '首页',
+          link: this.localePath('/')
+        },
+        {
           icon: 'mdi-chart-timeline-variant',
           title: '疫情概览',
-          link: this.localePath('/')
+          link: this.localePath('/statistics')
         },
         {
           icon: 'mdi-pencil-circle-outline',

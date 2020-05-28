@@ -382,25 +382,25 @@ export default {
       author: {
         headers: [
           { text: '小组成员', value: 'member'},
-          { text: '主要工作', value: 'work' },
+          { text: '学号', value: 'work' },
           { text: '联系方式', value: 'contact' },
 
         ],
         data: [
           {
-            member: "陈俊潼 (10185101210)",
-            work: "前端",
+            member: "陈俊潼",
+            work: "10185101210",
             contact: "Bill.Chen@live.com"
           },
           {
-            member: "陈俊潼 (10185101210)",
-            work: "前端",
-            contact: "Bill.Chen@live.com"
+            member: "包梁",
+            work: "10185101281",
+            contact: "964131617@qq.com"
           },
           {
-            member: "陈俊潼 (10185101210)",
-            work: "前端",
-            contact: "Bill.Chen@live.com"
+            member: "谢嘉东",
+            work: "10185101247",
+            contact: "xiejiadong0623@gmail.com"
           }
         ]
     }
