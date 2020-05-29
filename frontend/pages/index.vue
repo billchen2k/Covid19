@@ -43,7 +43,7 @@
   import FlowPc from '@/components/flow/FlowPc.vue'
   import FlowSp from '@/components/flow/FlowSp.vue'
   import PageHeader from '@/components/PageHeader.vue'
-
+  import TimeBarChart from '@/components/TimeBarChart.vue'
   export default Vue.extend({
     components: {
       CovidIcon,
@@ -52,12 +52,9 @@
       FlowPc,
       FlowSp
     },
-    head(): any {
-      const title: TranslateResult = this.$t(
-        '新型コロナウイルス感染症が心配なときに'
-      )
+    head() {
       return {
-        title
+        title: 'Covid-19 疫情分析与管理系统 | 数据库 2020 期末项目'
       }
     }
   })
@@ -137,6 +134,19 @@
   @include lessThan($medium) {
     .only-pc {
       display: none;
+    }
+  }
+  .DataBlock {
+    margin: 20px -8px;
+
+    .DataCard {
+      @include largerThan($medium) {
+        padding: 10px;
+      }
+
+      @include lessThan($small) {
+        padding: 4px 8px;
+      }
     }
   }
 </style>

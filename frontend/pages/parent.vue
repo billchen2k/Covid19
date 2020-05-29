@@ -1,165 +1,558 @@
 <template>
-  <div class="Parent">
-    <h2 class="Parent-Heading">
-      {{ $t('臨時休校中の新型コロナウイルス感染症対応についてのお願い') }}
-    </h2>
-    <div v-for="(item, i) in items" :key="i">
-      <TextCard :title="item.title" :body="item.body" />
-    </div>
+  <div class="MainPage">
+    <page-header
+      :icon="headerItem.icon"
+      :title="headerItem.title"
+      :date="headerItem.date"
+    />
+    <!--    <whats-new class="mb-4" :items="newsItems" />-->
+    <!--    <static-info-->
+    <!--      class="mb-4"-->
+    <!--      :url="localePath('/flow')"-->
+    <!--      :text="$t('自分や家族の症状に不安や心配があればまずは電話相談をどうぞ')"-->
+    <!--      :btn-text="$t('相談の手順を見る')"-->
+    <!--    />-->
+    <v-row class="DataBlock">
+      <v-col cols="12" md="6" class="DataCard">
+        <svg-card
+          :title="$t('検査陽性者の状況')"
+          :title-id="'details-of-confirmed-cases'"
+          :date="Data.inspections_summary.date"
+        >
+          <confirmed-cases-table
+            :aria-label="$t('検査陽性者の状況')"
+            v-bind="confirmedCases"
+          />
+        </svg-card>
+      </v-col>
+      <v-col cols="12" md="6" class="DataCard">
+        <time-bar-chart
+          :title="$t('陽性患者数')"
+          :title-id="'number-of-confirmed-cases'"
+          :chart-id="'time-bar-chart-patients'"
+          :chart-data="patientsGraph"
+          :date="Data.patients.date"
+          :unit="$t('人')"
+          :url="
+            'https://catalog.data.metro.tokyo.lg.jp/dataset/t000010d0000000068'
+          "
+        />
+      </v-col>
+      <v-col cols="12" md="6" class="DataCard">
+        <data-table
+          :title="$t('陽性患者の属性')"
+          :title-id="'attributes-of-confirmed-cases'"
+          :chart-data="patientsTable"
+          :chart-option="{}"
+          :date="Data.patients.date"
+          :info="sumInfoOfPatients"
+          :url="
+            'https://catalog.data.metro.tokyo.lg.jp/dataset/t000010d0000000068'
+          "
+        />
+      </v-col>
+      <v-col cols="12" md="6" class="DataCard">
+        <time-stacked-bar-chart
+          :title="$t('検査実施数')"
+          :title-id="'number-of-tested'"
+          :chart-id="'time-stacked-bar-chart-inspections'"
+          :chart-data="inspectionsGraph"
+          :date="Data.inspections_summary.date"
+          :items="inspectionsItems"
+          :labels="inspectionsLabels"
+          :unit="$t('件.tested')"
+        />
+        <!-- 件.tested = 検査数 -->
+      </v-col>
+      <v-col cols="12" md="6" class="DataCard">
+        <time-bar-chart
+          :title="$t('新型コロナコールセンター相談件数')"
+          :title-id="'number-of-reports-to-covid19-telephone-advisory-center'"
+          :chart-id="'time-bar-chart-contacts'"
+          :chart-data="contactsGraph"
+          :date="Data.contacts.date"
+          :unit="$t('件.reports')"
+          :url="''"
+        />
+        <!-- 件.reports = 窓口相談件数 -->
+      </v-col>
+      <v-col cols="12" md="6" class="DataCard">
+        <time-bar-chart
+          :title="$t('新型コロナ受診相談窓口相談件数')"
+          :title-id="'number-of-reports-to-covid19-consultation-desk'"
+          :chart-id="'time-bar-chart-querents'"
+          :chart-data="querentsGraph"
+          :date="Data.querents.date"
+          :unit="$t('件.reports')"
+          :url="''"
+        />
+        <!-- 件.reports = 窓口相談件数 -->
+      </v-col>
+      <v-col cols="12" md="6" class="DataCard">
+        <metro-bar-chart
+          :title="$t('都営地下鉄の利用者数の推移')"
+          :title-id="'predicted-number-of-toei-subway-passengers'"
+          :chart-id="'metro-bar-chart'"
+          :chart-data="metroGraph"
+          :chart-option="metroGraphOption"
+          :date="metroGraph.date"
+        />
+      </v-col>
+      <v-col cols="12" md="6" class="DataCard">
+        <agency-bar-chart
+          :title="$t('都庁来庁者数の推移')"
+          :title-id="'agency'"
+          :chart-id="'agency'"
+          :url="''"
+          :unit="'人'"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <i18n>
-{
+  {
   "ja": {
-    "臨時休校中の新型コロナウイルス感染症対応についてのお願い": "臨時休校中の新型コロナウイルス感染症対応についてのお願い",
-    "感染予防・健康管理": "感染予防・健康管理",
-    "不特定多数の人の集まる場所等への外出を避け、基本的に自宅で過ごしてください。": "〇 不特定多数の人の集まる場所等への外出を避け、基本的に自宅で過ごしてください",
-    "手洗い、咳エチケット等により、感染予防に努めてください。": "〇 手洗い、咳エチケット等により、感染予防に努めてください。",
-    "【参考】感染症予防のための正しい手洗い方法（動画）": "【参考】感染症予防のための正しい手洗い方法（動画）",
-    "規則正しい生活を心がけ、日常の健康管理に十分気を付けてください。": "〇 規則正しい生活を心がけ、日常の健康管理に十分気を付けてください。",
-    "感染症を疑う場合の対応": "感染症を疑う場合の対応",
-    "各保健所にご相談ください": "〇 風邪の症状や、37.5度以上の発熱が4日以上続いている、強いだるさ（倦怠感）、息苦しさ（呼吸困難）がある場合は、各保健所にご相談ください。",
-    "「新型コロナウイルス感染症にかかる相談窓口について」": "〇 「新型コロナウイルス感染症にかかる相談窓口について」（東京都福祉保健局）",
-    "その他": "その他",
-    "詳細は、各学校からのお知らせ等をご確認ください。": "〇 詳細は、各学校からのお知らせ等をご確認ください。"
+  "都内の最新感染動向": "都内の最新感染動向",
+  "自分や家族の症状に不安や心配があればまずは電話相談をどうぞ": "自分や家族の症状に不安や心配があればまずは電話相談をどうぞ",
+  "相談の手順を見る": "相談の手順を見る",
+  "検査陽性者の状況": "検査陽性者の状況",
+  "陽性患者数": "陽性患者数",
+  "陽性患者の属性": "陽性患者の属性",
+  "検査実施数": "検査実施数",
+  "新型コロナコールセンター相談件数": "新型コロナコールセンター相談件数",
+  "新型コロナ受診相談窓口相談件数": "新型コロナ受診相談窓口相談件数",
+  "都営地下鉄の利用者数の推移": "都営地下鉄の利用者数の推移",
+  "都庁来庁者数の推移": "都庁来庁者数の推移",
+  "都内発生（疑い例・接触者調査）": "都内発生（疑い例・接触者調査）",
+  "その他（チャーター便・クルーズ船）": "その他（チャーター便・クルーズ船）",
+  "{date}の累計": "{date}の累計",
+  "期間: {duration}": "期間: {duration}",
+  "{duration}の利用者数との相対値: {percentage}": "{duration}の利用者数との相対値: {percentage}",
+  "1月20日~1月24日": "1月20日~1月24日",
+  "2月10日~14日": "2月10日~14日",
+  "2月17日~21日": "2月17日~21日",
+  "2月25日~28日": "2月25日~28日",
+  "人": "人",
+  "件": {
+  "tested": "件",
+  "reports": "件"
+  },
+  "日付": "日付",
+  "居住地": "居住地",
+  "年代": "年代",
+  "性別": "性別",
+  "都内": "都内",
+  "埼玉県": "埼玉県",
+  "湖南省長沙市": "湖南省長沙市",
+  "湖北省武漢市": "湖北省武漢市",
+  "{age}代": "{age}代",
+  "10歳未満": "10歳未満",
+  "男性": "男性",
+  "女性": "女性",
+  "退院※": "退院※"
   },
   "en": {
-    "臨時休校中の新型コロナウイルス感染症対応についてのお願い": "Important notice about prevention of COVID-19 for students and families during the nationwide emergency school closure.",
-    "感染予防・健康管理": "How to reduce the risk of infection",
-    "不特定多数の人の集まる場所等への外出を避け、基本的に自宅で過ごしてください。": "Avoid crowded areas and stay at home.",
-    "手洗い、咳エチケット等により、感染予防に努めてください。": "To prevent the spread of infection, - Wash your hands regularly. - Cover your mouth when coughing or sneezing.",
-    "【参考】感染症予防のための正しい手洗い方法（動画）": "[Video instruction] How to wash your hands properly",
-    "規則正しい生活を心がけ、日常の健康管理に十分気を付けてください。": "Keep an orderly lifestyle and monitor your health condition",
-    "感染症を疑う場合の対応": "If you think you are infected",
-    "各保健所にご相談ください": "If you have any symptoms listed below, please call the nearby public health center.<ul><li>Having cold or flu-like symptoms.</li><li>Having a fever above 37.5 degree for four days or more.</li><li>Extreme fatigue.</li><li>Having difficulties when breathing.</li></ul>",
-    "「新型コロナウイルス感染症にかかる相談窓口について」": "See the website: about COVID-19 telephone advisory center (Bureau of Social Welfare and Public Health)",
-    "その他": "Other information",
-    "詳細は、各学校からのお知らせ等をご確認ください。": "Make sure to check for any updates from the schools"
+  "都内の最新感染動向": "Latest updates on COVID-19 in Tokyo",
+  "自分や家族の症状に不安や心配があればまずは電話相談をどうぞ": "Contact the Telephone Advisory Center if you have any concerns.",
+  "相談の手順を見る": "Steps for receiving help",
+  "検査陽性者の状況": "Details of confirmed cases",
+  "陽性患者数": "Number of confirmed cases",
+  "陽性患者の属性": "Confirmed patient attributes",
+  "検査実施数": "Number of tests conducted",
+  "新型コロナコールセンター相談件数": "Number of inquiries to COVID-19 telephone advisory center",
+  "新型コロナ受診相談窓口相談件数": "Number of inquiries to combined telephone advisory center",
+  "都営地下鉄の利用者数の推移": "The predicted number of Toei subway passengers",
+  "都庁来庁者数の推移": "Trend in the number of TMG visitors",
+  "都内発生（疑い例・接触者調査）": "Emerged in Tokyo (Suspected cases or contactees)",
+  "その他（チャーター便・クルーズ船）": "Others (Returnees or Cruise ship passengers)",
+  "{date}の累計": "Cumulative total as of {date}",
+  "期間: {duration}": "Period: {duration}",
+  "{duration}の利用者数との相対値: {percentage}": "Relative value based on the number of users {duration}: {percentage}",
+  "1月20日~1月24日": "from January 20 to 24",
+  "2月10日~14日": "from Feb. 10 to 14",
+  "2月17日~21日": "from Feb. 17 to 21",
+  "2月25日~28日": "from Feb. 25 to 28",
+  "人": "persons",
+  "件": {
+  "tested": "cases",
+  "reports": "reports"
+  },
+  "日付": "Date",
+  "居住地": "Residence",
+  "年代": "Age",
+  "性別": "Gender",
+  "都内": "Tokyo",
+  "埼玉県": "Saitama",
+  "湖南省長沙市": "Changsha, Hunan Province",
+  "湖北省武漢市": "Wuhan City, Hubei Province ",
+  "{age}代": "{age}s",
+  "10歳未満": "Under 10",
+  "男性": "Male",
+  "女性": "Female",
+  "退院※": "Discharge*"
   },
   "zh-cn": {
-    "臨時休校中の新型コロナウイルス感染症対応についてのお願い": "关于临时停课期间的新冠肺炎防治对应",
-    "感染予防・健康管理": "预防感染与健康管理指南",
-    "不特定多数の人の集まる場所等への外出を避け、基本的に自宅で過ごしてください。": "〇 尽量不要出没于人多的场所，尽可能待在家中。",
-    "手洗い、咳エチケット等により、感染予防に努めてください。": "〇 勤洗手，咳嗽时注意卫生，以控制与预防感染。",
-    "【参考】感染症予防のための正しい手洗い方法（動画）": "【参考】预防感染的正确洗手方法（视频）",
-    "規則正しい生活を心がけ、日常の健康管理に十分気を付けてください。": "〇 尽可能保证规律作息，并请注意日常的健康管理。",
-    "感染症を疑う場合の対応": "当怀疑孩子感染新冠肺炎时",
-    "各保健所にご相談ください": "〇 如果有以下症状时，请联络就近的保健所:\n出现感冒的症状;\n持续 4 天发烧37.5℃以上;\n强烈的倦怠感;\n呼吸困难。",
-    "「新型コロナウイルス感染症にかかる相談窓口について」": "〇 「关于新型冠状病毒感染咨询窗口」（东京都福祉保健局）",
-    "その他": "其它",
-    "詳細は、各学校からのお知らせ等をご確認ください。": "〇 详情请参见各个学校的通知。"
+  "都内の最新感染動向": "东京都最新新型冠状病毒感染情况",
+  "自分や家族の症状に不安や心配があればまずは電話相談をどうぞ": "如果您或您的家人出现疑似症状，请立即拨打电话咨询",
+  "相談の手順を見る": "查看咨询流程",
+  "検査陽性者の状況": "确诊案例状况",
+  "陽性患者数": "确诊人数",
+  "陽性患者の属性": "确诊患者的信息",
+  "検査実施数": "送检件数",
+  "新型コロナコールセンター相談件数": "新型冠状病毒咨询中心咨询件数",
+  "新型コロナ受診相談窓口相談件数": "新冠肺炎就诊咨询窗口的咨询数",
+  "都営地下鉄の利用者数の推移": "都营地下铁搭乘人数趋势",
+  "都庁来庁者数の推移": "东京都厅来访人数推移",
+  "都内発生（疑い例・接触者調査）": "东京都案例（疑似感染、接触者调查）",
+  "その他（チャーター便・クルーズ船）": "其它（包机、游轮）",
+  "{date}の累計": "截至 {date}",
+  "期間: {duration}": "期间: {duration}",
+  "{duration}の利用者数との相対値: {percentage}": "基于{duration}间乘客数的相对值: {percentage}",
+  "1月20日~1月24日": "1月20日~1月24日",
+  "2月10日~14日": "2月10日~14日",
+  "2月17日~21日": "2月17日~21日",
+  "2月25日~28日": "2月25日~28日",
+  "人": "人",
+  "件": {
+  "tested": "件",
+  "reports": "件"
+  },
+  "日付": "日期",
+  "居住地": "居住地",
+  "年代": "年龄",
+  "性別": "性别",
+  "都内": "东京都",
+  "埼玉県": "埼玉县",
+  "湖南省長沙市": "湖南省长沙市",
+  "湖北省武漢市": "湖北省武汉市",
+  "{age}代": "{age}多岁",
+  "10歳未満": "不到10岁",
+  "男性": "男性",
+  "女性": "女性",
+  "退院※": "出院※"
   },
   "zh-tw": {
-    "臨時休校中の新型コロナウイルス感染症対応についてのお願い": "關於臨時停課期間的新型冠狀病毒肺炎防治對應",
-    "感染予防・健康管理": "預防感染與健康管理指南",
-    "不特定多数の人の集まる場所等への外出を避け、基本的に自宅で過ごしてください。": "〇 盡量不要出沒於人多的場所，盡可能的待在家裡。",
-    "手洗い、咳エチケット等により、感染予防に努めてください。": "〇 勤洗手，咳嗽時注意衛生，以控制與預防感染。",
-    "【参考】感染症予防のための正しい手洗い方法（動画）": "【參考】預防感染的正確洗手方法（影片）",
-    "規則正しい生活を心がけ、日常の健康管理に十分気を付けてください。": "〇 盡可能維持規律作息，並請注意日常的健康管理。",
-    "感染症を疑う場合の対応": "當懷疑罹患新型冠狀病毒肺炎時",
-    "各保健所にご相談ください": "〇 有感冒的症狀，或者是攝氏 37.5度以上的發燒持續4天以上，有強烈倦怠感，呼吸困難時，請和各地保健所連絡。",
-    "「新型コロナウイルス感染症にかかる相談窓口について」": "〇 「關於新型冠狀病毒感染諮詢窗口」（東京都福祉保建局）",
-    "その他": "其它",
-    "詳細は、各学校からのお知らせ等をご確認ください。": "〇 詳情請參閱各個學校的通知。"
+  "都内の最新感染動向": "東京都最新新型冠狀病毒感染情形",
+  "自分や家族の症状に不安や心配があればまずは電話相談をどうぞ": "若您或家人出現疑似症狀，請即刻撥打電話諮詢",
+  "相談の手順を見る": "查看諮詢流程",
+  "検査陽性者の状況": "確診案例狀況",
+  "陽性患者数": "確診人數",
+  "陽性患者の属性": "確診案例概況",
+  "検査実施数": "送檢件數",
+  "新型コロナコールセンター相談件数": "新型冠狀病毒諮詢中心諮詢件數",
+  "新型コロナ受診相談窓口相談件数": "就診窗口諮詢數",
+  "都営地下鉄の利用者数の推移": "都營地下鐵搭乘人數走勢",
+  "都庁来庁者数の推移": "東京都廳來訪人數走勢",
+  "都内発生（疑い例・接触者調査）": "東京都案例（疑似感染、接觸者調查）",
+  "その他（チャーター便・クルーズ船）": "其它（包機、遊輪）",
+  "{date}の累計": "累計至 {date}",
+  "期間: {duration}": "期間: {duration}",
+  "{duration}の利用者数との相対値: {percentage}": "基於{duration}的搭乘人數之相對數值: {percentage}",
+  "1月20日~1月24日": "1月20日~1月24日",
+  "2月10日~14日": "2月10日~14日",
+  "2月17日~21日": "2月17日~21日",
+  "2月25日~28日": "2月25日~28日",
+  "人": "人",
+  "件": {
+  "tested": "件",
+  "reports": "件"
+  },
+  "日付": "日期",
+  "居住地": "居住地",
+  "年代": "年齡",
+  "性別": "性別",
+  "都内": "東京都",
+  "埼玉県": "埼玉縣",
+  "湖南省長沙市": "湖南省長沙市",
+  "湖北省武漢市": "湖北省武漢市",
+  "{age}代": "{age}多歲",
+  "10歳未満": "10歲以下",
+  "男性": "男性",
+  "女性": "女性",
+  "退院※": "出院※"
   },
   "ko": {
-    "臨時休校中の新型コロナウイルス感染症対応についてのお願い": "임시 휴학 중의 코로나 19 대처를 위한 부탁 말씀",
-    "感染予防・健康管理": "감염 예방, 건강 관리",
-    "不特定多数の人の集まる場所等への外出を避け、基本的に自宅で過ごしてください。": "〇 불특정 다수의 사람이 모이는 장소 등으로의 외출을 삼가하고, 기본적으로 집 안에서 지내십시오.",
-    "手洗い、咳エチケット等により、感染予防に努めてください。": "〇 손 씻기, 기침 예절 등으로, 감염 예방에 힘 써 주십시오.",
-    "【参考】感染症予防のための正しい手洗い方法（動画）": "[참고자료] 감염증 예방을 위한 바른 손 씻기 방법（동영상）",
-    "規則正しい生活を心がけ、日常の健康管理に十分気を付けてください。": "〇 규칙적인 생활을 유지하며 일상의 건강 관리에 충분히 주의하십시오.",
-    "感染症を疑う場合の対応": "감염이 의심될 경우의 대처 방법",
-    "各保健所にご相談ください": "〇 감기 증상, 4일 이상 지속되는 37.5도 이상의 발열, 강한 피로감(권태감), 호흡 곤란이 있을 경우, 각 보건소에 문의하십시오.",
-    "「新型コロナウイルス感染症にかかる相談窓口について」": "〇 \"신종 코로나 바이러스 감염 관련 전화 상담에 대해\"（도쿄도 복지 보건국）",
-    "その他": "기타",
-    "詳細は、各学校からのお知らせ等をご確認ください。": "〇 자세한 내용은 각 학교의 통지를 확인하시기 바랍니다."
+  "都内の最新感染動向": "도쿄도 코로나19 실시간 현황",
+  "自分や家族の症状に不安や心配があればまずは電話相談をどうぞ": "본인 혹은 가족에게 의심증상이 있을 경우, 콜센터에 먼저 문의하세요.",
+  "相談の手順を見る": "상담 절차",
+  "検査陽性者の状況": "확진자의 현황",
+  "陽性患者数": "확진자 수",
+  "陽性患者の属性": "확진 사례의 세부 사항",
+  "検査実施数": "검사실시수",
+  "新型コロナコールセンター相談件数": "코로나 19 콜센터 문의 건수",
+  "新型コロナ受診相談窓口相談件数": "코로나19 진찰 상담 창구 상담 건수",
+  "都営地下鉄の利用者数の推移": "도에이 지하철 의 예상 승객 수",
+  "都庁来庁者数の推移": "도쿄도 청사 방문자 수",
+  "都内発生（疑い例・接触者調査）": "도쿄 지역사회 발생 경우（의심환자, 접촉자）",
+  "その他（チャーター便・クルーズ船）": "기타（귀국자 또는 크루즈 승객 경우）",
+  "{date}の累計": "{date}의 누적 수",
+  "期間: {duration}": "기간: {duration}",
+  "{duration}の利用者数との相対値: {percentage}": "{duration}의 이용자수와의 상대치: {percentage}",
+  "1月20日~1月24日": "1월 20일~1월24일",
+  "2月10日~14日": "2월 10일~14일",
+  "2月17日~21日": "2월 17일~21일",
+  "2月25日~28日": "2월 25일~28일",
+  "人": "인",
+  "件": {
+  "tested": "건",
+  "reports": "건"
   },
-  "pt-BR": {
-    "臨時休校中の新型コロナウイルス感染症対応についてのお願い": "",
-    "感染予防・健康管理": "",
-    "不特定多数の人の集まる場所等への外出を避け、基本的に自宅で過ごしてください。": "",
-    "手洗い、咳エチケット等により、感染予防に努めてください。": "",
-    "【参考】感染症予防のための正しい手洗い方法（動画）": "",
-    "規則正しい生活を心がけ、日常の健康管理に十分気を付けてください。": "",
-    "感染症を疑う場合の対応": "",
-    "各保健所にご相談ください": "",
-    "「新型コロナウイルス感染症にかかる相談窓口について」": "",
-    "その他": "",
-    "詳細は、各学校からのお知らせ等をご確認ください。": ""
+  "日付": "날짜",
+  "居住地": "거주지",
+  "年代": "나이",
+  "性別": "성별",
+  "都内": "도쿄도내",
+  "埼玉県": "사이타마현",
+  "湖南省長沙市": "후난성 창사시",
+  "湖北省武漢市": "",
+  "{age}代": "{age}대",
+  "10歳未満": "10살 미만",
+  "男性": "남성",
+  "女性": "여성",
+  "退院※": "후베이성 우한시"
   },
   "ja-basic": {
-    "臨時休校中の新型コロナウイルス感染症対応についてのお願い": "いま がっこう が やすみ に なっている あいだの、コロナに かからないように するための おねがい",
-    "感染予防・健康管理": "コロナに なるべく かからないように・げんきでいるために",
-    "不特定多数の人の集まる場所等への外出を避け、基本的に自宅で過ごしてください。": "〇 ひとが たくさん あつまるところに いかないで ください。なるべくいえにいてください。",
-    "手洗い、咳エチケット等により、感染予防に努めてください。": "〇 てをよくあらい、せき が でている ひと は まわり の ひと に かけないようにして、おたがい で コロナ に かからないよう きをつけましょう",
-    "【参考】感染症予防のための正しい手洗い方法（動画）": "（さんこう）コロナにかかりづらくするための てのあらいかた（どうが・ムービー）",
-    "規則正しい生活を心がけ、日常の健康管理に十分気を付けてください。": "〇 まいにち はやくねて、からだがつかれないように きをつけてください。",
-    "感染症を疑う場合の対応": "コロナにかかったかもしれない とおもったら",
-    "各保健所にご相談ください": "〇 かぜ、37.5℃より あつい ねつ が 4にち より ながく つづいている、だるい（つらい・いつも より からだ が おもい など）、いきがくるしい などがあるときは、ちかくのほけんじょ に はなしてください",
-    "「新型コロナウイルス感染症にかかる相談窓口について」": "〇 コロナにかかったときに はなす ところ（とうきょうとふくしほけんきょく）",
-    "その他": "ほかのこと",
-    "詳細は、各学校からのお知らせ等をご確認ください。": "〇 くわしいことは、がっこう からの おしらせ を みてください"
+  "都内の最新感染動向": "とうきょうとでの コロナウイルスの あたらしいじょうほう",
+  "自分や家族の症状に不安や心配があればまずは電話相談をどうぞ": "からだの ぐあいが わるくて こわくなったら でんわして ください",
+  "相談の手順を見る": "そうだんの しかたの せつめい",
+  "検査陽性者の状況": "びょうきの ひとは いま",
+  "陽性患者数": "びょうきの ひとの かず",
+  "陽性患者の属性": "びょうきの ひとの じょうほう",
+  "検査実施数": "けんさした かず",
+  "新型コロナコールセンター相談件数": "コロナウイルス そうだんで でんわが あった かず",
+  "新型コロナ受診相談窓口相談件数": "コロナのことで とうきょうと に そうだんした ひとの かず",
+  "都営地下鉄の利用者数の推移": "とえいちかてつを つかった ひとの かず",
+  "都庁来庁者数の推移": "議事堂（ぎじどう）に 来（き）た 人（ひと）の 合計（ごうけい）",
+  "都内発生（疑い例・接触者調査）": "とうきょうとで びょうき かもしれない ひと",
+  "その他（チャーター便・クルーズ船）": "そのほか",
+  "{date}の累計": "{date} ぜんぶで",
+  "期間: {duration}": "きかん: {duration}",
+  "{duration}の利用者数との相対値: {percentage}": "ひとの かずを くらべると: {percentage}",
+  "1月20日~1月24日": "1がつ20にち から 1がつ24にち",
+  "2月10日~14日": "2がつ10にち から 2がつ14にち",
+  "2月17日~21日": "2がつ17にち から 2がつ21にち",
+  "2月25日~28日": "2がつ25にち から 2がつ28にち",
+  "人": "にん",
+  "件": {
+  "tested": "けん",
+  "reports": "けん"
+  },
+  "日付": "ひづけ",
+  "居住地": "すんでいるところ",
+  "年代": "とし",
+  "性別": "おとこ・おんな・そのほか",
+  "都内": "とうきょうと の なか",
+  "埼玉県": "さいたまけん",
+  "湖南省長沙市": "ちゅうごく こなん しょう ちょうさ し",
+  "湖北省武漢市": "ちゅうごく こほく しょう ぶかん し",
+  "{age}代": "{age}さい",
+  "10歳未満": "10さい より ちいさい ひと",
+  "男性": "おとこ の ひと",
+  "女性": "おんな の ひと",
+  "退院※": "たいいん※"
   }
-}
+  }
 </i18n>
 
 <script>
-import TextCard from '@/components/TextCard.vue'
+  import PageHeader from '@/components/PageHeader.vue'
+  import TimeBarChart from '@/components/TimeBarChart.vue'
+  import MetroBarChart from '@/components/MetroBarChart.vue'
+  import AgencyBarChart from '@/components/AgencyBarChart.vue'
+  import TimeStackedBarChart from '@/components/TimeStackedBarChart.vue'
+  import WhatsNew from '@/components/WhatsNew.vue'
+  import StaticInfo from '@/components/StaticInfo.vue'
+  import Data from '@/data/data.json'
+  import MetroData from '@/data/metro.json'
+  import DataTable from '@/components/DataTable.vue'
+  import formatGraph from '@/utils/formatGraph'
+  import formatTable from '@/utils/formatTable'
+  import formatConfirmedCases from '@/utils/formatConfirmedCases'
+  // import News from '@/data/news.json'
+  import SvgCard from '@/components/SvgCard.vue'
+  import ConfirmedCasesTable from '@/components/ConfirmedCasesTable.vue'
 
-export default {
-  components: {
-    TextCard
-  },
-  data() {
-    return {
-      items: [
-        {
-          title: `1. ${this.$t('感染予防・健康管理')}`,
-          body: [
-            this.$t(
-              '不特定多数の人の集まる場所等への外出を避け、基本的に自宅で過ごしてください。'
-            ),
-            this.$t('手洗い、咳エチケット等により、感染予防に努めてください。'),
-            '<a href="https://tokyodouga.jp/lViN9C_BS-0.html" target="_blank" rel="noopener">' +
-              this.$t('【参考】感染症予防のための正しい手洗い方法（動画）') +
-              '</a>',
-            this.$t(
-              '規則正しい生活を心がけ、日常の健康管理に十分気を付けてください。'
-            )
-          ].join('<br />')
-        },
-        {
-          title: `2. ${this.$t('感染症を疑う場合の対応')}`,
-          body: [
-            this.$t('各保健所にご相談ください'),
-            this.$t('「新型コロナウイルス感染症にかかる相談窓口について」'),
-            '<a href="https://www.fukushihoken.metro.tokyo.lg.jp/iryo/kansen/coronasodan.html" target="_blank" rel="noopener">https://www.fukushihoken.metro.tokyo.lg.jp/iryo/kansen/coronasodan.html</a>'
-          ].join('<br />')
-        },
-        {
-          title: `3. ${this.$t('その他')}`,
-          body: this.$t('詳細は、各学校からのお知らせ等をご確認ください。')
+  export default {
+    components: {
+      PageHeader,
+      TimeBarChart,
+      MetroBarChart,
+      AgencyBarChart,
+      TimeStackedBarChart,
+      WhatsNew,
+      StaticInfo,
+      DataTable,
+      SvgCard,
+      ConfirmedCasesTable
+    },
+    data() {
+      // 感染者数グラフ
+      const patientsGraph = formatGraph(Data.patients_summary.data)
+      // 陽性患者の属性
+      const patientsTable = formatTable(Data.patients.data)
+      // 陽性患者の属性 ヘッダー翻訳
+      for (const header of patientsTable.headers) {
+        header.text =
+          header.value === '退院' ? this.$t('退院※') : this.$t(header.value)
+      }
+      // 陽性患者の属性 中身の翻訳
+      for (const row of patientsTable.datasets) {
+        row['居住地'] = this.$t(row['居住地'])
+        row['性別'] = this.$t(row['性別'])
+
+        if (row['年代'] === '10歳未満') {
+          row['年代'] = this.$t('10歳未満')
+        } else {
+          const age = row['年代'].substring(0, 2)
+          row['年代'] = this.$t('{age}代', { age })
         }
+      }
+      // 退院者グラフ
+      const dischargesGraph = formatGraph(Data.discharges_summary.data)
+
+      // 相談件数
+      const contactsGraph = formatGraph(Data.contacts.data)
+      // 帰国者・接触者電話相談センター相談件数
+      const querentsGraph = formatGraph(Data.querents.data)
+      // 都営地下鉄の利用者数の推移
+      const metroGraph = MetroData
+      // metroGraph ツールチップ title文字列
+      // this.$t を使うため metroGraphOption の外側へ
+      const metroGraphTooltipTitle = (tooltipItems, _) => {
+        const label = tooltipItems[0].label
+        return this.$t('期間: {duration}', {
+          // duration = label = '2月10日~14日' | '2月17日~21日' | '2月25日~28日'
+          duration: this.$t(label)
+        })
+      }
+      // metroGraph ツールチップ label文字列
+      // this.$t を使うため metroGraphOption の外側へ
+      const metroGraphTooltipLabel = (tooltipItem, data) => {
+        const currentData = data.datasets[tooltipItem.datasetIndex]
+        const percentage = `${currentData.data[tooltipItem.index]}%`
+
+        return this.$t('{duration}の利用者数との相対値: {percentage}', {
+          // duration = metroGraph.base_period = '1月20日~1月24日'
+          duration: this.$t(metroGraph.base_period),
+          percentage
+        })
+      }
+      // 検査実施日別状況
+      const inspectionsGraph = [
+        Data.inspections_summary.data['都内'],
+        Data.inspections_summary.data['その他']
       ]
-    }
-  },
-  head() {
-    return {
-      title: 'お子様をお持ちの皆様へ'
+      const inspectionsItems = [
+        this.$t('都内発生（疑い例・接触者調査）'),
+        this.$t('その他（チャーター便・クルーズ船）')
+      ]
+      const inspectionsLabels = Data.inspections_summary.labels
+      // 死亡者数
+      // #MEMO: 今後使う可能性あるので一時コメントアウト
+      // const fatalitiesTable = formatTable(
+      //   Data.patients.data.filter(patient => patient['備考'] === '死亡')
+      // )
+      // 検査陽性者の状況
+      const confirmedCases = formatConfirmedCases(Data.main_summary)
+
+      const sumInfoOfPatients = {
+        lText: patientsGraph[
+        patientsGraph.length - 1
+          ].cumulative.toLocaleString(),
+        sText: this.$t('{date}の累計', {
+          date: patientsGraph[patientsGraph.length - 1].label
+        }),
+        unit: this.$t('人')
+      }
+
+      const data = {
+        Data,
+        patientsTable,
+        patientsGraph,
+        dischargesGraph,
+        contactsGraph,
+        querentsGraph,
+        metroGraph,
+        inspectionsGraph,
+        inspectionsItems,
+        inspectionsLabels,
+        confirmedCases,
+        sumInfoOfPatients,
+        headerItem: {
+          icon: 'mdi-chart-timeline-variant',
+          title: 'Covid-19 疫情分析与管理系统',
+          date: Data.lastUpdate
+        },
+        metroGraphOption: {
+          responsive: true,
+          legend: {
+            display: true
+          },
+          scales: {
+            xAxes: [
+              {
+                position: 'bottom',
+                stacked: false,
+                gridLines: {
+                  display: true
+                },
+                ticks: {
+                  fontSize: 10,
+                  maxTicksLimit: 20,
+                  fontColor: '#808080'
+                }
+              }
+            ],
+            yAxes: [
+              {
+                stacked: false,
+                gridLines: {
+                  display: true
+                },
+                ticks: {
+                  fontSize: 12,
+                  maxTicksLimit: 10,
+                  fontColor: '#808080',
+                  callback(value) {
+                    return value.toFixed(2) + '%'
+                  }
+                }
+              }
+            ]
+          },
+          tooltips: {
+            displayColors: false,
+            callbacks: {
+              title: metroGraphTooltipTitle,
+              label: metroGraphTooltipLabel
+            }
+          }
+        }
+      }
+      return data
+    },
+    head() {
+      return {
+        title: 'Covid-19 疫情分析与管理系统 | 数据库 2020 期末项目'
+      }
     }
   }
-}
 </script>
 
-<style lang="scss">
-.Parent {
-  &-Heading {
-    @include font-size(30);
-    font-weight: normal;
-    color: $gray-2;
-    margin-bottom: 12px;
+<style lang="scss" scoped>
+  .MainPage {
+    .DataBlock {
+      margin: 20px -8px;
+      .DataCard {
+        @include largerThan($medium) {
+          padding: 10px;
+        }
+        @include lessThan($small) {
+          padding: 4px 8px;
+        }
+      }
+    }
   }
-}
 </style>
