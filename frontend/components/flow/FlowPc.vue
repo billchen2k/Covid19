@@ -1,20 +1,6 @@
 <template>
   <div :class="$style.FlowCard">
-    <h3>{{ $t('新型コロナウイルス感染症にかかる相談窓口について') }}</h3>
-    <div :class="[$style.Outer, $style.OuterUpper]">
-      <div :class="[$style.CardBlock, $style.Past]">
-        <flow-pc-past />
-      </div>
-      <div :class="[$style.CardBlock, $style.Days]">
-        <flow-pc-days />
-      </div>
-      <div :class="[$style.CardBlock, $style.CardBlockCenter, $style.Suspect]">
-        <flow-pc-suspect />
-      </div>
-      <div :class="$style.Advisory">
-        <flow-pc-advisory />
-      </div>
-    </div>
+
     <h3>
       <i18n
         :class="$style.TitleSmall"
@@ -68,9 +54,9 @@
   },
   "zh-cn": {
     "新型コロナウイルス感染症にかかる相談窓口について": "关于新冠肺炎的咨询窗口",
-    "{advisory}による相談結果": "根据{advisory}的判断",
-    "新型コロナ受診相談窓口": "新冠肺炎就诊咨询窗口",
-    "※保険適用となる検査は、当面の間、院内感染防止等の観点から、「帰国者・接触者外来」等の医療機関で実施": "※目前，出于对防止院内感染的考量，仅在开设有「海外返日者、接触者专科」的医疗机构施行可以使用保险的检查。"
+    "{advisory}による相談結果": "关于{advisory}的接诊问题",
+    "新型コロナ受診相談窓口": "病人",
+    "※保険適用となる検査は、当面の間、院内感染防止等の観点から、「帰国者・接触者外来」等の医療機関で実施": "※为支持企事业单位和学校复工复产复学,满足社会需求,本市单位或个人可按照自愿自费原则,在相关检测机构预约开展新冠病毒核酸检测。"
   },
   "zh-tw": {
     "新型コロナウイルス感染症にかかる相談窓口について": "關於新型冠狀病毒肺炎的諮詢窗口",
