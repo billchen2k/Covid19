@@ -54,9 +54,11 @@ export default Vue.extend({
       this.isOpenNavigation = false
     }
   },
-  head(): MetaInfo {
+  head():
+    MetaInfo {
     const { htmlAttrs } = this.$nuxtI18nSeo()
     return {
+      title: 'Covid-19 疫情分析与管理系统 | 数据库 2020 期末项目',
       htmlAttrs,
       link: [
         {

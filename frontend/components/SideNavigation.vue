@@ -95,6 +95,11 @@ export default {
           link: this.localePath('/')
         },
         {
+          icon: 'mdi-account-search',
+          title: '病患查询',
+          link: this.localePath('/query')
+        },
+        {
           icon: 'mdi-chart-bubble',
           title: '分析报告',
           link: this.localePath('/'),

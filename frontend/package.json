@@ -1,7 +1,7 @@
 {
   "name": "covid19",
   "version": "1.0.0",
-  "description": "東京都 新型コロナウイルス感染症対策サイト",
+  "description": "数据库分析与建模系统",
   "author": "東京都",
   "private": true,
   "engines": {
@@ -51,7 +51,7 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "husky": "^4.2.3",
+
     "jest": "^24.1.0",
     "lint-staged": "^10.0.8",
     "nodemon": "^1.18.9",

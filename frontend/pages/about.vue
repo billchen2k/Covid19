@@ -1,8 +1,10 @@
 <template>
   <div class="About">
-    <h2 class="About-Heading">
-      关于本项目...
-    </h2>
+    <page-header
+      icon="mdi-information-outline"
+      title="关于项目"
+      date=""
+    />
     <TextCard title="简介">
       <br />
       这是一个 Covid-19 新冠疫情分析与管理项目，具有 BALABALABALA 功能。
@@ -372,10 +374,12 @@
 
 <script lang="ts">
 import TextCard from '@/components/TextCard.vue'
+import PageHeader from '@/components/PageHeader.vue'
 
 export default {
   components: {
-    TextCard
+    TextCard,
+    PageHeader
   },
   data() {
     return {

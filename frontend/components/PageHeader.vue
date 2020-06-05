@@ -6,10 +6,10 @@
       </v-icon>
       {{ title }}
     </h2>
-    <div class="date">
-      <span>{{ $t('最終更新') }} </span>
-      <time :datetime="formattedDate">{{ date }}</time>
-    </div>
+<!--    <div class="date">-->
+<!--      <span>{{ $t('最終更新') }} </span>-->
+<!--      <time :datetime="formattedDate">{{ date }}</time>-->
+<!--    </div>-->
 <!--    <div v-if="!['ja', 'ja-basic'].includes($i18n.locale)" class="annotation">-->
 <!--      <span>{{ $t('注釈') }} </span>-->
 <!--    </div>-->
