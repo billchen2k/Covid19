@@ -92,7 +92,7 @@ export default {
         {
           icon: 'mdi-pencil-circle-outline',
           title: '病患登记',
-          link: this.localePath('/')
+          link: this.localePath('/parent')
         },
         {
           icon: 'mdi-account-search',
@@ -102,7 +102,7 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: '分析报告',
-          link: this.localePath('/'),
+          link: this.localePath('/report'),
           divider: true
         },
         {
