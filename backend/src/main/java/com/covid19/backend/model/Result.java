@@ -1,6 +1,7 @@
 package com.covid19.backend.model;
 
 
+import com.covid19.backend.config.ErrorEnums;
 import com.covid19.backend.utils.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -31,7 +32,6 @@ public class Result<T> {
 	private String timestamp;
 	@ApiModelProperty("结果数据")
 	private T data;
-
 
 	// 错误代码
 	public static final int CODE_SUCCESS = 200;

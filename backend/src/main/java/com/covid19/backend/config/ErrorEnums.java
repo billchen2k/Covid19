@@ -13,10 +13,10 @@ import lombok.Getter;
 public enum ErrorEnums {
 
 	CODE_SUCCESS(200, "成功"),
-	CODE_ERROR(500, "出现异常"),
-	CODE_VALIDATE_FAILED(405, "验证失败"),
+	CODE_ERROR(500, "出现未知异常"),
+//	CODE_VALIDATE_FAILED(405, "验证失败"),
 	CODE_NOT_FOUND(404, "无法找到"),
-	CODE_UNAUTHORIZED(401, "权限不足"),
+ 	CODE_UNAUTHORIZED(401, "权限不足"),
 	CODE_FORBIDDEN(403, "禁止访问");
 
 	public int code;
