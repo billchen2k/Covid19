@@ -11,7 +11,7 @@
     <groupId>com.covid19</groupId>
     <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>backend</name>
+    <name>covid19-backend</name>
     <description>API for Covid-19</description>
 
     <properties>
