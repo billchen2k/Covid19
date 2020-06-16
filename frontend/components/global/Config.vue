@@ -3,11 +3,10 @@
 </template>
 
 <script>
-
-  const uid = 123;
   export default {
-    name: 'UserController',
-    uid
+    name: 'config',
+    apiurl: 'http://45.76.79.85'
+    // apiurl: 'http://localhost'
   }
 </script>
 

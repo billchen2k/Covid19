@@ -3,31 +3,32 @@
     <div class="SideNavigation-HeadingContainer sp-flex">
       <v-icon
         class="SideNavigation-HeadingIcon pc-none"
-        :aria-label="$t('サイドメニュー項目を開く')"
         @click="openNavi"
       >
         mdi-menu
       </v-icon>
       <nuxt-link :to="localePath('/')" class="SideNavigation-HeadingLink">
         <div class="SideNavigation-Logo">
-          <img src="/logo.svg" :alt="$t('東京都')" />
+          <img src="/logo.svg"/>
         </div>
         <h1 class="SideNavigation-Heading">
           Covid-19 疫情分析与管理系统<br />
           Covid-19 Analysis & Manage System
         </h1>
       </nuxt-link>
+      <div v-if="username!=''" class="SideNavigation-Copyright">您已登录为 {{ username }}。</div>
     </div>
     <v-divider class="SideNavigation-HeadingDivider" />
     <div class="sp-none" :class="{ open: isNaviOpen }">
       <v-icon
         class="SideNavigation-ListContainerIcon pc-none"
-        :aria-label="$t('サイドメニュー項目を閉じる')"
         @click="closeNavi"
       >
         mdi-close
       </v-icon>
 
+<!--      <input v-model="uid">-->
+<!--      <p>UID: {{uid}}</p>-->
 
       <v-list :flat="true">
 
@@ -37,8 +38,7 @@
           class="SideNavigation-ListItemContainer"
           @click="closeNavi"
         >
-
-          <ListItem :link="item.link" :icon="item.icon" :title="item.title" />
+          <ListItem v-if="(item.need_login && uid!='') || !item.need_login " :link="item.link" :icon="item.icon" :title="item.title" />
           <v-divider v-show="item.divider" class="SideNavigation-Divider" />
         </v-container>
       </v-list>
@@ -63,18 +63,26 @@
 
 <script>
 import ListItem from '@/components/ListItem'
+import Config from '~/components/global/Config'
+import { EventBus} from '~/components/global/EventBus.js'
 // import LanguageSelector from '@/components/LanguageSelector'
 
 export default {
   components: {
     ListItem,
-
+  },
+  data() {
+    return {
+      uid: '',
+      username: ''
+    }
   },
   props: {
     isNaviOpen: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
+
   },
   computed: {
     items() {
@@ -90,11 +98,6 @@ export default {
           link: this.localePath('/statistics')
         },
         {
-          icon: 'mdi-pencil-circle-outline',
-          title: '病患登记',
-          link: this.localePath('/parent')
-        },
-        {
           icon: 'mdi-account-search',
           title: '病患查询',
           link: this.localePath('/query')
@@ -106,68 +109,28 @@ export default {
           divider: true
         },
         {
+          icon: 'mdi-pencil-circle-outline',
+          title: '病患登记',
+          link: this.localePath('/parent'),
+          need_login: true,
+        },
+        {
           icon: 'mdi-bed-empty',
           title: '病患管理',
-          link: this.localePath('/')
+          link: this.localePath('/'),
+          need_login: true
         },
         {
           icon: 'mdi-doctor',
-          title: '医生登录',
-          link: this.localePath('/'),
+          title: this.uid == '' ? '医生登录' : '登出',
+          link: this.uid == '' ? this.localePath('/login') : this.localePath('/logout'),
           divider: true
         },
-
         {
           icon: 'mdi-information-outline',
           title: '关于',
           link: this.localePath('/about'),
         },
-        // {
-        //   icon: 'covid',
-        //   title: this.$t('新型コロナウイルス感染症が心配なときに'),
-        //   link: this.localePath('/flow'),
-        //   divider: true
-        // },
-        // {
-        //   icon: 'parent',
-        //   title: this.$t('お子様をお持ちの皆様へ'),
-        //   link: this.localePath('/parent')
-        // },
-        // {
-        //   icon: 'mdi-account-multiple',
-        //   title: this.$t('都民の皆様へ'),
-        //   link: 'https://www.metro.tokyo.lg.jp/tosei/tosei/news/2019-ncov.html'
-        // },
-        // {
-        //   icon: 'mdi-domain',
-        //   title: this.$t('企業の皆様・はたらく皆様へ'),
-        //   link: this.localePath('/worker'),
-        //   divider: true
-        // },
-        // {
-        //   title: this.$t('東京都新型コロナウイルス感染症対策本部報'),
-        //   link:
-        //     'https://www.bousai.metro.tokyo.lg.jp/taisaku/saigai/1007261/index.html'
-        // },
-        // {
-        //   title: this.$t('東京都主催等 中止又は延期するイベント等'),
-        //   link:
-        //     'https://www.seisakukikaku.metro.tokyo.lg.jp/information/event02.html'
-        // },
-        // {
-        //   title: this.$t('知事からのメッセージ'),
-        //   link:
-        //     'https://www.metro.tokyo.lg.jp/tosei/governor/governor/katsudo/2020/03/03_00.html'
-        // },
-        // {
-        //   title: this.$t('当サイトについて'),
-        //   link: this.localePath('/about')
-        // },
-        // {
-        //   title: this.$t('東京都公式ホームページ'),
-        //   link: 'https://www.metro.tokyo.lg.jp/',
-        //   divider: true
-        // }
       ]
     },
     isClass() {
@@ -180,6 +143,31 @@ export default {
     },
     closeNavi() {
       this.$emit('closeNavi')
+    },
+    logIn() {
+      console.log("Logging..." + username + password)
+    },
+  },
+  mounted() {
+    if(localStorage.uid){
+      this.uid = localStorage.uid
+      this.username = localStorage.username
+    }
+    // EventBus.$on('login', (username, password) => {
+    //   console.log("Logging ON..." + username + password)
+    // })
+    EventBus.$on('setUid', (uid) => {
+      this.uid = uid
+      localStorage.uid = uid
+    })
+    EventBus.$on('setUsername', (username) => {
+      this.username = username
+      localStorage.username = username
+    })
+  },
+  watch: {
+    uid(newUid) {
+      localStorage.uid = newUid
     }
   }
 }

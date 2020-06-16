@@ -44,6 +44,7 @@
   import FlowSp from '@/components/flow/FlowSp.vue'
   import PageHeader from '@/components/PageHeader.vue'
   import TimeBarChart from '@/components/TimeBarChart.vue'
+
   export default Vue.extend({
     components: {
       CovidIcon,

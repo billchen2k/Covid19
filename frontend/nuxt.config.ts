@@ -3,6 +3,10 @@ const purgecss = require('@fullhuman/postcss-purgecss')
 const autoprefixer = require('autoprefixer')
 
 const config: Configuration = {
+  // server: {
+  //   port: 80, // default: 3000
+  //   host: '0.0.0.0' // default: localhost
+  // },
   mode: 'universal',
   /*
    ** Headers of the page
@@ -99,7 +103,6 @@ const config: Configuration = {
    ** Nuxt.js dev-modules
    */
   buildModules: [
-    '@nuxtjs/vuetify',
     '@nuxt/typescript-build',
     '@nuxtjs/google-analytics'
   ],
@@ -158,6 +161,7 @@ const config: Configuration = {
     ],
     'nuxt-svg-loader',
     'nuxt-purgecss',
+    '@nuxtjs/vuetify',
     ['vue-scrollto/nuxt', { duration: 1000, offset: -72 }]
   ],
   /*
