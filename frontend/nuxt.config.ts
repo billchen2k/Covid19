@@ -174,9 +174,19 @@ const config: Configuration = {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
+    treeShake: true,
     customVariables: ['~/assets/variables.scss'],
     defaultAssets: {
-      icons: false
+      font: {
+        family: 'Roboto'
+      },
+      icons: 'mdi',
+      options: {customProperties: true},
+      themes: {
+        light: {
+          primary: '#C70000'
+        }
+      }
     }
   },
   googleAnalytics: {

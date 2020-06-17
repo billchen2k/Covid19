@@ -10,6 +10,13 @@
         <v-expansion-panel>
           <v-expansion-panel-header>条件筛选</v-expansion-panel-header>
           <v-expansion-panel-content>
+            <v-list-item
+              v-for="color in ['primary', 'secondary', 'info', 'success', 'warning', 'error']"
+              :key="color"
+              v-ripple="{ class: `${color}--text` }"
+            >
+              <v-list-item-title>Item with "{{ color }}" class</v-list-item-title>
+            </v-list-item>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </v-expansion-panel-content>
         </v-expansion-panel>
@@ -40,8 +47,25 @@
             :sort-by="confirm_date"
             :sort-desc="true"
             loading-text="正在加载数据，请稍候"
+
             class="cardTable"
-          />
+          >
+            <template v-slot:item.detail="{ item }">
+
+              <v-icon
+                medium
+                color="red"
+                @click="displayDetail(item)"
+              >mdi-arrow-expand</v-icon>
+              展开
+            </template>
+<!--            <template v-slot:item="{ item }">-->
+<!--              <v-icon-->
+<!--                small-->
+<!--                @click="displayDetail(item.patient_id)"-->
+<!--              >mdi-arrow-expand</v-icon>-->
+<!--            </template>-->
+          </v-data-table>
         </v-card>
 
 
@@ -85,7 +109,7 @@
             { text: '患者状态', value: 'status' },
             {
               text: '详细信息',
-              align: 'start',
+              align: 'center',
               sortable: false,
               value: 'detail',
             },
@@ -109,7 +133,12 @@
     },
 
     methods: {
+      fetchData() {
 
+      },
+      displayDetail(patientID){
+        console.log(patientID)
+      }
     },
 
     mounted() {

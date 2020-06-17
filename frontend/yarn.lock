@@ -1377,7 +1377,7 @@
     jimp-compact "^0.8.0"
     workbox-cdn "^4.3.1"
 
-"@nuxtjs/vuetify@^1.0.0":
+"@nuxtjs/vuetify@^1.11.2":
   version "1.11.2"
   resolved "https://registry.npm.taobao.org/@nuxtjs/vuetify/download/@nuxtjs/vuetify-1.11.2.tgz#fefa861d98c021e10dd579a5b91b34b3fb49dc99"
   integrity sha1-/vqGHZjAIeEN1XmluRs0s/tJ3Jk=
@@ -7585,10 +7585,10 @@ nuxt-svg-loader@^1.2.0:
     consola "^2.3.2"
     svg-to-vue-component "^0.3.1"
 
-nuxt@^2.11.0:
+nuxt@^2.12.2:
   version "2.12.2"
-  resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.12.2.tgz#959baa919bfef4adcd9e88f84bc948a49a03edd8"
-  integrity sha512-rARTgQBUZ0ALl9De7TRhHNzzYJT+RUGHTppDDaWno7a50YvZO85mXHCIVpOuXweNZzGq9njIAYHDHF/LO3esJQ==
+  resolved "https://registry.npm.taobao.org/nuxt/download/nuxt-2.12.2.tgz#959baa919bfef4adcd9e88f84bc948a49a03edd8"
+  integrity sha1-lZuqkZv+9K3Nnoj4S8lIpJoD7dg=
   dependencies:
     "@nuxt/builder" "2.12.2"
     "@nuxt/cli" "2.12.2"
