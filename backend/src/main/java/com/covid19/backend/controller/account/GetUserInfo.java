@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 获取用户信息的控制器
- * @author billchen
- * @version 1.0
- * @create 2020-02-24 10:53
  **/
 @RestController
 @Api(tags = "用户控制器", value = "和用户有关的控制器")

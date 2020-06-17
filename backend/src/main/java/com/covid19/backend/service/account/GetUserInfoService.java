@@ -15,8 +15,6 @@ public class GetUserInfoService extends BaseService {
 
 	/**
 	 * 取得当前登陆的用户信息
-	 * @param request
-	 * @return 返回用户类或 null （如果未登录）
 	 */
 	public User getCurrentUserInfo(HttpServletRequest request){
 		Long uid = Authentication.getCurrentUid(request);
@@ -25,8 +23,6 @@ public class GetUserInfoService extends BaseService {
 
 	/**
 	 * 根据邮件获取用户信息
-	 * @param email
-	 * @return
 	 */
 	public User getUserInfoByEmail(String email){
 		return userMapper.selectUserByEmail(email);
