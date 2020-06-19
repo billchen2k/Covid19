@@ -13,11 +13,11 @@ public interface ImageMapper {
     public Image selectImageByID(@Param("image_id") long image_id);
 
     @Select("SELECT * from image where " +
-            "patient_id like #{patient_id} " +
-            "and scanning_doctor_id like #{scanning_doctor_id} " +
-            "and image_picture like #{image_picture} " +
-            "and conclusion like #{conclusion} " +
-            "and conclusion_doctor_id = #{conclusion_doctor_id}")
+            "patient_id like concat('%',#{patient_id},'%') " +
+            "and scanning_doctor_id like concat('%',#{scanning_doctor_id},'%') " +
+            "and image_picture like concat('%',#{image_picture},'%') " +
+            "and conclusion like concat('%',#{conclusion},'%') " +
+            "and conclusion_doctor_id like concat('%',#{conclusion_doctor_id},'%')")
     public ArrayList<Image> selectImage(Image image);
 
     @Insert("insert into image(" +

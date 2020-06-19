@@ -13,10 +13,10 @@ public interface MedicineMapper {
     public Medicine selectMedicineByID(@Param("medicine_id") long medicine_id);
 
     @Select("SELECT * from medicine where " +
-            "name like #{name} " +
-            "and manufacturer like #{manufacturer} " +
-            "and introduction like #{introduction} " +
-            "and type like #{type}")
+            "name like concat('%',#{name},'%') " +
+            "and manufacturer like concat('%',#{manufacturer},'%') " +
+            "and introduction like concat('%',#{introduction},'%') " +
+            "and type like concat('%',#{type},'%')")
     public ArrayList<Medicine> selectMedicine(
             @Param("name") String name,
             @Param("manufacturer") String manufacturer,

@@ -15,16 +15,16 @@ public interface PatientMapper {
     public Patient selectPatientByID(@Param("patient_id") long patient_id);
 
     @Select("SELECT * from patient where " +
-            "name like #{name} " +
-            "and gender like #{gender} " +
-            "and birthday like #{birthday} " +
-            "and onset_place like #{onset_place} " +
-            "and onset_date like #{onset_date} " +
-            "and confirm_date like #{confirm_date} " +
-            "and status like #{status} " +
-            "and doctor_id like #{doctor_id} " +
-            "and hospital_id like #{hospital_id} " +
-            "and is_doctor like #{is_doctor}"
+            "name like concat('%',#{name},'%') " +
+            "and gender like concat('%',#{gender},'%') " +
+            "and birthday like concat('%',#{birthday},'%') " +
+            "and onset_place like concat('%',#{onset_place},'%') " +
+            "and onset_date like concat('%',#{onset_date},'%') " +
+            "and confirm_date like concat('%',#{confirm_date},'%') " +
+            "and status like concat('%',#{status},'%') " +
+            "and doctor_id like concat('%',#{doctor_id},'%') " +
+            "and hospital_id like concat('%',#{hospital_id},'%') " +
+            "and is_doctor like concat('%',#{is_doctor},'%')"
     )
     public ArrayList<Patient> selectPatient(
             @Param("name") String name,

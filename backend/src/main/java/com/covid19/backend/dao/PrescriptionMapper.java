@@ -13,10 +13,10 @@ public interface PrescriptionMapper {
     public Prescription selectPrescriptionByID(@Param("prescription_id") long prescription_id);
 
     @Select("SELECT * from prescription where " +
-            "patient_id like #{patient_id} " +
-            "and medicine_id like #{medicine_id} " +
-            "and dosage like #{dosage} " +
-            "and usage like #{usage}")
+            "patient_id like concat('%',#{patient_id},'%') " +
+            "and medicine_id like concat('%',#{medicine_id},'%') " +
+            "and dosage like concat('%',#{dosage},'%') " +
+            "and usage like concat('%',#{usage},'%')")
     public ArrayList<Prescription> selectPrescription(
             @Param("patient_id") String patient_id,
             @Param("medicine_id") String medicine_id,

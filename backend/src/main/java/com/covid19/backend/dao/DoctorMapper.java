@@ -14,10 +14,10 @@ public interface DoctorMapper {
 
     @Select("SELECT * from doctor where " +
             "name like #{name} " +
-            "and gender like #{gender} " +
-            "and birthday like #{birthday} " +
-            "and department like #{department} " +
-            "and hospital_id like #{hospital_id}")
+            "and gender like concat('%',#{gender},'%') " +
+            "and birthday like concat('%',#{birthday},'%') " +
+            "and department like concat('%',#{department},'%') " +
+            "and hospital_id like concat('%',#{hospital_id},'%')")
     public ArrayList<Doctor> selectDoctor(
             @Param("name") String name,
             @Param("gender") String gender,

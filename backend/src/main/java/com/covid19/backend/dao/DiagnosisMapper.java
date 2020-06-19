@@ -13,12 +13,12 @@ public interface DiagnosisMapper {
     public Diagnosis selectDiagnosisByID(@Param("diagnosis_id") long diagnosis_id);
 
     @Select("SELECT * from diagnosis where " +
-            "patient_id like #{patient_id} " +
-            "and doctor_id like #{doctor_id} " +
-            "and time like #{time} " +
-            "and symptom like #{symptom} " +
-            "and temperature like #{temperature} " +
-            "and nucleic_acid = #{nucleic_acid}")
+            "patient_id like concat('%',#{patient_id},'%') " +
+            "and doctor_id like concat('%',#{doctor_id},'%') " +
+            "and time like concat('%',#{time},'%') " +
+            "and symptom like concat('%',#{symptom},'%') " +
+            "and temperature like concat('%',#{temperature},'%') " +
+            "and nucleic_acid = concat('%',#{nucleic_acid},'%')")
     public ArrayList<Diagnosis> selectDiagnosis(Diagnosis diagnosis);
 
     @Insert("insert into Diagnosis(" +
