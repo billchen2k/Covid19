@@ -13,7 +13,7 @@ public interface HospitalMapper {
     public Hospital selectHospitalByID(@Param("hospital_id") long hospital_id);
 
     @Select("SELECT * from hospital where " +
-            "name like #{name} and address like #{address}")
+            "name like concat('%',#{name},'%') and address like concat('%',#{address},'%')")
     public ArrayList<Hospital> selectHospital(Hospital hospital);
 
     @Insert("insert into hospital(name, address) " +
