@@ -5,6 +5,24 @@
       :title="headerItem.title"
       :date="headerItem.date"
     />
+
+    <v-row class="BigDataBlock">
+
+      <v-col cols="12" md="40" class="DataCard">
+        <monitoring-consultation-desk-report-chart
+          :title="$t('全球疫情概览')"
+          title-id="monitoring-number-of-reports-to-covid19-consultation-desk"
+          chart-id="monitoring-consultation-desk-report-chart"
+          :chart-data="chartData"
+          :date="date"
+          :labels="labels"
+          :data-labels="dataLabels"
+          :unit="$t('人')"
+          url="https://catalog.data.metro.tokyo.lg.jp/dataset/t000010d0000000070"
+        />
+      </v-col>
+    </v-row>
+
     <v-row class="DataBlock">
       <v-col cols="12" md="6" class="DataCard">
         <svg-card
@@ -83,6 +101,7 @@ import DataTable from '@/components/DataTable.vue'
 import formatGraph from '@/utils/formatGraph'
 import formatTable from '@/utils/formatTable'
 import formatConfirmedCases from '@/utils/formatConfirmedCases'
+import MonitoringConsultationDeskReportChart from '@/components/MonitoringConsultationDeskReportChart.vue'
 // import News from '@/data/news.json'
 import SvgCard from '@/components/SvgCard.vue'
 import ConfirmedCasesTable from '@/components/ConfirmedCasesTable.vue'
@@ -98,9 +117,28 @@ export default {
     StaticInfo,
     DataTable,
     SvgCard,
-    ConfirmedCasesTable
+    ConfirmedCasesTable,
+    MonitoringConsultationDeskReportChart
   },
   data() {
+
+    const [
+      consulationReportsCount,
+      sevendayMoveAverages,
+      labels
+    ] = Data.querents.data.reduce(
+      (res, data) => {
+        res[0].push(data['小計'])
+        res[1].push(data['７日間平均'])
+        res[2].push(data['日付'])
+        return res
+      },
+      [[], [], []]
+    )
+    const chartData = [consulationReportsCount, sevendayMoveAverages]
+    const dataLabels = [this.$t('中国'), this.$t('美国')]
+    const date = Data.querents.date
+
     // 感染者数グラフ
     const patientsGraph = formatGraph(Data.patients_summary.data)
     // 陽性患者の属性
@@ -181,6 +219,11 @@ export default {
     }
 
     const data = {
+
+      chartData,
+      date,
+      labels,
+      dataLabels,
       Data,
       patientsTable,
       patientsGraph,
@@ -256,6 +299,18 @@ export default {
 
 <style lang="scss" scoped>
 .MainPage {
+  .BigDataBlock {
+    margin: 20px -8px;
+    .DataCard {
+      @include largerThan($medium) {
+        padding: 10px;
+      }
+      @include lessThan($small) {
+        padding: 4px 8px;
+      }
+    }
+  }
+
   .DataBlock {
     margin: 20px -8px;
     .DataCard {
