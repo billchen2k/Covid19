@@ -2550,7 +2550,1376 @@
             }
         ]
     },
-    "patients": {
+
+
+  "confirmedglobal": {
+    "date": "2020\/05\/28 18:45",
+    "data": [
+      {
+        "time": "2020-01-22T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 548,
+        "Japan": 2,
+        "Russia": 0,
+        "Italy": 0,
+        "England": 0
+      },
+      {
+        "time": "2020-01-23T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 643,
+        "Japan": 2,
+        "Russia": 0,
+        "Italy": 0,
+        "England": 0
+      },
+      {
+        "time": "2020-01-24T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 920,
+        "Japan": 2,
+        "Russia": 0,
+        "Italy": 0,
+        "England": 0
+      },
+      {
+        "time": "2020-01-25T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 1406,
+        "Japan": 2,
+        "Russia": 0,
+        "Italy": 0,
+        "England": 0
+      },
+      {
+        "time": "2020-01-26T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 2075,
+        "Japan": 4,
+        "Russia": 0,
+        "Italy": 0,
+        "England": 0
+      },
+      {
+        "time": "2020-01-27T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 2877,
+        "Japan": 4,
+        "Russia": 0,
+        "Italy": 0,
+        "England": 0
+      },
+      {
+        "time": "2020-01-28T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 5509,
+        "Japan": 7,
+        "Russia": 0,
+        "Italy": 0,
+        "England": 0
+      },
+      {
+        "time": "2020-01-29T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 6087,
+        "Japan": 7,
+        "Russia": 0,
+        "Italy": 0,
+        "England": 0
+      },
+      {
+        "time": "2020-01-30T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 8141,
+        "Japan": 11,
+        "Russia": 0,
+        "Italy": 0,
+        "England": 0
+      },
+      {
+        "time": "2020-01-31T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 9802,
+        "Japan": 15,
+        "Russia": 2,
+        "Italy": 2,
+        "England": 2
+      },
+      {
+        "time": "2020-02-01T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 11891,
+        "Japan": 20,
+        "Russia": 2,
+        "Italy": 2,
+        "England": 2
+      },
+      {
+        "time": "2020-02-02T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 16630,
+        "Japan": 20,
+        "Russia": 2,
+        "Italy": 2,
+        "England": 2
+      },
+      {
+        "time": "2020-02-03T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 19716,
+        "Japan": 20,
+        "Russia": 2,
+        "Italy": 2,
+        "England": 2
+      },
+      {
+        "time": "2020-02-04T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 23707,
+        "Japan": 22,
+        "Russia": 2,
+        "Italy": 2,
+        "England": 2
+      },
+      {
+        "time": "2020-02-05T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 27440,
+        "Japan": 22,
+        "Russia": 2,
+        "Italy": 2,
+        "England": 2
+      },
+      {
+        "time": "2020-02-06T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 30587,
+        "Japan": 22,
+        "Russia": 2,
+        "Italy": 2,
+        "England": 2
+      },
+      {
+        "time": "2020-02-07T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 34110,
+        "Japan": 25,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 3
+      },
+      {
+        "time": "2020-02-08T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 36814,
+        "Japan": 25,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 3
+      },
+      {
+        "time": "2020-02-09T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 39829,
+        "Japan": 26,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 3
+      },
+      {
+        "time": "2020-02-10T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 42354,
+        "Japan": 26,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 8
+      },
+      {
+        "time": "2020-02-11T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 44386,
+        "Japan": 26,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 8
+      },
+      {
+        "time": "2020-02-12T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 44759,
+        "Japan": 28,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 9
+      },
+      {
+        "time": "2020-02-13T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 59895,
+        "Japan": 28,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 9
+      },
+      {
+        "time": "2020-02-14T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 66358,
+        "Japan": 29,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 9
+      },
+      {
+        "time": "2020-02-15T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 68413,
+        "Japan": 43,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 9
+      },
+      {
+        "time": "2020-02-16T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 70513,
+        "Japan": 59,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 9
+      },
+      {
+        "time": "2020-02-17T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 72434,
+        "Japan": 66,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 9
+      },
+      {
+        "time": "2020-02-18T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 74211,
+        "Japan": 74,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 9
+      },
+      {
+        "time": "2020-02-19T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 74619,
+        "Japan": 84,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 9
+      },
+      {
+        "time": "2020-02-20T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 75077,
+        "Japan": 94,
+        "Russia": 2,
+        "Italy": 3,
+        "England": 9
+      },
+      {
+        "time": "2020-02-21T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 75550,
+        "Japan": 105,
+        "Russia": 2,
+        "Italy": 20,
+        "England": 9
+      },
+      {
+        "time": "2020-02-22T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 77001,
+        "Japan": 122,
+        "Russia": 2,
+        "Italy": 62,
+        "England": 9
+      },
+      {
+        "time": "2020-02-23T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 77022,
+        "Japan": 147,
+        "Russia": 2,
+        "Italy": 155,
+        "England": 9
+      },
+      {
+        "time": "2020-02-24T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 77241,
+        "Japan": 159,
+        "Russia": 2,
+        "Italy": 229,
+        "England": 13
+      },
+      {
+        "time": "2020-02-25T08:00:00.000Z",
+        "Brazil": 0,
+        "China": 77754,
+        "Japan": 170,
+        "Russia": 2,
+        "Italy": 322,
+        "England": 13
+      },
+      {
+        "time": "2020-02-26T08:00:00.000Z",
+        "Brazil": 1,
+        "China": 78166,
+        "Japan": 189,
+        "Russia": 2,
+        "Italy": 453,
+        "England": 13
+      },
+      {
+        "time": "2020-02-27T08:00:00.000Z",
+        "Brazil": 1,
+        "China": 78600,
+        "Japan": 214,
+        "Russia": 2,
+        "Italy": 655,
+        "England": 15
+      },
+      {
+        "time": "2020-02-28T08:00:00.000Z",
+        "Brazil": 1,
+        "China": 78928,
+        "Japan": 228,
+        "Russia": 2,
+        "Italy": 888,
+        "England": 20
+      },
+      {
+        "time": "2020-02-29T08:00:00.000Z",
+        "Brazil": 2,
+        "China": 79356,
+        "Japan": 241,
+        "Russia": 2,
+        "Italy": 1128,
+        "England": 23
+      },
+      {
+        "time": "2020-03-01T08:00:00.000Z",
+        "Brazil": 2,
+        "China": 79932,
+        "Japan": 256,
+        "Russia": 2,
+        "Italy": 1694,
+        "England": 36
+      },
+      {
+        "time": "2020-03-02T08:00:00.000Z",
+        "Brazil": 2,
+        "China": 80136,
+        "Japan": 274,
+        "Russia": 3,
+        "Italy": 2036,
+        "England": 40
+      },
+      {
+        "time": "2020-03-03T08:00:00.000Z",
+        "Brazil": 2,
+        "China": 80261,
+        "Japan": 293,
+        "Russia": 3,
+        "Italy": 2502,
+        "England": 51
+      },
+      {
+        "time": "2020-03-04T08:00:00.000Z",
+        "Brazil": 4,
+        "China": 80386,
+        "Japan": 331,
+        "Russia": 3,
+        "Italy": 3089,
+        "England": 85
+      },
+      {
+        "time": "2020-03-05T08:00:00.000Z",
+        "Brazil": 4,
+        "China": 80537,
+        "Japan": 360,
+        "Russia": 4,
+        "Italy": 3858,
+        "England": 115
+      },
+      {
+        "time": "2020-03-06T08:00:00.000Z",
+        "Brazil": 13,
+        "China": 80690,
+        "Japan": 420,
+        "Russia": 13,
+        "Italy": 4636,
+        "England": 163
+      },
+      {
+        "time": "2020-03-07T08:00:00.000Z",
+        "Brazil": 13,
+        "China": 80770,
+        "Japan": 461,
+        "Russia": 13,
+        "Italy": 5883,
+        "England": 206
+      },
+      {
+        "time": "2020-03-08T08:00:00.000Z",
+        "Brazil": 20,
+        "China": 80823,
+        "Japan": 502,
+        "Russia": 17,
+        "Italy": 7375,
+        "England": 273
+      },
+      {
+        "time": "2020-03-09T08:00:00.000Z",
+        "Brazil": 25,
+        "China": 80860,
+        "Japan": 511,
+        "Russia": 17,
+        "Italy": 9172,
+        "England": 321
+      },
+      {
+        "time": "2020-03-10T08:00:00.000Z",
+        "Brazil": 31,
+        "China": 80887,
+        "Japan": 581,
+        "Russia": 20,
+        "Italy": 10149,
+        "England": 382
+      },
+      {
+        "time": "2020-03-11T08:00:00.000Z",
+        "Brazil": 38,
+        "China": 80921,
+        "Japan": 639,
+        "Russia": 20,
+        "Italy": 12462,
+        "England": 456
+      },
+      {
+        "time": "2020-03-12T08:00:00.000Z",
+        "Brazil": 52,
+        "China": 80932,
+        "Japan": 639,
+        "Russia": 28,
+        "Italy": 15113,
+        "England": 456
+      },
+      {
+        "time": "2020-03-13T08:00:00.000Z",
+        "Brazil": 151,
+        "China": 80945,
+        "Japan": 701,
+        "Russia": 45,
+        "Italy": 17660,
+        "England": 798
+      },
+      {
+        "time": "2020-03-14T08:00:00.000Z",
+        "Brazil": 151,
+        "China": 80977,
+        "Japan": 773,
+        "Russia": 59,
+        "Italy": 21157,
+        "England": 1140
+      },
+      {
+        "time": "2020-03-15T08:00:00.000Z",
+        "Brazil": 162,
+        "China": 81003,
+        "Japan": 839,
+        "Russia": 63,
+        "Italy": 24747,
+        "England": 1140
+      },
+      {
+        "time": "2020-03-16T08:00:00.000Z",
+        "Brazil": 200,
+        "China": 81033,
+        "Japan": 839,
+        "Russia": 90,
+        "Italy": 27980,
+        "England": 1543
+      },
+      {
+        "time": "2020-03-17T08:00:00.000Z",
+        "Brazil": 321,
+        "China": 81058,
+        "Japan": 878,
+        "Russia": 114,
+        "Italy": 31506,
+        "England": 1950
+      },
+      {
+        "time": "2020-03-18T08:00:00.000Z",
+        "Brazil": 372,
+        "China": 81102,
+        "Japan": 889,
+        "Russia": 147,
+        "Italy": 35713,
+        "England": 2626
+      },
+      {
+        "time": "2020-03-19T08:00:00.000Z",
+        "Brazil": 621,
+        "China": 81156,
+        "Japan": 924,
+        "Russia": 199,
+        "Italy": 41035,
+        "England": 2689
+      },
+      {
+        "time": "2020-03-20T08:00:00.000Z",
+        "Brazil": 793,
+        "China": 81250,
+        "Japan": 963,
+        "Russia": 253,
+        "Italy": 47021,
+        "England": 3983
+      },
+      {
+        "time": "2020-03-21T08:00:00.000Z",
+        "Brazil": 1021,
+        "China": 81305,
+        "Japan": 1007,
+        "Russia": 306,
+        "Italy": 53578,
+        "England": 5018
+      },
+      {
+        "time": "2020-03-22T08:00:00.000Z",
+        "Brazil": 1546,
+        "China": 81435,
+        "Japan": 1101,
+        "Russia": 367,
+        "Italy": 59138,
+        "England": 5683
+      },
+      {
+        "time": "2020-03-23T08:00:00.000Z",
+        "Brazil": 1924,
+        "China": 81498,
+        "Japan": 1128,
+        "Russia": 438,
+        "Italy": 63927,
+        "England": 6650
+      },
+      {
+        "time": "2020-03-24T08:00:00.000Z",
+        "Brazil": 2247,
+        "China": 81591,
+        "Japan": 1193,
+        "Russia": 495,
+        "Italy": 69176,
+        "England": 8077
+      },
+      {
+        "time": "2020-03-25T08:00:00.000Z",
+        "Brazil": 2554,
+        "China": 81661,
+        "Japan": 1307,
+        "Russia": 658,
+        "Italy": 74386,
+        "England": 9529
+      },
+      {
+        "time": "2020-03-26T08:00:00.000Z",
+        "Brazil": 2985,
+        "China": 81782,
+        "Japan": 1387,
+        "Russia": 840,
+        "Italy": 80589,
+        "England": 11658
+      },
+      {
+        "time": "2020-03-27T08:00:00.000Z",
+        "Brazil": 3417,
+        "China": 81897,
+        "Japan": 1468,
+        "Russia": 1036,
+        "Italy": 86498,
+        "England": 14543
+      },
+      {
+        "time": "2020-03-28T08:00:00.000Z",
+        "Brazil": 3904,
+        "China": 81999,
+        "Japan": 1693,
+        "Russia": 1264,
+        "Italy": 92472,
+        "England": 17089
+      },
+      {
+        "time": "2020-03-29T08:00:00.000Z",
+        "Brazil": 4256,
+        "China": 82122,
+        "Japan": 1866,
+        "Russia": 1534,
+        "Italy": 97689,
+        "England": 19522
+      },
+      {
+        "time": "2020-03-30T08:00:00.000Z",
+        "Brazil": 4579,
+        "China": 82198,
+        "Japan": 1866,
+        "Russia": 1836,
+        "Italy": 101739,
+        "England": 22141
+      },
+      {
+        "time": "2020-03-31T08:00:00.000Z",
+        "Brazil": 5717,
+        "China": 82279,
+        "Japan": 1953,
+        "Russia": 2337,
+        "Italy": 105792,
+        "England": 25150
+      },
+      {
+        "time": "2020-04-01T08:00:00.000Z",
+        "Brazil": 6836,
+        "China": 82361,
+        "Japan": 2178,
+        "Russia": 2777,
+        "Italy": 110574,
+        "England": 29474
+      },
+      {
+        "time": "2020-04-02T08:00:00.000Z",
+        "Brazil": 8044,
+        "China": 82432,
+        "Japan": 2495,
+        "Russia": 3548,
+        "Italy": 115242,
+        "England": 33718
+      },
+      {
+        "time": "2020-04-03T08:00:00.000Z",
+        "Brazil": 9056,
+        "China": 82511,
+        "Japan": 2617,
+        "Russia": 4149,
+        "Italy": 119827,
+        "England": 38168
+      },
+      {
+        "time": "2020-04-04T08:00:00.000Z",
+        "Brazil": 10360,
+        "China": 82543,
+        "Japan": 3139,
+        "Russia": 4731,
+        "Italy": 124632,
+        "England": 41903
+      },
+      {
+        "time": "2020-04-05T08:00:00.000Z",
+        "Brazil": 11130,
+        "China": 82602,
+        "Japan": 3139,
+        "Russia": 5389,
+        "Italy": 128948,
+        "England": 47806
+      },
+      {
+        "time": "2020-04-06T08:00:00.000Z",
+        "Brazil": 12161,
+        "China": 82665,
+        "Japan": 3654,
+        "Russia": 6343,
+        "Italy": 132547,
+        "England": 51608
+      },
+      {
+        "time": "2020-04-07T08:00:00.000Z",
+        "Brazil": 14034,
+        "China": 82718,
+        "Japan": 3906,
+        "Russia": 7497,
+        "Italy": 135586,
+        "England": 55242
+      },
+      {
+        "time": "2020-04-08T08:00:00.000Z",
+        "Brazil": 16170,
+        "China": 82809,
+        "Japan": 4257,
+        "Russia": 8672,
+        "Italy": 139422,
+        "England": 60733
+      },
+      {
+        "time": "2020-04-09T08:00:00.000Z",
+        "Brazil": 18092,
+        "China": 82883,
+        "Japan": 4667,
+        "Russia": 10131,
+        "Italy": 143626,
+        "England": 65077
+      },
+      {
+        "time": "2020-04-10T08:00:00.000Z",
+        "Brazil": 19638,
+        "China": 82941,
+        "Japan": 5530,
+        "Russia": 11917,
+        "Italy": 147577,
+        "England": 73758
+      },
+      {
+        "time": "2020-04-11T08:00:00.000Z",
+        "Brazil": 20727,
+        "China": 83014,
+        "Japan": 6005,
+        "Russia": 13584,
+        "Italy": 152271,
+        "England": 78991
+      },
+      {
+        "time": "2020-04-12T08:00:00.000Z",
+        "Brazil": 22192,
+        "China": 83134,
+        "Japan": 6748,
+        "Russia": 15770,
+        "Italy": 156363,
+        "England": 84279
+      },
+      {
+        "time": "2020-04-13T08:00:00.000Z",
+        "Brazil": 23430,
+        "China": 83213,
+        "Japan": 7370,
+        "Russia": 18328,
+        "Italy": 159516,
+        "England": 88621
+      },
+      {
+        "time": "2020-04-14T08:00:00.000Z",
+        "Brazil": 25262,
+        "China": 83306,
+        "Japan": 7645,
+        "Russia": 21102,
+        "Italy": 162488,
+        "England": 93873
+      },
+      {
+        "time": "2020-04-15T08:00:00.000Z",
+        "Brazil": 28320,
+        "China": 83356,
+        "Japan": 8100,
+        "Russia": 24490,
+        "Italy": 165155,
+        "England": 98476
+      },
+      {
+        "time": "2020-04-16T08:00:00.000Z",
+        "Brazil": 30425,
+        "China": 83403,
+        "Japan": 8626,
+        "Russia": 27938,
+        "Italy": 168941,
+        "England": 103093
+      },
+      {
+        "time": "2020-04-17T08:00:00.000Z",
+        "Brazil": 33682,
+        "China": 83760,
+        "Japan": 9787,
+        "Russia": 32008,
+        "Italy": 172434,
+        "England": 108692
+      },
+      {
+        "time": "2020-04-18T08:00:00.000Z",
+        "Brazil": 36658,
+        "China": 83787,
+        "Japan": 10296,
+        "Russia": 36793,
+        "Italy": 175925,
+        "England": 114217
+      },
+      {
+        "time": "2020-04-19T08:00:00.000Z",
+        "Brazil": 38654,
+        "China": 83805,
+        "Japan": 10797,
+        "Russia": 42853,
+        "Italy": 178972,
+        "England": 120067
+      },
+      {
+        "time": "2020-04-20T08:00:00.000Z",
+        "Brazil": 40743,
+        "China": 83817,
+        "Japan": 10797,
+        "Russia": 47121,
+        "Italy": 181228,
+        "England": 124743
+      },
+      {
+        "time": "2020-04-21T08:00:00.000Z",
+        "Brazil": 43079,
+        "China": 83853,
+        "Japan": 11135,
+        "Russia": 52763,
+        "Italy": 183957,
+        "England": 129044
+      },
+      {
+        "time": "2020-04-22T08:00:00.000Z",
+        "Brazil": 45757,
+        "China": 83868,
+        "Japan": 11512,
+        "Russia": 57999,
+        "Italy": 187327,
+        "England": 133495
+      },
+      {
+        "time": "2020-04-23T08:00:00.000Z",
+        "Brazil": 50036,
+        "China": 83884,
+        "Japan": 12368,
+        "Russia": 62773,
+        "Italy": 189973,
+        "England": 138078
+      },
+      {
+        "time": "2020-04-24T08:00:00.000Z",
+        "Brazil": 54043,
+        "China": 83899,
+        "Japan": 12829,
+        "Russia": 68622,
+        "Italy": 192994,
+        "England": 143464
+      },
+      {
+        "time": "2020-04-25T08:00:00.000Z",
+        "Brazil": 59324,
+        "China": 83909,
+        "Japan": 13231,
+        "Russia": 74588,
+        "Italy": 195351,
+        "England": 148377
+      },
+      {
+        "time": "2020-04-26T08:00:00.000Z",
+        "Brazil": 63100,
+        "China": 83912,
+        "Japan": 13441,
+        "Russia": 80949,
+        "Italy": 197675,
+        "England": 152840
+      },
+      {
+        "time": "2020-04-27T08:00:00.000Z",
+        "Brazil": 67446,
+        "China": 83918,
+        "Japan": 14153,
+        "Russia": 87147,
+        "Italy": 199414,
+        "England": 157149
+      },
+      {
+        "time": "2020-04-28T08:00:00.000Z",
+        "Brazil": 73235,
+        "China": 83940,
+        "Japan": 13736,
+        "Russia": 93558,
+        "Italy": 201505,
+        "England": 161145
+      },
+      {
+        "time": "2020-04-29T08:00:00.000Z",
+        "Brazil": 79685,
+        "China": 83944,
+        "Japan": 13895,
+        "Russia": 99399,
+        "Italy": 203591,
+        "England": 165221
+      },
+      {
+        "time": "2020-04-30T08:00:00.000Z",
+        "Brazil": 87187,
+        "China": 83956,
+        "Japan": 14088,
+        "Russia": 106498,
+        "Italy": 205463,
+        "England": 171253
+      },
+      {
+        "time": "2020-05-01T08:00:00.000Z",
+        "Brazil": 92202,
+        "China": 83959,
+        "Japan": 14305,
+        "Russia": 114431,
+        "Italy": 207428,
+        "England": 177454
+      },
+      {
+        "time": "2020-05-02T08:00:00.000Z",
+        "Brazil": 97100,
+        "China": 83959,
+        "Japan": 14571,
+        "Russia": 124054,
+        "Italy": 209328,
+        "England": 182260
+      },
+      {
+        "time": "2020-05-03T08:00:00.000Z",
+        "Brazil": 101826,
+        "China": 83964,
+        "Japan": 14877,
+        "Russia": 134687,
+        "Italy": 210717,
+        "England": 186599
+      },
+      {
+        "time": "2020-05-04T08:00:00.000Z",
+        "Brazil": 108620,
+        "China": 83966,
+        "Japan": 15078,
+        "Russia": 145268,
+        "Italy": 211938,
+        "England": 190584
+      },
+      {
+        "time": "2020-05-05T08:00:00.000Z",
+        "Brazil": 115455,
+        "China": 83968,
+        "Japan": 15253,
+        "Russia": 155370,
+        "Italy": 213013,
+        "England": 194990
+      },
+      {
+        "time": "2020-05-06T08:00:00.000Z",
+        "Brazil": 126611,
+        "China": 83970,
+        "Japan": 15253,
+        "Russia": 165929,
+        "Italy": 214457,
+        "England": 201101
+      },
+      {
+        "time": "2020-05-07T08:00:00.000Z",
+        "Brazil": 135773,
+        "China": 83975,
+        "Japan": 15477,
+        "Russia": 177160,
+        "Italy": 215858,
+        "England": 206715
+      },
+      {
+        "time": "2020-05-08T08:00:00.000Z",
+        "Brazil": 146894,
+        "China": 83976,
+        "Japan": 15575,
+        "Russia": 187859,
+        "Italy": 217185,
+        "England": 211364
+      },
+      {
+        "time": "2020-05-09T08:00:00.000Z",
+        "Brazil": 156061,
+        "China": 83990,
+        "Japan": 15663,
+        "Russia": 198676,
+        "Italy": 218268,
+        "England": 215260
+      },
+      {
+        "time": "2020-05-10T08:00:00.000Z",
+        "Brazil": 162699,
+        "China": 84010,
+        "Japan": 15777,
+        "Russia": 209688,
+        "Italy": 219070,
+        "England": 219183
+      },
+      {
+        "time": "2020-05-11T08:00:00.000Z",
+        "Brazil": 169594,
+        "China": 84011,
+        "Japan": 15847,
+        "Russia": 221344,
+        "Italy": 219814,
+        "England": 223060
+      },
+      {
+        "time": "2020-05-12T08:00:00.000Z",
+        "Brazil": 178214,
+        "China": 84018,
+        "Japan": 15968,
+        "Russia": 232243,
+        "Italy": 221216,
+        "England": 226463
+      },
+      {
+        "time": "2020-05-13T08:00:00.000Z",
+        "Brazil": 190137,
+        "China": 84024,
+        "Japan": 16049,
+        "Russia": 242271,
+        "Italy": 222104,
+        "England": 229705
+      },
+      {
+        "time": "2020-05-14T08:00:00.000Z",
+        "Brazil": 203165,
+        "China": 84029,
+        "Japan": 16120,
+        "Russia": 252245,
+        "Italy": 223096,
+        "England": 233151
+      },
+      {
+        "time": "2020-05-15T08:00:00.000Z",
+        "Brazil": 220291,
+        "China": 84038,
+        "Japan": 16203,
+        "Russia": 262843,
+        "Italy": 223885,
+        "England": 236711
+      },
+      {
+        "time": "2020-05-16T08:00:00.000Z",
+        "Brazil": 233511,
+        "China": 84044,
+        "Japan": 16237,
+        "Russia": 272043,
+        "Italy": 224760,
+        "England": 240161
+      },
+      {
+        "time": "2020-05-17T08:00:00.000Z",
+        "Brazil": 241080,
+        "China": 84054,
+        "Japan": 16285,
+        "Russia": 281752,
+        "Italy": 225435,
+        "England": 243695
+      },
+      {
+        "time": "2020-05-18T08:00:00.000Z",
+        "Brazil": 255368,
+        "China": 84063,
+        "Japan": 16305,
+        "Russia": 290678,
+        "Italy": 225886,
+        "England": 246406
+      },
+      {
+        "time": "2020-05-19T08:00:00.000Z",
+        "Brazil": 271885,
+        "China": 84063,
+        "Japan": 16367,
+        "Russia": 299941,
+        "Italy": 226699,
+        "England": 248818
+      },
+      {
+        "time": "2020-05-20T08:00:00.000Z",
+        "Brazil": 291579,
+        "China": 84063,
+        "Japan": 16367,
+        "Russia": 308705,
+        "Italy": 227364,
+        "England": 248293
+      },
+      {
+        "time": "2020-05-21T08:00:00.000Z",
+        "Brazil": 310087,
+        "China": 84063,
+        "Japan": 16424,
+        "Russia": 317554,
+        "Italy": 228006,
+        "England": 250908
+      },
+      {
+        "time": "2020-05-22T08:00:00.000Z",
+        "Brazil": 330890,
+        "China": 84081,
+        "Japan": 16513,
+        "Russia": 326448,
+        "Italy": 228658,
+        "England": 254195
+      },
+      {
+        "time": "2020-05-23T08:00:00.000Z",
+        "Brazil": 347398,
+        "China": 84084,
+        "Japan": 16536,
+        "Russia": 335882,
+        "Italy": 229327,
+        "England": 257154
+      },
+      {
+        "time": "2020-05-24T08:00:00.000Z",
+        "Brazil": 363211,
+        "China": 84095,
+        "Japan": 16550,
+        "Russia": 344481,
+        "Italy": 229858,
+        "England": 259559
+      },
+      {
+        "time": "2020-05-25T08:00:00.000Z",
+        "Brazil": 374898,
+        "China": 84102,
+        "Japan": 16581,
+        "Russia": 353427,
+        "Italy": 230158,
+        "England": 261184
+      },
+      {
+        "time": "2020-05-26T08:00:00.000Z",
+        "Brazil": 391222,
+        "China": 84103,
+        "Japan": 16623,
+        "Russia": 362342,
+        "Italy": 230555,
+        "England": 265227
+      },
+      {
+        "time": "2020-05-27T08:00:00.000Z",
+        "Brazil": 411821,
+        "China": 84106,
+        "Japan": 16651,
+        "Russia": 370680,
+        "Italy": 231139,
+        "England": 267240
+      },
+      {
+        "time": "2020-05-28T08:00:00.000Z",
+        "Brazil": 438238,
+        "China": 84106,
+        "Japan": 16598,
+        "Russia": 379051,
+        "Italy": 231732,
+        "England": 269127
+      },
+      {
+        "time": "2020-05-29T08:00:00.000Z",
+        "Brazil": 465166,
+        "China": 84123,
+        "Japan": 16673,
+        "Russia": 387623,
+        "Italy": 232248,
+        "England": 271222
+      },
+      {
+        "time": "2020-05-30T08:00:00.000Z",
+        "Brazil": 498440,
+        "China": 84128,
+        "Japan": 16716,
+        "Russia": 396575,
+        "Italy": 232664,
+        "England": 272826
+      },
+      {
+        "time": "2020-05-31T08:00:00.000Z",
+        "Brazil": 514849,
+        "China": 84146,
+        "Japan": 16751,
+        "Russia": 405843,
+        "Italy": 232997,
+        "England": 274762
+      },
+      {
+        "time": "2020-06-01T08:00:00.000Z",
+        "Brazil": 526447,
+        "China": 84154,
+        "Japan": 16787,
+        "Russia": 414328,
+        "Italy": 233197,
+        "England": 276332
+      },
+      {
+        "time": "2020-06-02T08:00:00.000Z",
+        "Brazil": 555383,
+        "China": 84161,
+        "Japan": 16837,
+        "Russia": 423186,
+        "Italy": 233515,
+        "England": 277985
+      },
+      {
+        "time": "2020-06-03T08:00:00.000Z",
+        "Brazil": 584016,
+        "China": 84160,
+        "Japan": 16867,
+        "Russia": 431715,
+        "Italy": 233836,
+        "England": 279856
+      },
+      {
+        "time": "2020-06-04T08:00:00.000Z",
+        "Brazil": 614941,
+        "China": 84171,
+        "Japan": 16911,
+        "Russia": 440538,
+        "Italy": 234013,
+        "England": 281661
+      },
+      {
+        "time": "2020-06-05T08:00:00.000Z",
+        "Brazil": 645771,
+        "China": 84177,
+        "Japan": 16958,
+        "Russia": 449256,
+        "Italy": 234531,
+        "England": 283311
+      },
+      {
+        "time": "2020-06-06T08:00:00.000Z",
+        "Brazil": 672846,
+        "China": 84186,
+        "Japan": 17000,
+        "Russia": 458102,
+        "Italy": 234801,
+        "England": 284868
+      },
+      {
+        "time": "2020-06-07T08:00:00.000Z",
+        "Brazil": 691758,
+        "China": 84191,
+        "Japan": 17039,
+        "Russia": 467073,
+        "Italy": 234998,
+        "England": 286194
+      },
+      {
+        "time": "2020-06-08T08:00:00.000Z",
+        "Brazil": 707412,
+        "China": 84195,
+        "Japan": 17060,
+        "Russia": 476043,
+        "Italy": 235278,
+        "England": 287399
+      },
+      {
+        "time": "2020-06-09T08:00:00.000Z",
+        "Brazil": 739503,
+        "China": 84198,
+        "Japan": 17111,
+        "Russia": 484630,
+        "Italy": 235561,
+        "England": 289140
+      },
+      {
+        "time": "2020-06-10T08:00:00.000Z",
+        "Brazil": 772416,
+        "China": 84209,
+        "Japan": 17146,
+        "Russia": 493023,
+        "Italy": 235763,
+        "England": 290143
+      },
+      {
+        "time": "2020-06-11T08:00:00.000Z",
+        "Brazil": 802828,
+        "China": 84216,
+        "Japan": 17187,
+        "Russia": 501800,
+        "Italy": 236142,
+        "England": 291409
+      },
+      {
+        "time": "2020-06-12T08:00:00.000Z",
+        "Brazil": 828810,
+        "China": 84228,
+        "Japan": 17250,
+        "Russia": 510761,
+        "Italy": 236305,
+        "England": 292950
+      },
+      {
+        "time": "2020-06-13T08:00:00.000Z",
+        "Brazil": 850514,
+        "China": 84286,
+        "Japan": 17293,
+        "Russia": 519458,
+        "Italy": 236651,
+        "England": 294375
+      },
+      {
+        "time": "2020-06-14T08:00:00.000Z",
+        "Brazil": 867624,
+        "China": 84335,
+        "Japan": 17369,
+        "Russia": 528267,
+        "Italy": 236989,
+        "England": 295889
+      },
+      {
+        "time": "2020-06-15T08:00:00.000Z",
+        "Brazil": 888271,
+        "China": 84378,
+        "Japan": 17439,
+        "Russia": 536484,
+        "Italy": 237290,
+        "England": 296857
+      },
+      {
+        "time": "2020-06-16T08:00:00.000Z",
+        "Brazil": 923189,
+        "China": 84422,
+        "Japan": 17484,
+        "Russia": 544725,
+        "Italy": 237500,
+        "England": 298136
+      },
+      {
+        "time": "2020-06-17T08:00:00.000Z",
+        "Brazil": 955377,
+        "China": 84458,
+        "Japan": 17530,
+        "Russia": 552549,
+        "Italy": 237828,
+        "England": 299251
+      },
+      {
+        "time": "2020-06-18T08:00:00.000Z",
+        "Brazil": 978142,
+        "China": 84494,
+        "Japan": 17588,
+        "Russia": 560321,
+        "Italy": 238159,
+        "England": 300469
+      },
+      {
+        "time": "2020-06-19T08:00:00.000Z",
+        "Brazil": 1032913,
+        "China": 84494,
+        "Japan": 17658,
+        "Russia": 568292,
+        "Italy": 238011,
+        "England": 301815
+      },
+      {
+        "time": "2020-06-20T08:00:00.000Z",
+        "Brazil": 1032913,
+        "China": 84553,
+        "Japan": 17725,
+        "Russia": 576162,
+        "Italy": 238275,
+        "England": 303110
+      }
+    ]
+  },
+
+
+
+  "patients": {
         "date": "2020\/05\/28 18:45",
         "data": [
             {

@@ -10,7 +10,7 @@
 
       <v-col cols="12" md="40" class="DataCard">
         <monitoring-consultation-desk-report-chart
-          :title="$t('全球疫情概览')"
+          :title="$t('疫情较严重国家确诊人数')"
           title-id="monitoring-number-of-reports-to-covid19-consultation-desk"
           chart-id="monitoring-consultation-desk-report-chart"
           :chart-data="chartData"
@@ -124,21 +124,27 @@ export default {
 
     const [
       China,
-      America,
+      England,
       labels,
-      Japan
-    ] = Data.querents.data.reduce(
+      Japan,
+      Brazil,
+      Russia,
+      Italy
+    ] = Data.confirmedglobal.data.reduce(
       (res, data) => {
-        res[0].push(data['17-翌9時'])
-        res[1].push(data['７日間平均'])
-        res[2].push(data['日付'])
-        res[3].push(data['9-17時'])
+        res[0].push(data['China'])
+        res[1].push(data['England'])
+        res[2].push(data['time'])
+        res[3].push(data['Japan'])
+        res[4].push(data['Brazil'])
+        res[5].push(data['Russia'])
+        res[6].push(data['Italy'])
         return res
       },
-      [[], [], [], []]
+      [[], [], [], [], [], [], []]
     )
-    const chartData = [China, America, Japan]
-    const dataLabels = [this.$t('中国'), this.$t('美国'), this.$t('日本')]
+    const chartData = [China, England, Japan, Brazil, Russia, Italy]
+    const dataLabels = [this.$t('中国'), this.$t('英国'), this.$t('日本'), this.$t('巴西'), this.$t('俄罗斯'), this.$t('意大利')]
     const date = Data.querents.date
 
     // 感染者数グラフ

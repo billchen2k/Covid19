@@ -37,7 +37,7 @@
             :plugins="scrollPlugin"
             :display-legends="displayLegends"
             :height="240"
-            :width="1100"
+            :width="1000"
           />
         </div>
        </div>
@@ -182,12 +182,15 @@
     },
     data() {
       const colors: SurfaceStyle[] = [
-        getGraphSeriesColor('B'),
         getGraphSeriesColor('A'),
-        getGraphSeriesColor('C')
+        getGraphSeriesColor('B'),
+        getGraphSeriesColor('C'),
+        getGraphSeriesColor('D'),
+        getGraphSeriesColor('E'),
+        getGraphSeriesColor('F')
       ]
       return {
-        displayLegends: [true, true],
+        displayLegends: [true, true, true, true, true, true],
         chartWidth: null,
         colors,
         canvas: true,
@@ -200,14 +203,22 @@
       displayTransitionRatio() {
         const data0 = this.chartData[0]
         const data1 = this.chartData[1]
-        const lastDay = data0[data0.length - 1] + data1[data1.length - 1]
-        const lastDayBefore = data0[data0.length - 2] + data1[data1.length - 2]
+        const data2 = this.chartData[2]
+        const data3 = this.chartData[3]
+        const data4 = this.chartData[4]
+        const data5 = this.chartData[5]
+        const lastDay = data0[data0.length - 1] + data1[data1.length - 1] + data2[data2.length - 1] + data3[data3.length - 1]+ data4[data2.length - 1] + data5[data3.length - 1]
+        const lastDayBefore = data0[data0.length - 2] + data1[data1.length - 2] + data2[data2.length - 2] + data3[data3.length - 2]+ data4[data2.length - 2] + data5[data3.length - 2]
         return this.formatDayBeforeRatio(lastDay - lastDayBefore)
       },
       displayLastday() {
         const data0 = this.chartData[0]
         const data1 = this.chartData[1]
-        const lastDay = data0[data0.length - 1] + data1[data1.length - 1]
+        const data2 = this.chartData[2]
+        const data3 = this.chartData[3]
+        const data4 = this.chartData[4]
+        const data5 = this.chartData[5]
+        const lastDay = data0[data0.length - 1] + data1[data1.length - 1] + data2[data2.length - 1] + data3[data3.length - 1]+ data4[data2.length - 1] + data5[data3.length - 1]
         return this.formatDayBeforeRatio(lastDay)
       },
       displayInfo() {
@@ -257,6 +268,42 @@
               pointBackgroundColor: 'rgba(0,0,0,0)',
               pointBorderColor: 'rgba(0,0,0,0)',
               borderColor: this.colors[2].fillColor,
+              borderWidth: 3,
+              fill: false,
+              order: 2,
+              lineTension: 0
+            },
+            {
+              type: 'line',
+              label: this.dataLabels[3],
+              data: this.chartData[3],
+              pointBackgroundColor: 'rgba(0,0,0,0)',
+              pointBorderColor: 'rgba(0,0,0,0)',
+              borderColor: this.colors[3].fillColor,
+              borderWidth: 3,
+              fill: false,
+              order: 2,
+              lineTension: 0
+            },
+            {
+              type: 'line',
+              label: this.dataLabels[4],
+              data: this.chartData[4],
+              pointBackgroundColor: 'rgba(0,0,0,0)',
+              pointBorderColor: 'rgba(0,0,0,0)',
+              borderColor: this.colors[4].fillColor,
+              borderWidth: 3,
+              fill: false,
+              order: 2,
+              lineTension: 0
+            },
+            {
+              type: 'line',
+              label: this.dataLabels[5],
+              data: this.chartData[5],
+              pointBackgroundColor: 'rgba(0,0,0,0)',
+              pointBorderColor: 'rgba(0,0,0,0)',
+              borderColor: this.colors[5].fillColor,
               borderWidth: 3,
               fill: false,
               order: 2,
