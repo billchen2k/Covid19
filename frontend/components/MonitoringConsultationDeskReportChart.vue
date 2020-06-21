@@ -96,6 +96,7 @@
 
   type Computed = {
     displayTransitionRatio: string
+    displayLastday : string
     displayInfo: {
       lText: string
       sText: string
@@ -182,7 +183,8 @@
     data() {
       const colors: SurfaceStyle[] = [
         getGraphSeriesColor('B'),
-        getGraphSeriesColor('A')
+        getGraphSeriesColor('A'),
+        getGraphSeriesColor('C')
       ]
       return {
         displayLegends: [true, true],
@@ -196,14 +198,21 @@
     },
     computed: {
       displayTransitionRatio() {
-        const data = this.chartData[1]
-        const lastDay = data[data.length - 1]
-        const lastDayBefore = data[data.length - 2]
+        const data0 = this.chartData[0]
+        const data1 = this.chartData[1]
+        const lastDay = data0[data0.length - 1] + data1[data1.length - 1]
+        const lastDayBefore = data0[data0.length - 2] + data1[data1.length - 2]
         return this.formatDayBeforeRatio(lastDay - lastDayBefore)
+      },
+      displayLastday() {
+        const data0 = this.chartData[0]
+        const data1 = this.chartData[1]
+        const lastDay = data0[data0.length - 1] + data1[data1.length - 1]
+        return this.formatDayBeforeRatio(lastDay)
       },
       displayInfo() {
         return {
-          lText: this.chartData[1][this.chartData[1].length - 1].toLocaleString(),
+          lText: `${this.displayLastday}`,
           sText: `${this.$t('{date} 的数据', {
             date: dayjs(this.labels[this.labels.length - 1]).format('M/D')
           })}（${this.$t('比前一天')}: ${this.displayTransitionRatio} ${
@@ -236,6 +245,18 @@
               pointBackgroundColor: 'rgba(0,0,0,0)',
               pointBorderColor: 'rgba(0,0,0,0)',
               borderColor: this.colors[1].fillColor,
+              borderWidth: 3,
+              fill: false,
+              order: 2,
+              lineTension: 0
+            },
+            {
+              type: 'line',
+              label: this.dataLabels[2],
+              data: this.chartData[2],
+              pointBackgroundColor: 'rgba(0,0,0,0)',
+              pointBorderColor: 'rgba(0,0,0,0)',
+              borderColor: this.colors[2].fillColor,
               borderWidth: 3,
               fill: false,
               order: 2,

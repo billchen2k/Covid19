@@ -123,20 +123,22 @@ export default {
   data() {
 
     const [
-      consulationReportsCount,
-      sevendayMoveAverages,
-      labels
+      China,
+      America,
+      labels,
+      Japan
     ] = Data.querents.data.reduce(
       (res, data) => {
-        res[0].push(data['小計'])
+        res[0].push(data['17-翌9時'])
         res[1].push(data['７日間平均'])
         res[2].push(data['日付'])
+        res[3].push(data['9-17時'])
         return res
       },
-      [[], [], []]
+      [[], [], [], []]
     )
-    const chartData = [consulationReportsCount, sevendayMoveAverages]
-    const dataLabels = [this.$t('中国'), this.$t('美国')]
+    const chartData = [China, America, Japan]
+    const dataLabels = [this.$t('中国'), this.$t('美国'), this.$t('日本')]
     const date = Data.querents.date
 
     // 感染者数グラフ
