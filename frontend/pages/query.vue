@@ -47,7 +47,6 @@
             :sort-by="confirm_date"
             :sort-desc="true"
             loading-text="正在加载数据，请稍候"
-
             class="cardTable"
           >
             <template v-slot:item.detail="{ item }">
@@ -77,6 +76,8 @@
 
   import PageHeader from '../components/PageHeader'
   import TextCard from '../components/TextCard'
+  import axios from '../.nuxt/axios'
+  import Config from '../components/global/Config'
 
   export default {
     name: 'query',
@@ -133,9 +134,10 @@
     },
 
     methods: {
-      fetchData() {
-
+      fetchData: (name, gender, onset_place) => {
+        // axios().post(url)
       },
+
       displayDetail(patientID){
         console.log(patientID)
       }
@@ -154,18 +156,8 @@
         doctor_name: '李四',
         status: '已治愈'
       }
-      this.patients.data.pop()
-      this.loading = true
-      setTimeout(() => {
-        var i = 0;
-        while(i < 80000){
-          var topush = Object.assign({}, test)
-          topush.patient_id = i
-          this.patients.data.push(topush)
-          i++
-        }
-        this.loading = false
-      }, 1000)
+      this.loading = false;
+      console.log(Config.apiurl);
     }
   }
 </script>

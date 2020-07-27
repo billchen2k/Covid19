@@ -119,7 +119,6 @@
             console.error("Fail to reach server.")
             this.errormsg = "无法连接到服务器。"
             this.loading = false
-
           })
       }
     }

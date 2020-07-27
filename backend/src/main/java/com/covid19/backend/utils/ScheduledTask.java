@@ -45,6 +45,7 @@ public class ScheduledTask {
 				log.info("Cleaning file: " + fileList[i].getName());
 			}
 		}
+		log.info("Clean finished.");
 
 
 	}

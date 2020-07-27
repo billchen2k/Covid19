@@ -7,7 +7,7 @@ import requests
 
 fake = faker.Factory.create("zh-CN")
 
-api = "http://45.76.79.85/"
+api = "http://localhost/"
 s = requests.session()
 res = json.loads(s.post(api + "user/logIn?identifier=admin&password=admin").text)
 
@@ -88,15 +88,16 @@ def new_patient(city, province, date, status):
 		'birthday': profile['birthdate'].strftime("%Y-%m-%d"),
 		'confirm_date': date,
 		'doctor_id': random.randint(0, 10000),
-		'gender': profile['gender'],
-		'hospital_id': city + "第一人民医院",
+		'gender': 1 if profile['sex'] == 'M' else 0,
+		# 'hospital_id': city + "第一人民医院",
+		'hospital_id': city + "第一人民医院" if city.find('人员') != -1 else "中心医院",
 		'name': profile['name'],
 		'onset_date': date,
 		'onset_place': province + city,
 		'is_doctor': 0,
-		'status': status
+		'status': random.choice(status)
 	}
-
+	print(patient)
 
 diagnosis = [
 	{
@@ -111,12 +112,12 @@ diagnosis = [
 	},
 	{
 		"temp": random.randint(370, 380) / 10,
-		"words": "呼吸略有困难，辅助药物治疗，并保证隔离。",
+		"words": "呼吸略有困难，应当辅助药物治疗，并保证已经被隔离。",
 		"dna": 1
 	},
 	{
 		"temp": random.randint(380, 390) / 10,
-		"words": "温度较高，应特别关注状态，有突发情况及时处理。",
+		"words": "温度较高，应特别关注病情，有突发情况及时处理。",
 		"dna": 1
 	},
 	{
@@ -125,8 +126,8 @@ diagnosis = [
 		"dna": 1
 	},
 	{
-		"temp": random.randint(395, 410) / 10,
-		"words": "重点监护对象，保持密切关注并时刻监护。",
+		"temp": random.randint(395, 412) / 10,
+		"words": "状态极其危险，应作为重点监护对象，保持密切关注，辅助生命维持设备。",
 		"dna": 1
 	},
 ]
