@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // MyBatis
 @Mapper
@@ -13,6 +14,9 @@ public interface PatientMapper {
 
     @Select("SELECT * from patient where patient_id=#{patient_id}")
     public Patient selectPatientByID(@Param("patient_id") long patient_id);
+
+    @Select("SELECT * from patient NATURAL JOIN (SELECT `name` AS hospital_name, hospital_id FROM hospital) AS T where patient_id=#{patient_id}")
+    public HashMap<String, String> selectDetailedPatientByID(@Param("patient_id") long patient_id);
 
     @Select("SELECT * from patient where " +
             "name like concat('%',#{name},'%') " +

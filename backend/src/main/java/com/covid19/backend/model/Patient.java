@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 //swagger
 @ApiModel("Patient 病人实体")
@@ -20,7 +21,8 @@ import javax.persistence.*;
 @Getter
 @Accessors(chain = true)
 @Entity(name = "patient")
-public class Patient {
+@Table(name = "patient")
+public class Patient implements Serializable {
     @ApiModelProperty("患者 ID")
     @Id
     private long patient_id;
@@ -49,8 +51,11 @@ public class Patient {
     @ApiModelProperty("主治大夫")
     private String doctor_id;
 
-    @ApiModelProperty("治疗医院")
+    @ApiModelProperty("治疗医院 ID")
     private String hospital_id;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "hospital_id", nullable = true)
+//    private Hospital hospital_id;
 
     @ApiModelProperty("是否为医生")
     private String is_doctor;

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 获取病人信息的控制器
@@ -29,11 +30,11 @@ public class GetPatientInfo {
     @PostMapping("/patient/getPatientInfoByID")
     @ApiOperation(value = "根据病人ID获取病人信息", notes = "可以根据病人ID获取病人信息")
     @ApiImplicitParam(name = "patient_id",value = "病人ID")
-    public Result<Patient> getPatientInfoByID(
+    public Result<HashMap<String, String>> getPatientInfoByID(
             @RequestParam(value = "patient_id") long patient_id
     )
     {
-        Patient patient = getPatientInfoService.getPatientInfoByID(patient_id);
+        HashMap<String, String> patient = getPatientInfoService.getDetailedPatiendInfoByID(patient_id);
         if(patient == null) return Result.error(2012,"不存在该病人");
         return Result.ok(patient);
     }

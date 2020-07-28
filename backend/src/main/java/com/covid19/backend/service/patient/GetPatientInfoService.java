@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class GetPatientInfoService extends BaseService {
@@ -19,6 +20,9 @@ public class GetPatientInfoService extends BaseService {
         return patientMapper.selectPatientByID(patient_id);
     }
 
+    public HashMap<String, String>getDetailedPatiendInfoByID(long patient_id) {
+        return patientMapper.selectDetailedPatientByID(patient_id);
+    }
     /**
      * 根据病人其他属性获取病人信息
      * @param name
