@@ -35,7 +35,7 @@ public interface PrescriptionMapper {
             "#{dosage}, " +
             "#{usage})"
     )
-    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "prescription_id", before = false, resultType = long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID() as prescription_id", keyProperty = "prescription_id", before = false, resultType = long.class)
     long insertPrescription(Prescription prescription);
 
     @Update("Update prescription set " +

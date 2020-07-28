@@ -21,8 +21,7 @@ public class CreateImageService extends BaseService{
 
     public Image createImage(Image image)
     {
-        long id = imageMapper.insertImage(image);
-        image.setImage_id(id);
+        imageMapper.insertImage(image);
         return image;
     }
 }

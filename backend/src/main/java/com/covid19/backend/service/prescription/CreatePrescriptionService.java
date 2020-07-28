@@ -41,8 +41,7 @@ public class CreatePrescriptionService extends BaseService{
     {
         Prescription prescription = new Prescription();
         prescription.setPatient_id(patient_id).setMedicine_id(medicine_id).setDosage(dosage).setUsage(usage);
-        long id = prescriptionMapper.insertPrescription(prescription);
-        prescription.setPrescription_id(id);
+        prescriptionMapper.insertPrescription(prescription);
         return prescription;
     }
 }

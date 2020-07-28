@@ -19,7 +19,7 @@ public interface HospitalMapper {
     @Insert("insert into hospital(name, address) " +
             "values (#{name}, #{address})"
     )
-    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "hospital_id", before = false, resultType = long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID() as hospital_id", keyProperty = "hospital_id", before = false, resultType = long.class)
     long insertHospital(Hospital hospital);
 
     @Update("Update hospital set " +

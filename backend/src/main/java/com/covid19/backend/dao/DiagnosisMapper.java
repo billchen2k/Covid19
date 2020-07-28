@@ -36,7 +36,7 @@ public interface DiagnosisMapper {
             "#{temperature}, " +
             "#{nucleic_acid})"
     )
-    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "diagnosis_id", before = false, resultType = long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID() as diagnosis_id", keyProperty = "diagnosis_id", before = false, resultType = long.class)
     long insertDiagnosis(Diagnosis diagnosis);
 
     @Update("Update Diagnosis set " +

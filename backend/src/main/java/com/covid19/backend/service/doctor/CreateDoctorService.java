@@ -42,8 +42,7 @@ public class CreateDoctorService extends BaseService{
     {
         Doctor doctor = new Doctor();
         doctor.setName(name).setGender(gender).setBirthday(birthday).setDepartment(department).setHospital_id(hospital_id);
-        long id = doctorMapper.insertDoctor(doctor);
-        doctor.setDoctor_id(id);
+        doctorMapper.insertDoctor(doctor);
         return doctor;
     }
 }

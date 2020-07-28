@@ -21,8 +21,7 @@ public class CreateHospitalService extends BaseService{
 
     public Hospital createHospital(Hospital hospital)
     {
-        long id = hospitalMapper.insertHospital(hospital);
-        hospital.setHospital_id(id);
+        hospitalMapper.insertHospital(hospital);
         return hospital;
     }
 }

@@ -33,7 +33,7 @@ public interface ImageMapper {
             "#{conclusion}, " +
             "#{conclusion_doctor_id})"
     )
-    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "image_id", before = false, resultType = long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID() as image_id", keyProperty = "image_id", before = false, resultType = long.class)
     long insertImage(Image image);
 
     @Update("Update image set " +

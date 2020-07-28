@@ -21,8 +21,7 @@ public class CreateDiagnosisService extends BaseService{
 
     public Diagnosis createDiagnosis(Diagnosis diagnosis)
     {
-        long id = diagnosisMapper.insertDiagnosis(diagnosis);
-        diagnosis.setDiagnosis_id(id);
+        diagnosisMapper.insertDiagnosis(diagnosis);
         return diagnosis;
     }
 }

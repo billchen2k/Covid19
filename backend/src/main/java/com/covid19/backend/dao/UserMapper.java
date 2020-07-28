@@ -36,7 +36,7 @@ public interface UserMapper {
 			"CURRENT_TIMESTAMP(), " +
 			"#{role}, " +
 			"#{gender})")
-	@SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "user_id", before = false, resultType = long.class)
+	@SelectKey(statement = "SELECT LAST_INSERT_ID() as user_id", keyProperty = "user_id", before = false, resultType = long.class)
 	long insertUser(User user);
 
 	@Update("Update user set " +

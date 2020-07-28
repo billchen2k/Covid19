@@ -35,7 +35,7 @@ public interface MedicineMapper {
             "#{introduction}, " +
             "#{type})"
     )
-    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "medicine_id", before = false, resultType = long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID() as medicine_id", keyProperty = "medicine_id", before = false, resultType = long.class)
     long insertMedicine(Medicine doctor);
 
     @Update("Update medicine set " +
