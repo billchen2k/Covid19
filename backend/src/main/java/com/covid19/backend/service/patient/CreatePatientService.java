@@ -53,8 +53,7 @@ public class CreatePatientService extends BaseService{
         Patient patient = new Patient();
         patient.setName(name).setGender(gender).setBirthday(birthday).setOnset_place(onset_place).setOnset_date(onset_date);
         patient.setConfirm_date(confirm_date).setStatus(status).setDoctor_id(doctor_id).setHospital_id(hospital_id).setIs_doctor(is_doctor);
-        long id = patientMapper.insertPatient(patient);
-        patient.setPatient_id(id);
+        patientMapper.insertPatient(patient);
         return patient;
     }
 }

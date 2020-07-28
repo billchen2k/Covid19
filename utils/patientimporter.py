@@ -7,6 +7,7 @@ import requests
 
 fake = faker.Factory.create("zh-CN")
 
+api = "http://45.77.26.112/"
 api = "http://localhost/"
 s = requests.session()
 res = json.loads(s.post(api + "user/logIn?identifier=admin&password=admin").text)
@@ -87,17 +88,20 @@ def new_patient(city, province, date, status):
 	patient = {
 		'birthday': profile['birthdate'].strftime("%Y-%m-%d"),
 		'confirm_date': date,
-		'doctor_id': random.randint(0, 10000),
+		'doctor_id': random.randint(0, 9146),
 		'gender': 1 if profile['sex'] == 'M' else 0,
 		# 'hospital_id': city + "第一人民医院",
-		'hospital_id': city + "第一人民医院" if city.find('人员') != -1 else "中心医院",
+		'hospital_id': city + "第一人民医院" if (city.find('人员') == -1 and city.find('境外') == -1 and city.find('监狱') == -1)
+		else "中心医院",
 		'name': profile['name'],
 		'onset_date': date,
 		'onset_place': province + city,
 		'is_doctor': 0,
-		'status': random.choice(status)
+		'status': status
 	}
 	print(patient)
+	res = s.post(api + 'patient/createPatient', data=patient)
+	print(json.loads(res.text)['data'])
 
 diagnosis = [
 	{

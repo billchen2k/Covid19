@@ -63,7 +63,7 @@ public interface PatientMapper {
             "#{hospital_id}, " +
             "#{is_doctor})"
     )
-    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "patient_id", before = false, resultType = long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID() as patient_id", keyProperty = "patient_id", before = false, resultType = long.class)
     long insertPatient(Patient patient);
 
     @Update("Update patient set " +
