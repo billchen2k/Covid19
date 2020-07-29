@@ -8,3 +8,4 @@ if [ -n "$PID" ]; then
 fi
 echo "Starting..."
 nohup java -jar backend-0.0.1-SNAPSHOT.jar > stdout.log &
+tail -10f stdout.log

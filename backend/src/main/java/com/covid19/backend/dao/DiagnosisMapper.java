@@ -21,7 +21,7 @@ public interface DiagnosisMapper {
             "and nucleic_acid = concat('%',#{nucleic_acid},'%')")
     public ArrayList<Diagnosis> selectDiagnosis(Diagnosis diagnosis);
 
-    @Insert("insert into Diagnosis(" +
+    @Insert("insert into diagnosis(" +
             "patient_id, " +
             "doctor_id, " +
             "time, " +
@@ -39,7 +39,7 @@ public interface DiagnosisMapper {
     @SelectKey(statement = "SELECT LAST_INSERT_ID() as diagnosis_id", keyProperty = "diagnosis_id", before = false, resultType = long.class)
     long insertDiagnosis(Diagnosis diagnosis);
 
-    @Update("Update Diagnosis set " +
+    @Update("Update diagnosis set " +
             "patient_id=#{patient_id}, " +
             "doctor_id=#{doctor_id}, " +
             "time=#{time}, " +
@@ -49,6 +49,6 @@ public interface DiagnosisMapper {
             "where diagnosis_id=#{diagnosis_id}")
     void updateDiagnosis(Diagnosis diagnosis);
 
-    @Delete("delete from Diagnosis where diagnosis_id = #{diagnosis_id}")
+    @Delete("delete from diagnosis where diagnosis_id = #{diagnosis_id}")
     void deleteDiagnosisByID(@Param("diagnosis_id") long diagnosis_id);
 }
