@@ -50,7 +50,7 @@ public class UpdateMedicineService extends BaseService{
     )
     {
         Medicine medicine = getMedicineInfoService.getMedicineInfoByID(doctor_id);
-        medicine.setName(name).setManufacturer(manufacturer).setIntroduction(introduction).setType(type);
+        medicine.setMedicine_name(name).setManufacturer(manufacturer).setIntroduction(introduction).setType(type);
         medicineMapper.updateMedicineInfo(medicine);
         return medicine;
     }

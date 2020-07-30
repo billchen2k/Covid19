@@ -13,17 +13,17 @@ public interface HospitalMapper {
     public Hospital selectHospitalByID(@Param("hospital_id") long hospital_id);
 
     @Select("SELECT * from hospital where " +
-            "name like concat('%',#{name},'%') and address like concat('%',#{address},'%')")
+            "hospital_name like concat('%',#{hospital_name},'%') and address like concat('%',#{address},'%')")
     public ArrayList<Hospital> selectHospital(Hospital hospital);
 
-    @Insert("insert into hospital(name, address) " +
-            "values (#{name}, #{address})"
+    @Insert("insert into hospital(hospital_name, address) " +
+            "values (#{hospital_name}, #{address})"
     )
     @SelectKey(statement = "SELECT LAST_INSERT_ID() as hospital_id", keyProperty = "hospital_id", before = false, resultType = long.class)
     long insertHospital(Hospital hospital);
 
     @Update("Update hospital set " +
-            "name=#{name}, address=#{address} " +
+            "hospital_name=#{hospital_name}, address=#{address} " +
             "where hospital_id=#{hospital_id}")
     void updateHospital(Hospital hospital);
 

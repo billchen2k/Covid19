@@ -49,7 +49,7 @@ public class UpdateDoctorService extends BaseService{
     )
     {
         Doctor doctor = getDoctorInfoService.getDoctorInfoByID(doctor_id);
-        doctor.setName(name).setGender(gender).setBirthday(birthday).setDepartment(department).setHospital_id(hospital_id);
+        doctor.setDoctor_name(name).setDoctor_gender(gender).setDoctor_birthday(birthday).setDepartment(department).setHospital_id(hospital_id);
         doctorMapper.updateDoctorInfo(doctor);
         return doctor;
     }

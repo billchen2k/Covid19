@@ -13,24 +13,24 @@ public interface MedicineMapper {
     public Medicine selectMedicineByID(@Param("medicine_id") long medicine_id);
 
     @Select("SELECT * from medicine where " +
-            "name like concat('%',#{name},'%') " +
+            "medicine_name like concat('%',#{medicine_name},'%') " +
             "and manufacturer like concat('%',#{manufacturer},'%') " +
             "and introduction like concat('%',#{introduction},'%') " +
             "and type like concat('%',#{type},'%')")
     public ArrayList<Medicine> selectMedicine(
-            @Param("name") String name,
+            @Param("medicine_name") String name,
             @Param("manufacturer") String manufacturer,
             @Param("introduction") String introduction,
             @Param("type") String type
     );
 
     @Insert("insert into medicine(" +
-            "name, " +
+            "medicine_name, " +
             "manufacturer, " +
             "introduction, " +
             "type) " +
             "values (" +
-            "#{name}, " +
+            "#{medicine_name}, " +
             "#{manufacturer}, " +
             "#{introduction}, " +
             "#{type})"
@@ -39,7 +39,7 @@ public interface MedicineMapper {
     long insertMedicine(Medicine doctor);
 
     @Update("Update medicine set " +
-            "name=#{name}, " +
+            "medicine_name=#{medicine_name}, " +
             "manufacturer=#{manufacturer}, " +
             "introduction=#{introduction}, " +
             "type=#{type} " +

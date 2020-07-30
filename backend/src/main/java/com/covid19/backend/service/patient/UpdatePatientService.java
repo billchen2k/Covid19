@@ -53,7 +53,7 @@ public class UpdatePatientService extends BaseService{
     )
     {
         Patient patient = getPatientInfoService.getPatientInfoByID(patient_id);
-        patient.setName(name).setGender(gender).setBirthday(birthday).setOnset_place(onset_place).setOnset_date(onset_date);
+        patient.setPatient_name(name).setPatient_gender(gender).setPatient_birthday(birthday).setOnset_place(onset_place).setOnset_date(onset_date);
         patient.setConfirm_date(confirm_date).setStatus(status).setDoctor_id(doctor_id).setHospital_id(hospital_id).setIs_doctor(is_doctor);
         patientMapper.updatePatientInfo(patient);
         return patient;

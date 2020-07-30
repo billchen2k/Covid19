@@ -26,13 +26,13 @@ public class Doctor {
     private long doctor_id;
 
     @ApiModelProperty("姓名")
-    private String name;
+    private String doctor_name;
 
     @ApiModelProperty("性别")
-    private String gender;
+    private String doctor_gender;
 
     @ApiModelProperty("生日")
-    private String birthday;
+    private String doctor_birthday;
 
     @ApiModelProperty("部门")
     private String department;

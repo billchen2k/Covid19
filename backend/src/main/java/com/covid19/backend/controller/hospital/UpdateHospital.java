@@ -45,7 +45,7 @@ public class UpdateHospital extends BaseController{
 
         Hospital new_hospital = new Hospital();
         new_hospital.setHospital_id(hospital_id);
-        new_hospital.setName(name);
+        new_hospital.setHospital_name(name);
         new_hospital.setAddress(address);
 
         updateHospitalService.updateHospital(new_hospital);

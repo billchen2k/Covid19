@@ -39,7 +39,7 @@ public class CreateHospital extends BaseController{
 
         Hospital hospital = new Hospital();
 
-        hospital.setName(name);
+        hospital.setHospital_name(name);
         hospital.setAddress(address);
 
         Hospital new_hospital = createHospitalService.createHospital(hospital);

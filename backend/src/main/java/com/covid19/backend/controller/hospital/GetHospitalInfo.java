@@ -49,7 +49,7 @@ public class GetHospitalInfo {
     {
         Hospital hospital = new Hospital();
 
-        hospital.setName(name);
+        hospital.setHospital_name(name);
         hospital.setAddress(address);
 
         ArrayList<Hospital> list = getHospitalInfoService.getHospitalInfo(hospital);

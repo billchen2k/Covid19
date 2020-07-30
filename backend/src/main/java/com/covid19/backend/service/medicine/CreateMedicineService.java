@@ -39,7 +39,7 @@ public class CreateMedicineService extends BaseService{
     )
     {
         Medicine medicine = new Medicine();
-        medicine.setName(name).setManufacturer(manufacturer).setIntroduction(introduction).setType(type);
+        medicine.setMedicine_name(name).setManufacturer(manufacturer).setIntroduction(introduction).setType(type);
         medicineMapper.insertMedicine(medicine);
         return medicine;
     }

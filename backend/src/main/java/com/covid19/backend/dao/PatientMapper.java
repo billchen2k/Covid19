@@ -19,9 +19,9 @@ public interface PatientMapper {
     public HashMap<String, String> selectDetailedPatientByID(@Param("patient_id") long patient_id);
 
     @Select("SELECT * from patient where " +
-            "name like concat('%',#{name},'%') " +
-            "and gender like concat('%',#{gender},'%') " +
-            "and birthday like concat('%',#{birthday},'%') " +
+            "patient_name like concat('%',#{patient_name},'%') " +
+            "and patient_gender like concat('%',#{patient_gender},'%') " +
+            "and patient_birthday like concat('%',#{patient_birthday},'%') " +
             "and onset_place like concat('%',#{onset_place},'%') " +
             "and onset_date like concat('%',#{onset_date},'%') " +
             "and confirm_date like concat('%',#{confirm_date},'%') " +
@@ -31,9 +31,9 @@ public interface PatientMapper {
             "and is_doctor like concat('%',#{is_doctor},'%')"
     )
     public ArrayList<Patient> selectPatient(
-            @Param("name") String name,
-            @Param("gender") String gender,
-            @Param("birthday") String birthday,
+            @Param("patient_name") String name,
+            @Param("patient_gender") String gender,
+            @Param("patient_birthday") String birthday,
             @Param("onset_place") String onset_place,
             @Param("onset_date") String onset_date,
             @Param("confirm_date") String confirm_date,
@@ -45,9 +45,9 @@ public interface PatientMapper {
 
 
     @Insert("insert into patient(" +
-            "name, " +
-            "gender, " +
-            "birthday, " +
+            "patient_name, " +
+            "patient_gender, " +
+            "patient_birthday, " +
             "onset_place, " +
             "onset_date, " +
             "confirm_date, " +
@@ -56,9 +56,9 @@ public interface PatientMapper {
             "hospital_id, " +
             "is_doctor)" +
             " values (" +
-            "#{name}, " +
-            "#{gender}, " +
-            "#{birthday}, " +
+            "#{patient_name}, " +
+            "#{patient_gender}, " +
+            "#{patient_birthday}, " +
             "#{onset_place}, " +
             "#{onset_date}, " +
             "#{confirm_date}, " +
@@ -71,9 +71,9 @@ public interface PatientMapper {
     long insertPatient(Patient patient);
 
     @Update("Update patient set " +
-            "name=#{name}, " +
-            "gender=#{gender}, " +
-            "birthday=#{birthday}, " +
+            "patient_name=#{patient_name}, " +
+            "patient_gender=#{patient_gender}, " +
+            "patient_birthday=#{patient_birthday}, " +
             "onset_place=#{onset_place}, " +
             "onset_date=#{onset_date}, " +
             "confirm_date=#{confirm_date}, " +

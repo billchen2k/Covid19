@@ -26,7 +26,7 @@ public class Medicine {
     private long medicine_id;
 
     @ApiModelProperty("名称")
-    private String name;
+    private String medicine_name;
 
     @ApiModelProperty("厂商")
     private String manufacturer;

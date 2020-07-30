@@ -28,13 +28,13 @@ public class Patient implements Serializable {
     private long patient_id;
 
     @ApiModelProperty("姓名")
-    private String name;
+    private String patient_name;
 
     @ApiModelProperty("性别")
-    private String gender;
+    private String patient_gender;
 
     @ApiModelProperty("生日")
-    private String birthday;
+    private String patient_birthday;
 
     @ApiModelProperty("发病地点")
     private String onset_place;

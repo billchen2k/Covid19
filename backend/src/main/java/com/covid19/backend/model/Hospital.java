@@ -25,7 +25,7 @@ public class Hospital implements Serializable {
     private long hospital_id;
 
     @ApiModelProperty("医院名称")
-    private String name;
+    private String hospital_name;
 
     @ApiModelProperty("医院地址")
     private String address;

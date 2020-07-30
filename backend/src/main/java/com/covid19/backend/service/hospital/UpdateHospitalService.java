@@ -35,7 +35,7 @@ public class UpdateHospitalService extends BaseService{
     public Hospital updateHospital(Hospital new_hospital)
     {
         Hospital hospital = getHospitalInfoService.geHospitalInfoByID(new_hospital.getHospital_id());
-        hospital.setName(new_hospital.getName()).setAddress(new_hospital.getAddress());
+        hospital.setHospital_name(new_hospital.getHospital_name()).setAddress(new_hospital.getAddress());
         hospitalMapper.updateHospital(hospital);
         return hospital;
     }

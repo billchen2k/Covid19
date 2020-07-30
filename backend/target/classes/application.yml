@@ -2,7 +2,7 @@ spring:
   application:
     name: covid19-backend
   datasource:
-    url: jdbc:mysql://45.76.79.85/covid19
+    url: jdbc:mysql://45.77.26.112/covid19
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: covid19
     password: Database4.0!
@@ -28,7 +28,7 @@ session:
   max-day: 30
 
 server:
-  port: 8080
+  port: 80
   tomcat:
     uri-encoding: UTF-8
 

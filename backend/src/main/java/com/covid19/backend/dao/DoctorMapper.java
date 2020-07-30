@@ -13,29 +13,29 @@ public interface DoctorMapper {
     public Doctor selectDoctorByID(@Param("doctor_id") long doctor_id);
 
     @Select("SELECT * from doctor where " +
-            "name like #{name} " +
-            "and gender like concat('%',#{gender},'%') " +
-            "and birthday like concat('%',#{birthday},'%') " +
+            "doctor_name like #{doctor_name} " +
+            "and doctor_gender like concat('%',#{doctor_gender},'%') " +
+            "and doctor_birthday like concat('%',#{doctor_birthday},'%') " +
             "and department like concat('%',#{department},'%') " +
             "and hospital_id like concat('%',#{hospital_id},'%')")
     public ArrayList<Doctor> selectDoctor(
-            @Param("name") String name,
-            @Param("gender") String gender,
-            @Param("birthday") String birthday,
+            @Param("doctor_name") String name,
+            @Param("doctor_gender") String gender,
+            @Param("doctor_birthday") String birthday,
             @Param("department") String department,
             @Param("hospital_id") String hospital_id
     );
 
     @Insert("insert into doctor(" +
-            "name, " +
-            "gender, " +
-            "birthday, " +
+            "doctor_name, " +
+            "doctor_gender, " +
+            "doctor_birthday, " +
             "department, " +
             "hospital_id) " +
             "values (" +
-            "#{name}, " +
-            "#{gender}, " +
-            "#{birthday}, " +
+            "#{doctor_name}, " +
+            "#{doctor_gender}, " +
+            "#{doctor_birthday}, " +
             "#{department}, " +
             "#{hospital_id})"
     )
@@ -43,9 +43,9 @@ public interface DoctorMapper {
     long insertDoctor(Doctor doctor);
 
     @Update("Update doctor set " +
-            "name=#{name}, " +
-            "gender=#{gender}, " +
-            "birthday=#{birthday}, " +
+            "doctor_name=#{doctor_name}, " +
+            "doctor_gender=#{doctor_gender}, " +
+            "doctor_birthday=#{doctor_birthday}, " +
             "department=#{department}, " +
             "hospital_id=#{hospital_id} " +
             "where doctor_id=#{doctor_id}")
