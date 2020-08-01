@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 获取医生信息的控制器
@@ -29,11 +31,11 @@ public class GetDoctorInfo {
     @PostMapping("/doctor/getDoctorInfoByID")
     @ApiOperation(value = "根据医生ID获取医生信息", notes = "可以根据医生ID获取医生信息")
     @ApiImplicitParam(name = "doctor_id",value = "医生ID")
-    public Result<Doctor> getDoctorInfoByID(
+    public Result<HashMap<Object, Object>> getDoctorInfoByID(
             @RequestParam(value = "doctor_id") long doctor_id
     )
     {
-        Doctor doctor = getDoctorInfoService.getDoctorInfoByID(doctor_id);
+        HashMap<Object, Object> doctor = getDoctorInfoService.getDetailedDoctorInfoByID(doctor_id);
         if(doctor == null) return Result.error(2012,"不存在该医生");
         return Result.ok(doctor);
     }

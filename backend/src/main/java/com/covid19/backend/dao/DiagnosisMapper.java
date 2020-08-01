@@ -14,7 +14,7 @@ public interface DiagnosisMapper {
 
     @Select("SELECT * from diagnosis where " +
             "patient_id like concat('%',#{patient_id},'%') " +
-            "and doctor_id like concat('%',#{doctor_id},'%') " +
+            "and doctor_id like #{doctor_id}" +
             "and time like concat('%',#{time},'%') " +
             "and symptom like concat('%',#{symptom},'%') " +
             "and temperature like concat('%',#{temperature},'%') " +

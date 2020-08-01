@@ -22,7 +22,7 @@ public class GetHospitalInfoService extends BaseService{
 
     public ArrayList<Hospital> getHospitalInfo(Hospital hospital)
     {
-        if(hospital.getName() == null) hospital.setName("%");
+        if(hospital.getHospital_name()== null) hospital.setHospital_name("%");
         if(hospital.getAddress() == null) hospital.setAddress("%");
         return hospitalMapper.selectHospital(hospital);
     }

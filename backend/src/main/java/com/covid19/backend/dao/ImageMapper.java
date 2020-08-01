@@ -17,7 +17,7 @@ public interface ImageMapper {
             "and scanning_doctor_id like concat('%',#{scanning_doctor_id},'%') " +
             "and image_picture like concat('%',#{image_picture},'%') " +
             "and conclusion like concat('%',#{conclusion},'%') " +
-            "and conclusion_doctor_id like concat('%',#{conclusion_doctor_id},'%')")
+            "and conclusion_doctor_id like #{conclusion_doctor_id}")
     public ArrayList<Image> selectImage(Image image);
 
     @Insert("insert into image(" +

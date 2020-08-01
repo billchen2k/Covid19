@@ -4,6 +4,7 @@ import com.covid19.backend.model.Doctor;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // MyBatis
 @Mapper
@@ -12,12 +13,15 @@ public interface DoctorMapper {
     @Select("SELECT * from doctor where doctor_id=#{doctor_id}")
     public Doctor selectDoctorByID(@Param("doctor_id") long doctor_id);
 
+    @Select("SELECT * from doctor NATURAL JOIN hospital where doctor_id=#{doctor_id}")
+    public HashMap<Object, Object> selectDoctorDetailByID(@Param("doctor_id") long doctor_id);
+
     @Select("SELECT * from doctor where " +
             "doctor_name like #{doctor_name} " +
             "and doctor_gender like concat('%',#{doctor_gender},'%') " +
             "and doctor_birthday like concat('%',#{doctor_birthday},'%') " +
             "and department like concat('%',#{department},'%') " +
-            "and hospital_id like concat('%',#{hospital_id},'%')")
+            "and hospital_id like #{hospital_id}")
     public ArrayList<Doctor> selectDoctor(
             @Param("doctor_name") String name,
             @Param("doctor_gender") String gender,
