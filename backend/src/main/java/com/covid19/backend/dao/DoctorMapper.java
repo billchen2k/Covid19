@@ -11,10 +11,10 @@ import java.util.HashMap;
 @Component
 public interface DoctorMapper {
     @Select("SELECT * from doctor where doctor_id=#{doctor_id}")
-    public Doctor selectDoctorByID(@Param("doctor_id") long doctor_id);
+    Doctor selectDoctorByID(@Param("doctor_id") long doctor_id);
 
     @Select("SELECT * from doctor NATURAL JOIN hospital where doctor_id=#{doctor_id}")
-    public HashMap<Object, Object> selectDoctorDetailByID(@Param("doctor_id") long doctor_id);
+    HashMap<Object, Object> selectDoctorDetailByID(@Param("doctor_id") long doctor_id);
 
     @Select("SELECT * from doctor where " +
             "doctor_name like #{doctor_name} " +
@@ -22,7 +22,7 @@ public interface DoctorMapper {
             "and doctor_birthday like concat('%',#{doctor_birthday},'%') " +
             "and department like concat('%',#{department},'%') " +
             "and hospital_id like #{hospital_id}")
-    public ArrayList<Doctor> selectDoctor(
+    ArrayList<Doctor> selectDoctor(
             @Param("doctor_name") String name,
             @Param("doctor_gender") String gender,
             @Param("doctor_birthday") String birthday,

@@ -16,6 +16,8 @@
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %cyan(%logger{50}) - %highlight(%msg) [%thread %file:%line]%n</pattern>
         </encoder>
     </appender>
+
+
     <!-- RollingFileAppender：滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 -->
     <!-- 以下的大概意思是：1.先按日期存日志，日期变了，将前一天的日志文件名重命名为XXX%日期%索引，新的日志仍然是sys.log -->
     <!--             2.如果日期没有发生变化，但是当前日志的文件大小超过1KB时，对当前日志进行分割 重命名-->
@@ -32,7 +34,7 @@
             <maxHistory>180</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- maxFileSize:活动文件的大小 -->
-                <maxFileSize>5MB</maxFileSize>
+                <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
@@ -58,7 +60,7 @@
             <maxHistory>180</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- maxFileSize:活动文件的大小 -->
-                <maxFileSize>5MB</maxFileSize>
+                <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
@@ -70,22 +72,26 @@
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->
         </encoder>
     </appender>
-    <!-- 控制台输出日志级别 -->
 
-    <root level="FATAL">
+    <!-- 控制台输出日志级别 -->
+    <root level="TRACE">
         <appender-ref ref="STDOUT" />
+        <appender-ref ref="info"/>
     </root>
+
+    <root level="ERROR">
+        <appender-ref ref="error" />
+    </root>
+
     <!-- 指定项目中某个包，当有日志操作行为时的日志记录级别 -->
     <!-- com.appley为根包，也就是只要是发生在这个根包下面的所有日志操作行为的权限都是DEBUG -->
     <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
+<!--    <logger name="ink.jiyan.backend" level="ERROR">-->
+<!--        <appender-ref ref="error" />-->
+<!--    </logger>-->
 
-    <logger name="ink.jiyan.backend" level="ERROR">
-        <appender-ref ref="error"/>
-    </logger>
-
-
-    <logger name="ink.jiyan.backend" level="INFO">
-        <appender-ref ref="info"/>
-    </logger>
+<!--    <logger name="ink.jiyan.backend" level="INFO">-->
+<!--        <appender-ref ref="info"/>-->
+<!--    </logger>-->
 </configuration>
 

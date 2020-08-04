@@ -36,4 +36,7 @@ public class Prescription {
 
     @ApiModelProperty("药物使用方法")
     private String usage;
+
+    @ApiModelProperty("医生")
+    private long doctor_id;
 }

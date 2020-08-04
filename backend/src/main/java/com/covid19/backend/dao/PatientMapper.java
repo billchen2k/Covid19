@@ -16,7 +16,7 @@ public interface PatientMapper {
     public Patient selectPatientByID(@Param("patient_id") long patient_id);
 
     @Select("SELECT * from patient NATURAL JOIN hospital NATURAL JOIN doctor where patient_id=#{patient_id}")
-    public HashMap<String, String> selectDetailedPatientByID(@Param("patient_id") long patient_id);
+    HashMap<String, String> selectDetailedPatientByID(@Param("patient_id") long patient_id);
 
     @Select("SELECT * from patient where " +
             "patient_name like concat('%',#{patient_name},'%') " +
