@@ -154,7 +154,7 @@ export default {
     // 陽性患者の属性 ヘッダー翻訳
     for (const header of patientsTable.headers) {
       header.text =
-        header.value === '退院' ? this.$t('退院※') : this.$t(header.value)
+        header.value === '退院' ? this.$t('离院※') : this.$t(header.value)
     }
     // 陽性患者の属性 中身の翻訳
     for (const row of patientsTable.datasets) {
@@ -162,10 +162,10 @@ export default {
       row['性別'] = this.$t(row['性別'])
 
       if (row['年代'] === '10歳未満') {
-        row['年代'] = this.$t('10歳未満')
+        row['年代'] = this.$t('未満10岁')
       } else {
-        const age = row['年代'].substring(0, 2)
-        row['年代'] = this.$t('{age}代', { age })
+        const age = row['年代'].substring(0, 4)
+        //row['年代'] = this.$t('{age}代', { age })
       }
     }
     // 退院者グラフ
@@ -220,7 +220,7 @@ export default {
       lText: patientsGraph[
         patientsGraph.length - 1
       ].cumulative.toLocaleString(),
-      sText: this.$t('{date}の累計', {
+      sText: this.$t('累计至 6/20', {
         date: patientsGraph[patientsGraph.length - 1].label
       }),
       unit: this.$t('人')

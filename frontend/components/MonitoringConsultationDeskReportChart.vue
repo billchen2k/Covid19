@@ -314,7 +314,7 @@
       },
       tableHeaders() {
         return [
-          { text: this.$t('日付'), value: 'text' },
+          { text: this.$t('日期'), value: 'text' },
           ...(this.dataLabels as string[]).map((text, i) => {
             return { text, value: String(i), align: 'end' }
           })
