@@ -26,7 +26,7 @@
     <v-row class="DataBlock">
       <v-col cols="12" md="6" class="DataCard">
         <svg-card
-          :title="$t('目前确诊案例情况分布')"
+          :title="$t('国内目前疫情情况分布')"
           :title-id="'details-of-confirmed-cases'"
           :date="Data.inspections_summary.date"
         >
@@ -38,7 +38,7 @@
       </v-col>
       <v-col cols="12" md="6" class="DataCard">
         <time-bar-chart
-          :title="$t('确诊人数')"
+          :title="$t('湖北省武漢市确诊人数')"
           :title-id="'number-of-confirmed-cases'"
           :chart-id="'time-bar-chart-patients'"
           :chart-data="patientsGraph"
