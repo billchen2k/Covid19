@@ -1,5 +1,14 @@
 <template>
   <data-view :title="title" :title-id="titleId" :date="date" :url="url">
+    <template v-slot:button>
+      <p class="Graph-Desc">
+        {{
+        $t(
+        '从上海口岸和我国其他口岸入境的来沪境外旅游人数'
+        )
+        }}
+      </p>
+    </template>
     <bar
       :chart-id="chartId"
       :chart-data="displayData"
@@ -12,7 +21,7 @@
 <i18n>
 {
   "ja": {
-    "第一庁舎計": "第一庁舎計",
+    "第一庁舎計": "外国人",
     "第二庁舎計": "第二庁舎計",
     "議事堂計": "議事堂計",
     "人": "人",
@@ -25,10 +34,10 @@
     "期間: {duration}": "Period: {duration}"
   },
   "zh-cn": {
-    "第一庁舎計": "第一本厅大厦来访人数",
+    "第一庁舎計": "外国人",
     "第二庁舎計": "第二本厅大厦来访人数",
     "議事堂計": "都议会议事堂来发人数",
-    "人": "persons",
+    "人": "人",
     "期間: {duration}": "期间: {duration}"
   },
   "zh-tw": {

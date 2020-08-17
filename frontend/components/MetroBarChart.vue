@@ -2,13 +2,7 @@
   <data-view :title="title" :title-id="titleId" :date="date">
     <template v-slot:button>
       <p class="MetroGraph-Desc">
-        {{
-          $t('{range}の利用者数*の平均値を基準としたときの相対値', {
-            range: $t(chartData.base_period)
-          })
-        }}
-        <br />
-        *{{ $t('都営地下鉄4路線の自動改札出場数') }}
+        *{{ $t('{range}都営地下鉄4路線の自動改札出場数',{range: $t(chartData.base_period)}) }}
       </p>
     </template>
     <bar
@@ -33,9 +27,9 @@
     "1月20日~1月24日": "from January 20 to 24"
   },
   "zh-cn": {
-    "{range}の利用者数*の平均値を基準としたときの相対値": "基于{range}间平均乘客数*的相对值",
-    "都営地下鉄4路線の自動改札出場数": "都营地下铁 4 条路线的出站乘客数",
-    "1月20日~1月24日": "1月20日~1月24日"
+    "{range}の利用者数*の平均値を基準としたときの相対値": " ",
+    "{range}都営地下鉄4路線の自動改札出場数": " 基于{range}间WHO数据",
+    "1月20日~1月24日": "3月~7月"
   },
   "zh-tw": {
     "{range}の利用者数*の平均値を基準としたときの相対値": "基於{range}的平均搭乘人數*之相對數值",

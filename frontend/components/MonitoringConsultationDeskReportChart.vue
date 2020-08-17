@@ -4,8 +4,17 @@
       :class="$style.GraphLegend"
       :style="{ display: canvas ? 'block' : 'none' }"
     >
+
+      <p class="Graph-Desc">
+        {{
+        $t(
+        '数据来源：WHO 每日疫情简报'
+        )
+        }}
+      </p>
       <li v-for="(item, i) in dataLabels" :key="i" @click="onClickLegend(i)">
         <button>
+
           <div
             :style="{
               backgroundColor: colors[i].fillColor,
@@ -226,7 +235,7 @@
           lText: `${this.displayLastday}`,
           sText: `${this.$t('{date} 的数据', {
             date: dayjs(this.labels[this.labels.length - 1]).format('M/D')
-          })}（${this.$t('比前一天')}: ${this.displayTransitionRatio} ${
+          })}（${this.$t('比前一天')}: +${this.displayTransitionRatio} ${
             this.unit
           }）`,
           unit: this.unit
@@ -521,7 +530,7 @@
         const dayBeforeRatioLocaleString = dayBeforeRatio.toLocaleString()
         switch (Math.sign(dayBeforeRatio)) {
           case 1:
-            return `+${dayBeforeRatioLocaleString}`
+            return `${dayBeforeRatioLocaleString}`
           case -1:
             return `${dayBeforeRatioLocaleString}`
           default:

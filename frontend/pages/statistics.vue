@@ -37,8 +37,38 @@
         </svg-card>
       </v-col>
       <v-col cols="12" md="6" class="DataCard">
+        <agency-bar-chart
+          :title="$t('国际旅游入境人数')"
+          :title-id="'agency'"
+          :chart-id="'agency'"
+          :url="''"
+          :unit="'人'"
+        />
+      </v-col>
+      <v-col cols="12" md="6" class="DataCard">
+        <metro-bar-chart
+          :title="$t('全球疫情变化情况')"
+          :title-id="'predicted-number-of-toei-subway-passengers'"
+          :chart-id="'metro-bar-chart'"
+          :chart-data="metroGraph"
+          :chart-option="metroGraphOption"
+          :date="metroGraph.date"
+        />
+      </v-col>
+      <v-col cols="12" md="6" class="DataCard">
+        <metro-bar-chart
+          :title="$t('国内疫情变化情况')"
+          :title-id="'predicted-number-of-toei-subway-passengers'"
+          :chart-id="'metro-bar-chart'"
+          :chart-data="metroChinaGraph"
+          :chart-option="metroGraphOption"
+          :date="metroChinaGraph.date"
+        />
+      </v-col>
+
+      <v-col cols="12" md="6" class="DataCard">
         <time-bar-chart
-          :title="$t('湖北省武漢市确诊人数')"
+          :title="$t('湖北省确诊人数')"
           :title-id="'number-of-confirmed-cases'"
           :chart-id="'time-bar-chart-patients'"
           :chart-data="patientsGraph"
@@ -51,7 +81,7 @@
       </v-col>
       <v-col cols="12" md="6" class="DataCard">
         <data-table
-          :title="$t('最新确诊患者信息')"
+          :title="$t('湖北省最新确诊患者信息')"
           :title-id="'attributes-of-confirmed-cases'"
           :chart-data="patientsTable"
           :chart-option="{}"
@@ -60,26 +90,6 @@
           :url="
             'https://catalog.data.metro.tokyo.lg.jp/dataset/t000010d0000000068'
           "
-        />
-      </v-col>
-
-      <v-col cols="12" md="6" class="DataCard">
-        <metro-bar-chart
-          :title="$t('都営地下鉄の利用者数の推移')"
-          :title-id="'predicted-number-of-toei-subway-passengers'"
-          :chart-id="'metro-bar-chart'"
-          :chart-data="metroGraph"
-          :chart-option="metroGraphOption"
-          :date="metroGraph.date"
-        />
-      </v-col>
-      <v-col cols="12" md="6" class="DataCard">
-        <agency-bar-chart
-          :title="$t('都庁来庁者数の推移')"
-          :title-id="'agency'"
-          :chart-id="'agency'"
-          :url="''"
-          :unit="'人'"
         />
       </v-col>
     </v-row>
@@ -97,6 +107,7 @@ import WhatsNew from '@/components/WhatsNew.vue'
 import StaticInfo from '@/components/StaticInfo.vue'
 import Data from '@/data/data.json'
 import MetroData from '@/data/metro.json'
+import MetroDataChina from '@/data/metroChina.json'
 import DataTable from '@/components/DataTable.vue'
 import formatGraph from '@/utils/formatGraph'
 import formatTable from '@/utils/formatTable'
@@ -177,6 +188,7 @@ export default {
     const querentsGraph = formatGraph(Data.querents.data)
     // 都営地下鉄の利用者数の推移
     const metroGraph = MetroData
+    const metroChinaGraph = MetroDataChina
     // metroGraph ツールチップ title文字列
     // this.$t を使うため metroGraphOption の外側へ
     const metroGraphTooltipTitle = (tooltipItems, _) => {
@@ -192,9 +204,7 @@ export default {
       const currentData = data.datasets[tooltipItem.datasetIndex]
       const percentage = `${currentData.data[tooltipItem.index]}%`
 
-      return this.$t('{duration}の利用者数との相対値: {percentage}', {
-        // duration = metroGraph.base_period = '1月20日~1月24日'
-        duration: this.$t(metroGraph.base_period),
+      return this.$t('变化率: {percentage}', {
         percentage
       })
     }
@@ -220,7 +230,7 @@ export default {
       lText: patientsGraph[
         patientsGraph.length - 1
       ].cumulative.toLocaleString(),
-      sText: this.$t('累计至 6/20', {
+      sText: this.$t('累计至 5/28', {
         date: patientsGraph[patientsGraph.length - 1].label
       }),
       unit: this.$t('人')
@@ -239,6 +249,7 @@ export default {
       contactsGraph,
       querentsGraph,
       metroGraph,
+      metroChinaGraph,
       inspectionsGraph,
       inspectionsItems,
       inspectionsLabels,
@@ -246,7 +257,7 @@ export default {
       sumInfoOfPatients,
       headerItem: {
         icon: 'mdi-chart-timeline-variant',
-        title: 'Covid-19 疫情分析与管理系统',
+        title: 'Covid-19 疫情分析与概览',
         date: Data.lastUpdate
       },
       metroGraphOption: {
