@@ -11,7 +11,10 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 @ApiModel("标准返回结果体")
@@ -32,12 +35,10 @@ public class Result<T> {
 //	private String sessionid;
 	@ApiModelProperty("时间戳")
 	private String timestamp;
-
-	@ApiModelProperty("总数信息（仅在具备分页时需要用）")
+	@ApiModelProperty("总数信息（仅在分页查询时需要用）")
 	private String totalCount;
 	@ApiModelProperty("结果数据")
 	private T data;
-
 
 	// 错误代码
 	public static final int CODE_SUCCESS = 200;
@@ -66,7 +67,6 @@ public class Result<T> {
 			success = true;
 		}
 	}
-
 
 	public Result(long code, T dataObject, String message) {
 		this(code, message);

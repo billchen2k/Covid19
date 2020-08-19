@@ -43,7 +43,7 @@ public class GetPatientInfo {
     @PostMapping("/patient/getPatientInfo")
     @ApiOperation(value = "根据病人除ID外属性批量获取病人信息", notes = "可以根据病人除ID外属性获取病人信息。具有分页功能。")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "name",value = "病人名称"),
+            @ApiImplicitParam(name = "patient_name",value = "病人名称"),
             @ApiImplicitParam(name = "gender",value = "病人性别"),
             @ApiImplicitParam(name = "birthday",value = "病人生日"),
             @ApiImplicitParam(name = "onset_place",value = "发病地点"),
@@ -55,7 +55,7 @@ public class GetPatientInfo {
             @ApiImplicitParam(name = "is_doctor",value = "是否是医生")
     })
     public Result<ArrayList<Patient>> getPatientInfo(
-            @RequestParam(value = "name",required = false) String name,
+            @RequestParam(value = "patient_name",required = false) String patient_name,
             @RequestParam(value = "gender",required = false)String gender,
             @RequestParam(value = "birthday",required = false)String birthday,
             @RequestParam(value = "onset_place",required = false)String onset_place,
@@ -71,7 +71,7 @@ public class GetPatientInfo {
     {
         Page<HashMap<String, String>> pageInfo = PageHelper.startPage(page, size);
         ArrayList<HashMap<String, String>> list = getPatientInfoService.getPatientInfo(
-                name,
+                patient_name,
                 gender,
                 birthday,
                 onset_place,

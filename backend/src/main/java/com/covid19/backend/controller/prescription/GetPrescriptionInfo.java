@@ -4,6 +4,7 @@ import com.covid19.backend.controller.BaseController;
 import com.covid19.backend.model.Result;
 import com.covid19.backend.model.Prescription;
 import com.covid19.backend.service.prescription.GetPrescriptionInfoService;
+import com.github.pagehelper.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 获取用药信息的控制器
@@ -50,15 +52,18 @@ public class GetPrescriptionInfo {
             @RequestParam(value = "patient_id") String patient_id,
             @RequestParam(value = "medicine_id")String medicine_id,
             @RequestParam(value = "dosage",required = false)String dosage,
-            @RequestParam(value = "usage",required = false)String usage
+            @RequestParam(value = "usage",required = false)String usage,
+            @RequestParam Integer page, // 分页
+            @RequestParam Integer size
     )
     {
+        Page<HashMap<String, String>> pageInfo = PageHelper.startPage(page, size);
         ArrayList<Prescription> list = getPrescriptionInfoService.getPrescriptionInfo(
                 patient_id,
                 medicine_id,
                 dosage,
                 usage);
         if (list == null) return null;
-        return Result.ok(list);
+        return Result.pagedOk(pageInfo);
     }
 }

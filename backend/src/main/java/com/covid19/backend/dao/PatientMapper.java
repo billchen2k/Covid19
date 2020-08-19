@@ -20,16 +20,18 @@ public interface PatientMapper {
     HashMap<String, String> selectDetailedPatientByID(@Param("patient_id") long patient_id);
 
     @Select("SELECT * from patient NATURAL JOIN hospital NATURAL JOIN doctor where " +
-            "patient_name like concat('%',#{patient_name},'%') " +
-            "and patient_gender like concat('%',#{patient_gender},'%') " +
+
+            "patient_gender like concat('%',#{patient_gender},'%') " +
             "and patient_birthday like concat('%',#{patient_birthday},'%') " +
-            "and onset_place like concat('%',#{onset_place},'%') " +
+
             "and onset_date like concat('%',#{onset_date},'%') " +
             "and confirm_date like concat('%',#{confirm_date},'%') " +
             "and status like concat('%',#{status},'%') " +
             "and doctor_id like #{doctor_id}" +
             "and hospital_id like #{hospital_id}" +
-            "and is_doctor like #{is_doctor}"
+            "and is_doctor like #{is_doctor}" +
+            "and (patient_name like concat('%',#{patient_name},'%') " +
+            "or onset_place like concat('%',#{onset_place},'%') )"
     )
     ArrayList<HashMap<String, String>> selectMultipleDetailedPatient(
     @Param("patient_name") String name,

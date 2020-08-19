@@ -4,6 +4,7 @@ import com.covid19.backend.controller.BaseController;
 import com.covid19.backend.model.Result;
 import com.covid19.backend.model.Medicine;
 import com.covid19.backend.service.medicine.GetMedicineInfoService;
+import com.github.pagehelper.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -50,15 +51,18 @@ public class GetMedicineInfo {
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "manufacturer",required = false)String manufacturer,
             @RequestParam(value = "introduction",required = false)String introduction,
-            @RequestParam(value = "type",required = false)String type
+            @RequestParam(value = "type",required = false)String type,
+            @RequestParam Integer page, // 分页
+            @RequestParam Integer size
     )
     {
+        Page<Medicine> pageInfo = PageHelper.startPage(page, size);
         ArrayList<Medicine> list = getMedicineInfoService.getMedicineInfo(
                 name,
                 manufacturer,
                 introduction,
                 type);
         if (list == null) return null;
-        return Result.ok(list);
+        return Result.pagedOk(pageInfo);
     }
 }
