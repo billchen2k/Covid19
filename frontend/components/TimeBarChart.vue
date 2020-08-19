@@ -251,7 +251,8 @@ export default {
                     'Nov',
                     'Dec'
                   ]
-                  const month = monthStringArry.indexOf(label.split(' ')[0]) + 1
+                  const month = label.split('/')[0][0]
+                  //monthStringArry.indexOf(label.split(' ')[0]) + 1
                   return month + '月'
                 }
               },

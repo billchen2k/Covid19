@@ -26,17 +26,9 @@
       </div>
       <v-footer class="DataView-Footer">
         <time :datetime="date">{{ $t('{date} 更新', { date }) }}</time>
-        <a
-          v-if="url"
-          class="OpenDataLink"
-          :href="url"
-          target="_blank"
-          rel="noopener"
-        >
+
           {{ $t('オープンデータへのリンク') }}
-          <v-icon class="ExternalLinkIcon" size="15">
-            mdi-open-in-new
-          </v-icon>
+
         </a>
       </v-footer>
     </div>
@@ -55,7 +47,7 @@
   },
   "zh-cn": {
     "{date} 更新": "{date} 更新",
-    "オープンデータへのリンク": "公开数据的链接"
+    "オープンデータへのリンク": "由于不完整的病人公开信息数据，部分数据是为展示功能而随机产生"
   },
   "zh-tw": {
     "{date} 更新": "{date} 更新",

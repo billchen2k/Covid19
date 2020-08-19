@@ -28,6 +28,7 @@
       </div>
       <ul class="group">
         <li class="item in-hospital">
+
           <div class="gutter oneThird">
             <div class="box">
               <span>{{ $t('入院中') }}</span>
@@ -37,6 +38,7 @@
               </span>
             </div>
           </div>
+
           <ul class="group">
             <li class="item mild">
               <div class="gutter">
@@ -116,14 +118,14 @@
     "人": "pers."
   },
   "zh-cn": {
-    "検査実施<br />人数": "筛检人数",
+    "検査実施<br />人数": "累计死亡",
     "陽性者数": "确诊人数",
-    "(累積)": "",
+    "(累積)": "(累积)",
     "入院中": "住院人数",
-    "軽症・<br />中等症": "轻症",
-    "重症": "重症",
-    "死亡": "死亡",
-    "退院": "出院",
+    "軽症・<br />中等症": "无症状",
+    "重症": "其他",
+    "死亡": "境外输入",
+    "退院": "治愈出院",
     "人": "人"
   },
   "zh-tw": {
