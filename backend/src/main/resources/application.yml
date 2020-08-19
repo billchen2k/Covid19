@@ -16,12 +16,6 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB
 
-#xunfei:
-#  api-secret: 48a6e1905e5c869459f9b3b9e2a0b66f
-#  api-key: 732e987ba7e0941db1c8ad4d257131df
-#  app-id: 5e4e763f
-#  host-url: https://iat-api.xfyun.cn/v2/iat
-
 swagger:
   enable: true
 
@@ -37,4 +31,11 @@ logging:
   # 是否记录详细的请求日志，默认为 false
   request: false
   level:
-    root: info
+    root: DEBUG
+
+# pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

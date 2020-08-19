@@ -4,6 +4,7 @@ import com.covid19.backend.controller.BaseController;
 import com.covid19.backend.model.Result;
 import com.covid19.backend.model.Diagnosis;
 import com.covid19.backend.service.diagnosis.GetDiagnosisInfoService;
+import com.github.pagehelper.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -52,11 +53,13 @@ public class GetDiagnosisInfo {
             @RequestParam(value = "time",required = false)String time,
             @RequestParam(value = "symptom",required = false)String symptom,
             @RequestParam(value = "temperature",required = false)String temperature,
-            @RequestParam(value = "nucleic_acid",required = false)String nucleic_acid
+            @RequestParam(value = "nucleic_acid",required = false)String nucleic_acid,
+            @RequestParam Integer page, // 分页
+            @RequestParam Integer size
     )
     {
         Diagnosis diagnosis = new Diagnosis();
-
+        Page<Diagnosis> pageInfo = PageHelper.startPage(page, size);
         diagnosis.setPatient_id(patient_id);
         diagnosis.setDoctor_id(doctor_id);
         diagnosis.setTime(time);
@@ -66,6 +69,7 @@ public class GetDiagnosisInfo {
 
         ArrayList<Diagnosis> list = getDiagnosisInfoService.getDiagnosisInfo(diagnosis);
         if (list == null) return null;
-        return Result.ok(list);
+//        return Result.ok(list);
+        return Result.pagedOk(pageInfo, pageInfo.getTotal());
     }
 }

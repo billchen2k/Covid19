@@ -30,6 +30,20 @@ public interface DoctorMapper {
             @Param("hospital_id") String hospital_id
     );
 
+    @Select("SELECT * from doctor where " +
+            "doctor_name like #{doctor_name} " +
+            "and doctor_gender like concat('%',#{doctor_gender},'%') " +
+            "and doctor_birthday like concat('%',#{doctor_birthday},'%') " +
+            "and department like concat('%',#{department},'%') " +
+            "and hospital_id like #{hospital_id}")
+    ArrayList<HashMap<String, String>> selectMultipleDetailedDoctor(
+            @Param("doctor_name") String name,
+            @Param("doctor_gender") String gender,
+            @Param("doctor_birthday") String birthday,
+            @Param("department") String department,
+            @Param("hospital_id") String hospital_id
+    );
+
     @Insert("insert into doctor(" +
             "doctor_name, " +
             "doctor_gender, " +

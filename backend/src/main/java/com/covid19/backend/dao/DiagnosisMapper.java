@@ -1,9 +1,11 @@
 package com.covid19.backend.dao;
 
 import com.covid19.backend.model.Diagnosis;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
+import java.util.List;
 
 // MyBatis
 @Mapper
@@ -11,15 +13,18 @@ import java.util.ArrayList;
 public interface DiagnosisMapper {
     @Select("SELECT * from diagnosis where diagnosis_id=#{diagnosis_id}")
     public Diagnosis selectDiagnosisByID(@Param("diagnosis_id") long diagnosis_id);
-
+//
+//    @Select("SELECT * from diagnosis where patient_id=#{pati_id}")
+//    public ArrayList<Diagnosis> selectDiagnosisByPatientID(@Param("patinet_id") long patient_id);
+//
     @Select("SELECT * from diagnosis where " +
-            "patient_id like concat('%',#{patient_id},'%') " +
+            "patient_id like #{patient_id}" +
             "and doctor_id like #{doctor_id}" +
             "and time like concat('%',#{time},'%') " +
-            "and symptom like concat('%',#{symptom},'%') " +
             "and temperature like concat('%',#{temperature},'%') " +
-            "and nucleic_acid = concat('%',#{nucleic_acid},'%')")
-    public ArrayList<Diagnosis> selectDiagnosis(Diagnosis diagnosis);
+            "and symptom like concat('%',#{symptom},'%') " +
+            "and nucleic_acid LIKE #{nucleic_acid}")
+    public ArrayList<Diagnosis> selectDiagnosis(Diagnosis params);
 
     @Insert("insert into diagnosis(" +
             "patient_id, " +

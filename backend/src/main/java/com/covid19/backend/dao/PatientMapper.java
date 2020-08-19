@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 // MyBatis
 @Mapper
@@ -17,6 +18,32 @@ public interface PatientMapper {
 
     @Select("SELECT * from patient NATURAL JOIN hospital NATURAL JOIN doctor where patient_id=#{patient_id}")
     HashMap<String, String> selectDetailedPatientByID(@Param("patient_id") long patient_id);
+
+    @Select("SELECT * from patient NATURAL JOIN hospital NATURAL JOIN doctor where " +
+            "patient_name like concat('%',#{patient_name},'%') " +
+            "and patient_gender like concat('%',#{patient_gender},'%') " +
+            "and patient_birthday like concat('%',#{patient_birthday},'%') " +
+            "and onset_place like concat('%',#{onset_place},'%') " +
+            "and onset_date like concat('%',#{onset_date},'%') " +
+            "and confirm_date like concat('%',#{confirm_date},'%') " +
+            "and status like concat('%',#{status},'%') " +
+            "and doctor_id like #{doctor_id}" +
+            "and hospital_id like #{hospital_id}" +
+            "and is_doctor like #{is_doctor}"
+    )
+    ArrayList<HashMap<String, String>> selectMultipleDetailedPatient(
+    @Param("patient_name") String name,
+    @Param("patient_gender") String gender,
+    @Param("patient_birthday") String birthday,
+    @Param("onset_place") String onset_place,
+    @Param("onset_date") String onset_date,
+    @Param("confirm_date") String confirm_date,
+    @Param("status") String status,
+    @Param("doctor_id") String doctor_id,
+    @Param("hospital_id") String hospital_id,
+    @Param("is_doctor") String is_doctor
+    );
+
 
     @Select("SELECT * from patient where " +
             "patient_name like concat('%',#{patient_name},'%') " +

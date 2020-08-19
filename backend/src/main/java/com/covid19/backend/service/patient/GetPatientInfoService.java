@@ -37,7 +37,7 @@ public class GetPatientInfoService extends BaseService {
      * @param is_doctor
      * @return
      */
-    public ArrayList<Patient> getPatientInfo(
+    public ArrayList<HashMap<String, String>> getPatientInfo(
             String name,
             String gender,
             String birthday,
@@ -61,7 +61,7 @@ public class GetPatientInfoService extends BaseService {
         if(hospital_id == null) hospital_id = "%";
         if(is_doctor == null) is_doctor = "%";
 
-        return patientMapper.selectPatient(
+        return patientMapper.selectMultipleDetailedPatient(
                 name,
                 gender,
                 birthday,

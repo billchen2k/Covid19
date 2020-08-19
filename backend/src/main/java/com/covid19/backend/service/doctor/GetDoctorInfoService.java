@@ -27,7 +27,7 @@ public class GetDoctorInfoService extends BaseService{
     /**
      * 根据医生其他属性获取医生信息
      */
-    public ArrayList<Doctor> getDoctorInfo(
+    public ArrayList<HashMap<String, String>> getDoctorInfo(
             String name,
             String gender,
             String birthday,
@@ -41,7 +41,7 @@ public class GetDoctorInfoService extends BaseService{
         if(department == null) department = "%";
         if(hospital_id == null) hospital_id = "%";
 
-        return doctorMapper.selectDoctor(
+        return doctorMapper.selectMultipleDetailedDoctor(
                 name,
                 gender,
                 birthday,

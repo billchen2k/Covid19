@@ -4,6 +4,7 @@ import com.covid19.backend.controller.BaseController;
 import com.covid19.backend.model.Result;
 import com.covid19.backend.model.Patient;
 import com.covid19.backend.service.patient.GetPatientInfoService;
+import com.github.pagehelper.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -40,7 +41,7 @@ public class GetPatientInfo {
     }
 
     @PostMapping("/patient/getPatientInfo")
-    @ApiOperation(value = "根据病人除ID外属性获取病人信息", notes = "可以根据病人除ID外属性获取病人信息")
+    @ApiOperation(value = "根据病人除ID外属性批量获取病人信息", notes = "可以根据病人除ID外属性获取病人信息。具有分页功能。")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name",value = "病人名称"),
             @ApiImplicitParam(name = "gender",value = "病人性别"),
@@ -63,10 +64,13 @@ public class GetPatientInfo {
             @RequestParam(value = "status",required = false)String status,
             @RequestParam(value = "doctor_id",required = false)String doctor_id,
             @RequestParam(value = "hospital_id",required = false)String hospital_id,
-            @RequestParam(value = "is_doctor",required = false)String is_doctor
+            @RequestParam(value = "is_doctor",required = false)String is_doctor,
+            @RequestParam Integer page, // 分页
+            @RequestParam Integer size
     )
     {
-        ArrayList<Patient> list = getPatientInfoService.getPatientInfo(
+        Page<HashMap<String, String>> pageInfo = PageHelper.startPage(page, size);
+        ArrayList<HashMap<String, String>> list = getPatientInfoService.getPatientInfo(
                 name,
                 gender,
                 birthday,
@@ -79,6 +83,6 @@ public class GetPatientInfo {
                 is_doctor
         );
         if (list == null) return null;
-        return Result.ok(list);
+        return Result.pagedOk(pageInfo, pageInfo.getTotal());
     }
 }

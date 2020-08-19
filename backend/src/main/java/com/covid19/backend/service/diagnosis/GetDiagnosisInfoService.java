@@ -20,14 +20,12 @@ public class GetDiagnosisInfoService extends BaseService{
 
 
     public ArrayList<Diagnosis> getDiagnosisInfo(Diagnosis diagnosis) {
-
         if(diagnosis.getPatient_id() == null) diagnosis.setPatient_id("%");
         if(diagnosis.getDoctor_id() == null) diagnosis.setDoctor_id("%");
         if(diagnosis.getTime() == null) diagnosis.setTime("%");
         if(diagnosis.getSymptom() == null) diagnosis.setSymptom("%");
         if(diagnosis.getTemperature() == null) diagnosis.setTemperature("%");
         if(diagnosis.getNucleic_acid() == null) diagnosis.setNucleic_acid("%");
-
         return diagnosisMapper.selectDiagnosis(diagnosis);
     }
 }

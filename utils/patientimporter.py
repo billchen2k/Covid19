@@ -14,7 +14,7 @@ import os
 fake = faker.Factory.create("zh-CN")
 api = "http://45.77.26.112/"
 api = "http://localhost/"
-api = "http://8.210.248.203/"
+# api = "http://8.210.248.203/"
 s = requests.session()
 res = json.loads(s.post(api + "user/logIn?identifier=admin&password=admin").text)
 print(res)
@@ -235,4 +235,9 @@ for one in tqdm(citytimeline.values(), desc="Enumerating Cities"):
             new_patient(today['city'], today['province'], today['date'], random.choice(status))
         for t in range(newDead):
             new_patient(today['city'], today['province'], today['date'], '已死亡')
+
+
+def new_medicine():
+    s.post('medicine/newMedicine')
+    pass
 
