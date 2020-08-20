@@ -33,20 +33,19 @@
 
           <v-col cols="12" align="right">
 
-<!--              <v-progress-circular-->
-<!--                v-if="loading"-->
-<!--                indeterminate-->
-<!--                color="red dark-2"-->
-<!--              ></v-progress-circular>-->
-<!--              <v-progress-circular :value="20"></v-progress-circular>-->
+              <v-progress-circular
+                v-if="loading"
+                indeterminate
+              ></v-progress-circular>
 
-
-            <v-col cols="4" v-if="loading">
-              <scale-loader color="#C70000" />
-            </v-col>
+<!--            <v-col cols="4" v-if="loading">-->
+<!--              <scale-loader color="#C70000" />-->
+<!--            </v-col>-->
             <span v-if="errormsg != ''" style="color:#C70000; margin: 2px">{{ errormsg }}</span>
-            <v-btn depressed
+            <v-btn outlined
+                   color="#C70000"
                    width="200"
+
                    v-on:click="logIn()">
 
               登录

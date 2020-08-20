@@ -24,6 +24,7 @@
                   v-model="conditions.status"
                   :items="['不限', '已死亡', '已康复', '治疗中']"
                   label="病情状态"
+                  color="red darken-2"
                   outlined
                 ></v-select>
               </v-col>
@@ -32,6 +33,7 @@
                   :items="['不限', '男', '女']"
                   label="性别"
                   v-model="conditions.gender"
+                  color="red darken-2"
                   outlined
                 ></v-select>
               </v-col>
@@ -53,8 +55,10 @@
                       v-model="date"
                       label="发病日期"
                       readonly
+                      clearable
                       v-bind="attrs"
                       v-on="on"
+                      color="red darken-2"
                     ></v-text-field>
                   </template>
                   <v-date-picker
@@ -64,9 +68,9 @@
                     scrollable
                   >
                     <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="$refs.menu.save([]); date=''; menu = false;">清空</v-btn>
-                    <v-btn text color="primary" @click="menu = false">取消</v-btn>
-                    <v-btn text color="primary" @click="$refs.menu.save(date); menu = false;">确定</v-btn>
+                    <v-btn text color="red darken-2" @click="$refs.menu.save([]); date=''; menu = false;">清空</v-btn>
+                    <v-btn text color="red darken-2" @click="menu = false">取消</v-btn>
+                    <v-btn text color="red darken-2" @click="$refs.menu.save(date); menu = false;">确定</v-btn>
                   </v-date-picker>
                 </v-menu>
               </v-col>
@@ -78,6 +82,7 @@
                   v-model="conditions.patient_name"
                   filled
                   label="病人姓名"
+                  color="red darken-2"
                 ></v-text-field>
               </v-col>
               <v-col sm="4">
@@ -85,6 +90,7 @@
                   filled
                   v-model="conditions.onset_place"
                   label="发病地点"
+                  color="red darken-2"
                 ></v-text-field>
               </v-col>
               <v-col sm="4">
@@ -92,7 +98,7 @@
                   outlined
                   x-large
                   block
-                  color="primary"
+                  color="red darken-2"
                   v-on:click="patients.data = []; fetchData();"
                 >查询</v-btn>
               </v-col>
@@ -107,18 +113,21 @@
           <v-card-title>
             病患数据
             <v-spacer></v-spacer>
-
+            <v-spacer></v-spacer>
             <v-text-field
               v-model="search"
+              prepend-icon="mdi-magnify"
               label="快速过滤姓名或地点"
               single-line
+              color="red darken-2"
               calculate-widths
               hide-details
             ></v-text-field>
           </v-card-title>
           <v-data-table
-            dense
+            dense disable-sort
             calculate-widths
+            color="red darken-2"
             :options.sync="options"
             :loading="loading"
             :headers="patients.headers"
@@ -132,12 +141,11 @@
             class="cardTable"
           >
             <template v-slot:item.detail="{ item }">
-              <v-icon
-                medium
-                color="red"
-                @click="displayDetail(item)"
-              >mdi-arrow-expand</v-icon>
-              展开
+              <patient-detail
+                :patient_id="item.patient_id"
+                editable
+                v-on:close="fetchData"
+              ></patient-detail>
             </template>
 
 <!--            <template v-slot:expanded-item="{ headers, item }">-->
@@ -171,10 +179,11 @@
   import axios from 'axios'
   import Config from '../components/global/Config'
   import { EventBus } from '../components/global/EventBus'
-
+  import PatientDetail from '../components/patient/PatientDetail'
   export default {
     name: 'query',
     components: {
+      PatientDetail,
       PageHeader,
       TextCard
     },
@@ -184,6 +193,8 @@
         options: {},
         loading: true,
         search: "",
+        date: "",
+        menu: false,
         rawdata: {},
         conditions: {
           gender: "",
@@ -193,13 +204,7 @@
           status: ""
         },
         expanded_patient_id: -1,
-        expanded_patient: {
-          loading: true,
-          data: {},
-          diagnosis: [
-            {}
-          ],
-        },
+
         patients: {
           total_length: 0,
           headers: [
@@ -235,7 +240,7 @@
           one.patient_birthday = one.patient_birthday.substring(0, 10);
           one.onset_place = one.onset_place.length > 6 ? one.onset_place.substring(0,5) + "..." : one.onset_place;
           one.hospital_name = one.hospital_name.length > 6 ? one.hospital_name.substring(0, 5) + "..." : one.hospital_name;
-          one.gender = one.gender == 'F' ? "女" : "男";
+          one.gender = one.patient_gender == 'F' ? "女" : "男";
           return one;
         }),
 
@@ -271,7 +276,7 @@
             }
           })
           .catch(error => {
-            alert('无法连接到服务器，刷新重试。\n' + error.message());
+            alert('无法连接到服务器，刷新重试。\n' + error.message);
           })
         .finally(() => this.loading = false);
       },
@@ -299,13 +304,13 @@
       }
     },
     mounted() {
-      this.fetchData();
+
     }
   }
 
 </script>
 
-<style scoped>
+<style>
 
   .query-selector {
     margin-bottom:  20px;

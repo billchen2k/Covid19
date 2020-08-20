@@ -104,7 +104,8 @@ const config: Configuration = {
    */
   buildModules: [
     '@nuxt/typescript-build',
-    '@nuxtjs/google-analytics'
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/vuetify',
   ],
   /*
    ** Nuxt.js modules
@@ -161,7 +162,6 @@ const config: Configuration = {
     ],
     'nuxt-svg-loader',
     'nuxt-purgecss',
-    '@nuxtjs/vuetify',
     ['vue-scrollto/nuxt', { duration: 1000, offset: -72 }]
   ],
   /*
@@ -182,38 +182,39 @@ const config: Configuration = {
       },
       icons: 'mdi',
       options: {customProperties: true},
-      themes: {
-        light: {
-          primary: '#C70000'
-        }
-      }
+      // themes: {
+      //   light: {
+      //     primary: '#C70000'
+      //   },
+      //   dark: {
+      //     primary: '#C70000'
+      //   }
+      // }
     }
   },
   googleAnalytics: {
     id: 'UA-159417676-1'
   },
   build: {
-    postcss: {
-      plugins: [
-        autoprefixer({ grid: 'autoplace' }),
-        purgecss({
-          content: [
-            './pages/**/*.vue',
-            './layouts/**/*.vue',
-            './components/**/*.vue',
-            './node_modules/vuetify/dist/vuetify.js',
-            './node_modules/vue-spinner/src/ScaleLoader.vue'
-          ],
-          whitelist: ['html', 'body', 'nuxt-progress', 'DataCard'],
-          whitelistPatterns: [/(col|row)/]
-        })
-      ]
-    },
+    // postcss: {
+    //   plugins: [
+    //     autoprefixer({ grid: 'autoplace' }),
+    //     purgecss({
+    //       content: [
+    //         './pages/**/*.vue',
+    //         './layouts/**/*.vue',
+    //         './components/**/*.vue',
+    //       ],
+    //       whitelist: ['html', 'body', 'nuxt-progress', 'DataCard'],
+    //       whitelistPatterns: [/(col|row)/]
+    //     })
+    //   ]
+    // },
     // https://ja.nuxtjs.org/api/configuration-build/#hardsource
     hardSource: process.env.NODE_ENV === 'development'
   },
   manifest: {
-    name: '東京都 新型コロナウイルス感染症対策サイト',
+    name: '新馆疫情分析系统',
     theme_color: '#00a040',
     background_color: '#ffffff',
     display: 'standalone',
