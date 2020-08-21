@@ -20,23 +20,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * 获取用药信息的控制器
+ * 获取处方信息的控制器
  **/
 @RestController
-@Api(tags = "用药控制器", value = "和用药有关的控制器")
+@Api(tags = "处方控制器", value = "和处方有关的控制器")
 public class GetPrescriptionInfo {
     @Autowired
     public GetPrescriptionInfoService getPrescriptionInfoService;
 
     @PostMapping("/prescription/getPrescriptionInfoByID")
-    @ApiOperation(value = "根据用药ID获取用药信息", notes = "可以根据用药ID获取用药信息")
-    @ApiImplicitParam(name = "prescription_id",value = "用药ID")
+    @ApiOperation(value = "根据处方ID获取处方信息", notes = "可以根据处方ID获取处方信息")
+    @ApiImplicitParam(name = "prescription_id",value = "处方ID")
     public Result<Prescription> getPrescriptionInfoByID(
             @RequestParam(value = "prescription_id") long prescription_id
     )
     {
         Prescription prescription = getPrescriptionInfoService.gePrescriptionInfoByID(prescription_id);
-        if(prescription == null) return Result.error(2012,"不存在该用药记录");
+        if(prescription == null) return Result.error(2012,"不存在该处方记录");
         return Result.ok(prescription);
     }
 
@@ -53,7 +53,7 @@ public class GetPrescriptionInfo {
     }
 
     @PostMapping("/prescription/getPrescriptionInfo")
-    @ApiOperation(value = "根据用药除ID外属性获取用药信息", notes = "可以根据用药除ID外属性获取用药信息")
+    @ApiOperation(value = "根据处方除ID外属性获取处方信息", notes = "可以根据处方除ID外属性获取处方信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "patient_id",value = "病人ID"),
             @ApiImplicitParam(name = "medicine_id",value = "药品ID"),
@@ -78,6 +78,23 @@ public class GetPrescriptionInfo {
                 dosage,
                 usage,
                 doctor_id);
+        if (list == null) return null;
+        return Result.pagedOk(pageInfo);
+    }
+
+    @PostMapping("/prescription/getPrescriptionInfoByPatientId")
+    @ApiOperation(value = "根据病人 ID 获取处方信息", notes = "可以根据处方除ID外属性获取处方信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "patient_id",value = "病人ID"),
+    })
+    public Result<ArrayList<Prescription>> getPrescriptionInfoByPatientId(
+            @RequestParam(value = "patient_id") long patient_id,
+            @RequestParam Integer page, // 分页
+            @RequestParam Integer size
+    )
+    {
+        Page<HashMap<String, String>> pageInfo = PageHelper.startPage(page, size);
+        ArrayList<Prescription> list = getPrescriptionInfoService.getPrescriptionByPatientId(patient_id);
         if (list == null) return null;
         return Result.pagedOk(pageInfo);
     }

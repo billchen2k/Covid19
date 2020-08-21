@@ -31,7 +31,7 @@ logging:
   # 是否记录详细的请求日志，默认为 false
   request: false
   level:
-    root: DEBUG
+    root: INFO
 
 # pagehelper
 pagehelper:

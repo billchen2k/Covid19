@@ -29,15 +29,20 @@ public interface PrescriptionMapper {
             @Param("doctor_id") String doctor_id
     );
 
+    @Select("SELECT * FROM prescription WHERE patient_id = #{patient_id}")
+    ArrayList<Prescription> selectPrescriptionByPatientId(@Param("patient_id") long patient_id);
+
     @Insert("insert into prescription(" +
             "patient_id, " +
             "medicine_id, " +
+            "doctor_id," +
             "dosage, " +
             "usage, " +
             "doctor_id) "+
             "values (" +
             "#{patient_id}, " +
             "#{medicine_id}, " +
+            "#{doctor_id}," +
             "#{dosage}, " +
             "#{usage}, "+
             "#{doctor_id})"
@@ -48,6 +53,7 @@ public interface PrescriptionMapper {
     @Update("Update prescription set " +
             "patient_id=#{patient_id}, " +
             "medicine_id=#{medicine_id}, " +
+            "doctor_id=#{doctor_id}" +
             "dosage=#{dosage}, " +
             "usage=#{usage}, " +
             "doctor_id=#{doctor_id} "+

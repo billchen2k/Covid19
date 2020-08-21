@@ -18,7 +18,7 @@ public interface DiagnosisMapper {
 //    public ArrayList<Diagnosis> selectDiagnosisByPatientID(@Param("patinet_id") long patient_id);
 //
     @Select("SELECT * from diagnosis where " +
-            "patient_id like #{patient_id}" +
+            "patient_id = #{patient_id}" +
             "and doctor_id like #{doctor_id}" +
             "and time like concat('%',#{time},'%') " +
             "and temperature like concat('%',#{temperature},'%') " +

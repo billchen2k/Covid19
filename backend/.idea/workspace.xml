@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b70580d-6874-4be3-96ec-e548e55daaab" name="Default Changelist" comment="Backend has been updated!" />
+    <list default="true" id="2b70580d-6874-4be3-96ec-e548e55daaab" name="Default Changelist" comment="Backend has been updated!">
+      <change afterPath="$PROJECT_DIR$/../utils/prescriptionImporter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../utils/patientimporter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../utils/patientimporter.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,7 +95,7 @@
       </method>
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -114,6 +117,7 @@
       <workItem from="1597929630861" duration="438000" />
       <workItem from="1597930136993" duration="737000" />
       <workItem from="1597931357737" duration="3110000" />
+      <workItem from="1597998999954" duration="34000" />
     </task>
     <task id="LOCAL-00001" summary="hospital更新啦">
       <created>1592562765460</created>
@@ -126,7 +130,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="hospital更新啦" />
@@ -151,15 +155,6 @@
     <state x="403" y="213" width="670" height="676" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1597931502887" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/covid19/backend/service/diagnosis/GetDiagnosisInfoService.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="diagnosis.patient_id" />

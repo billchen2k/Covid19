@@ -26,8 +26,8 @@ public class CreatePrescription extends BaseController{
     @PostMapping("/prescription/createPrescription")
     @ApiOperation(value = "创建用药信息", notes = "可以创建用药信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "patient_id",value = "病人ID"),
-            @ApiImplicitParam(name = "medicine_id",value = "药品ID"),
+            @ApiImplicitParam(name = "patient_id",value = "病人 ID"),
+            @ApiImplicitParam(name = "medicine_id",value = "药品 ID"),
             @ApiImplicitParam(name = "dosage",value = "剂量"),
             @ApiImplicitParam(name = "usage",value = "药物使用方法"),
             @ApiImplicitParam(name = "doctor_id",value = "医生ID")

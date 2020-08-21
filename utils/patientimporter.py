@@ -223,21 +223,15 @@ def new_patient(city, province, date, status):
             f.write('<{}>: Error occurred in patient({}, {}, {}, {})\n'.format(datetime.datetime.now().isoformat()[:-4], city, province, date, status))
 
 # Generat patient and diagnosis and perscription
-for one in tqdm(citytimeline.values(), desc="Enumerating Cities"):
-    for i, today in tqdm(enumerate(one), desc="Enumerating Patients"):
-        if i == 0:
-            newCount = today['confirmedCount']
-            newDead = today['deadCount']
-        else:
-            newCount = today['confirmedCount'] - one[i - 1]['confirmedCount']
-            newDead = today['deadCount'] - one[i - 1]['deadCount']
-        for t in range(newCount - newDead):
-            new_patient(today['city'], today['province'], today['date'], random.choice(status))
-        for t in range(newDead):
-            new_patient(today['city'], today['province'], today['date'], '已死亡')
-
-
-def new_medicine():
-    s.post('medicine/newMedicine')
-    pass
-
+# for one in tqdm(citytimeline.values(), desc="Enumerating Cities"):
+#     for i, today in tqdm(enumerate(one), desc="Enumerating Patients"):
+#         if i == 0:
+#             newCount = today['confirmedCount']
+#             newDead = today['deadCount']
+#         else:
+#             newCount = today['confirmedCount'] - one[i - 1]['confirmedCount']
+#             newDead = today['deadCount'] - one[i - 1]['deadCount']
+#         for t in range(newCount - newDead):
+#             new_patient(today['city'], today['province'], today['date'], random.choice(status))
+#         for t in range(newDead):
+#             new_patient(today['city'], today['province'], today['date'], '已死亡')

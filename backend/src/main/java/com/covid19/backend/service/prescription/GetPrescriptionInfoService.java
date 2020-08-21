@@ -49,4 +49,8 @@ public class GetPrescriptionInfoService extends BaseService{
                 usage,
                 doctor_id);
     }
+
+    public ArrayList<Prescription> getPrescriptionByPatientId(long patientId){
+        return prescriptionMapper.selectPrescriptionByPatientId(patientId);
+    }
 }
