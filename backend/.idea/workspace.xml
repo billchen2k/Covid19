@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b70580d-6874-4be3-96ec-e548e55daaab" name="Default Changelist" comment="Backend has been updated!">
-      <change afterPath="$PROJECT_DIR$/../utils/prescriptionImporter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utils/patientimporter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../utils/patientimporter.py" afterDir="false" />
-    </list>
+    <list default="true" id="2b70580d-6874-4be3-96ec-e548e55daaab" name="Default Changelist" comment="Backend has been updated!" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,12 +48,6 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="114" />
-    <option name="y" value="23" />
-    <option name="width" value="1249" />
-    <option name="height" value="877" />
-  </component>
   <component name="ProjectId" id="1gMjRyNVBUikUMC6ruwWoKtWb9P" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -95,7 +86,7 @@
       </method>
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -118,6 +109,7 @@
       <workItem from="1597930136993" duration="737000" />
       <workItem from="1597931357737" duration="3110000" />
       <workItem from="1597998999954" duration="34000" />
+      <workItem from="1597999729338" duration="751000" />
     </task>
     <task id="LOCAL-00001" summary="hospital更新啦">
       <created>1592562765460</created>
@@ -130,7 +122,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="hospital更新啦" />

@@ -4,6 +4,7 @@ import com.covid19.backend.model.Prescription;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // MyBatis
 @Mapper
@@ -12,8 +13,10 @@ public interface PrescriptionMapper {
     @Select("SELECT * from prescription where prescription_id=#{prescription_id}")
     public Prescription selectPrescriptionByID(@Param("prescription_id") long prescription_id);
 
-    @Select("SELECT * from prescription where patient_id=#{patient_id}")
-    public ArrayList<Prescription> selectPrescriptionByPatientID(@Param("patient_id") String patient_id);
+    @Select("SELECT * " +
+            "from prescription natural join doctor " +
+            "where patient_id=#{patient_id}")
+    public ArrayList<HashMap<String,String>> selectPrescriptionByPatientID(@Param("patient_id") String patient_id);
 
     @Select("SELECT * from prescription where " +
             "patient_id like concat('%',#{patient_id},'%')" +

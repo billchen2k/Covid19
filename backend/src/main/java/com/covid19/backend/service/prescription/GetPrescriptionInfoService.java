@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class GetPrescriptionInfoService extends BaseService{
@@ -22,7 +23,7 @@ public class GetPrescriptionInfoService extends BaseService{
     /**
      * 根据病人ID获取用药信息
      */
-    public ArrayList<Prescription> gePrescriptionInfoByPatientID(String patient_id){
+    public ArrayList<HashMap<String,String>> gePrescriptionInfoByPatientID(String patient_id){
         return prescriptionMapper.selectPrescriptionByPatientID(patient_id);
     }
     /**

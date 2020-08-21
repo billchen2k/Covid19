@@ -47,7 +47,7 @@ public class GetPrescriptionInfo {
             @RequestParam(value = "patient_id") String patient_id
     )
     {
-        ArrayList<Prescription> list = getPrescriptionInfoService.gePrescriptionInfoByPatientID(patient_id);
+        ArrayList<HashMap<String,String>> list = getPrescriptionInfoService.gePrescriptionInfoByPatientID(patient_id);
         if(list == null) return Result.error(2012,"不存在这样的用药记录");
         return Result.ok(list);
     }
