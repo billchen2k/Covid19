@@ -38,5 +38,5 @@ public class Prescription {
     private String usage;
 
     @ApiModelProperty("医生")
-    private long doctor_id;
+    private String doctor_id;
 }

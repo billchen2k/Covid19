@@ -16,7 +16,7 @@ public interface PrescriptionMapper {
             "patient_id like #{patient_id}" +
             "and medicine_id like #{medicine_id}" +
             "and dosage like concat('%',#{dosage},'%') " +
-            "and usage like concat('%',#{usage},'%')")
+            "and `usage` like concat('%',#{usage},'%')")
     public ArrayList<Prescription> selectPrescription(
             @Param("patient_id") String patient_id,
             @Param("medicine_id") String medicine_id,
@@ -31,8 +31,8 @@ public interface PrescriptionMapper {
             "patient_id, " +
             "medicine_id, " +
             "doctor_id," +
-            "dosage, " +
-            "usage) " +
+            "dosage," +
+            "`usage`) " +
             "values (" +
             "#{patient_id}, " +
             "#{medicine_id}, " +
@@ -48,7 +48,7 @@ public interface PrescriptionMapper {
             "medicine_id=#{medicine_id}, " +
             "doctor_id=#{doctor_id}" +
             "dosage=#{dosage}, " +
-            "usage=#{usage} " +
+            "`usage`=#{usage} " +
             "where prescription_id=#{prescription_id}")
     void updatePrescription(Prescription prescription);
 

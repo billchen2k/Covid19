@@ -35,7 +35,7 @@ public class CreatePrescriptionService extends BaseService{
     public Prescription createPrescription(
             String patient_id,
             String medicine_id,
-            long doctor_id,
+            String doctor_id,
             String dosage,
             String usage
     )

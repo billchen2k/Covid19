@@ -35,7 +35,7 @@ public class CreatePrescription extends BaseController{
     public Result createMedicine(
             @RequestParam(value = "patient_id") String patient_id,
             @RequestParam(value = "medicine_id")String medicine_id,
-            @RequestParam(value = "doctor_id")long doctor_id,
+            @RequestParam(value = "doctor_id")String doctor_id,
             @RequestParam(value = "dosage",required = false)String dosage,
             @RequestParam(value = "usage",required = false)String usage,
             HttpServletRequest request)
