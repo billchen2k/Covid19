@@ -24,6 +24,9 @@ public interface PrescriptionMapper {
             @Param("usage") String usage
     );
 
+    @Select("SELECT * FROM prescription WHERE patient_id = #{patient_id}")
+    ArrayList<Prescription> selectPrescriptionByPatientId(@Param("patient_id") long patient_id);
+
     @Insert("insert into prescription(" +
             "patient_id, " +
             "medicine_id, " +
