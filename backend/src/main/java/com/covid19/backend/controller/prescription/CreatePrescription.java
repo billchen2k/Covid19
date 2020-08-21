@@ -26,14 +26,16 @@ public class CreatePrescription extends BaseController{
     @PostMapping("/prescription/createPrescription")
     @ApiOperation(value = "创建用药信息", notes = "可以创建用药信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "patient_id",value = "病人ID"),
-            @ApiImplicitParam(name = "medicine_id",value = "药品ID"),
+            @ApiImplicitParam(name = "patient_id",value = "病人 ID"),
+            @ApiImplicitParam(name = "medicine_id",value = "药品 ID"),
+            @ApiImplicitParam(name = "dctor_id",value = "医生 ID"),
             @ApiImplicitParam(name = "dosage",value = "剂量"),
-            @ApiImplicitParam(name = "type",value = "类型")
+            @ApiImplicitParam(name = "usgae",value = "用量")
     })
     public Result createMedicine(
             @RequestParam(value = "patient_id") String patient_id,
             @RequestParam(value = "medicine_id")String medicine_id,
+            @RequestParam(value = "doctor_id")long doctor_id,
             @RequestParam(value = "dosage",required = false)String dosage,
             @RequestParam(value = "usage",required = false)String usage,
             HttpServletRequest request)
@@ -44,6 +46,7 @@ public class CreatePrescription extends BaseController{
         Prescription new_prescription = createPrescriptionService.createPrescription(
                 patient_id,
                 medicine_id,
+                doctor_id,
                 dosage,
                 usage);
         return Result.ok(new_prescription);

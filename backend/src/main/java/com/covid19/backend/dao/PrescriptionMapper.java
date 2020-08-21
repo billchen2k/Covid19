@@ -30,11 +30,13 @@ public interface PrescriptionMapper {
     @Insert("insert into prescription(" +
             "patient_id, " +
             "medicine_id, " +
+            "doctor_id," +
             "dosage, " +
             "usage) " +
             "values (" +
             "#{patient_id}, " +
             "#{medicine_id}, " +
+            "#{doctor_id}," +
             "#{dosage}, " +
             "#{usage})"
     )
@@ -44,6 +46,7 @@ public interface PrescriptionMapper {
     @Update("Update prescription set " +
             "patient_id=#{patient_id}, " +
             "medicine_id=#{medicine_id}, " +
+            "doctor_id=#{doctor_id}" +
             "dosage=#{dosage}, " +
             "usage=#{usage} " +
             "where prescription_id=#{prescription_id}")
