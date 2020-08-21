@@ -40,19 +40,33 @@ public class GetPrescriptionInfo {
         return Result.ok(prescription);
     }
 
+    @PostMapping("/prescription/getPrescriptionInfoByPatientID")
+    @ApiOperation(value = "根据病人ID获取用药信息", notes = "可以根据病人ID获取用药信息")
+    @ApiImplicitParam(name = "patient_id",value = "病人ID")
+    public Result<Prescription> getPrescriptionInfoByPatientID(
+            @RequestParam(value = "patient_id") String patient_id
+    )
+    {
+        ArrayList<Prescription> list = getPrescriptionInfoService.gePrescriptionInfoByPatientID(patient_id);
+        if(list == null) return Result.error(2012,"不存在这样的用药记录");
+        return Result.ok(list);
+    }
+
     @PostMapping("/prescription/getPrescriptionInfo")
     @ApiOperation(value = "根据用药除ID外属性获取用药信息", notes = "可以根据用药除ID外属性获取用药信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "patient_id",value = "病人ID"),
             @ApiImplicitParam(name = "medicine_id",value = "药品ID"),
             @ApiImplicitParam(name = "dosage",value = "剂量"),
-            @ApiImplicitParam(name = "usage",value = "用法")
+            @ApiImplicitParam(name = "usage",value = "用法"),
+            @ApiImplicitParam(name = "doctor_id",value = "医生ID")
     })
     public Result<ArrayList<Prescription>> getPrescriptionInfo(
             @RequestParam(value = "patient_id") String patient_id,
             @RequestParam(value = "medicine_id")String medicine_id,
             @RequestParam(value = "dosage",required = false)String dosage,
             @RequestParam(value = "usage",required = false)String usage,
+            @RequestParam(value = "doctor_id",required = false)String doctor_id,
             @RequestParam Integer page, // 分页
             @RequestParam Integer size
     )
@@ -62,7 +76,8 @@ public class GetPrescriptionInfo {
                 patient_id,
                 medicine_id,
                 dosage,
-                usage);
+                usage,
+                doctor_id);
         if (list == null) return null;
         return Result.pagedOk(pageInfo);
     }

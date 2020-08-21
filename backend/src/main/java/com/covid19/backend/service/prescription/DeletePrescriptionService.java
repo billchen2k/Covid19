@@ -60,7 +60,8 @@ public class DeletePrescriptionService extends BaseService {
             String patient_id,
             String medicine_id,
             String dosage,
-            String usage
+            String usage,
+            String doctor_id
     )
     {
 
@@ -68,7 +69,8 @@ public class DeletePrescriptionService extends BaseService {
                 patient_id,
                 medicine_id,
                 dosage,
-                usage);
+                usage,
+                doctor_id);
         for(Prescription prescription: prescriptions){
             deletePrescriptionByID(prescription.getPrescription_id());
         }

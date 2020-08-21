@@ -29,13 +29,15 @@ public class CreatePrescription extends BaseController{
             @ApiImplicitParam(name = "patient_id",value = "病人ID"),
             @ApiImplicitParam(name = "medicine_id",value = "药品ID"),
             @ApiImplicitParam(name = "dosage",value = "剂量"),
-            @ApiImplicitParam(name = "type",value = "类型")
+            @ApiImplicitParam(name = "usage",value = "药物使用方法"),
+            @ApiImplicitParam(name = "doctor_id",value = "医生ID")
     })
     public Result createMedicine(
             @RequestParam(value = "patient_id") String patient_id,
             @RequestParam(value = "medicine_id")String medicine_id,
             @RequestParam(value = "dosage",required = false)String dosage,
             @RequestParam(value = "usage",required = false)String usage,
+            @RequestParam(value = "doctor_id",required = false)String doctor_id,
             HttpServletRequest request)
     {
         if(createPrescriptionService.checkCurrentUserInfo(request) == -1)
@@ -45,7 +47,8 @@ public class CreatePrescription extends BaseController{
                 patient_id,
                 medicine_id,
                 dosage,
-                usage);
+                usage,
+                doctor_id);
         return Result.ok(new_prescription);
     }
 }

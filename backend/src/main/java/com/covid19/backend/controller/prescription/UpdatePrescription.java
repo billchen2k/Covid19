@@ -35,7 +35,8 @@ public class UpdatePrescription extends BaseController{
             @ApiImplicitParam(name = "patient_id",value = "病人ID"),
             @ApiImplicitParam(name = "medicine_id",value = "药品ID"),
             @ApiImplicitParam(name = "dosage",value = "剂量"),
-            @ApiImplicitParam(name = "usage",value = "用法")
+            @ApiImplicitParam(name = "usage",value = "用法"),
+            @ApiImplicitParam(name = "doctor_id",value = "医生ID")
     })
     public Result updatePrescription(
             @RequestParam(value = "prescription_id") long prescription_id,
@@ -43,6 +44,7 @@ public class UpdatePrescription extends BaseController{
             @RequestParam(value = "medicine_id")String medicine_id,
             @RequestParam(value = "dosage",required = false)String dosage,
             @RequestParam(value = "usage",required = false)String usage,
+            @RequestParam(value = "doctor_id",required = false)String doctor_id,
             HttpServletRequest request)
     {
         if(updatePrescriptionService.checkCurrentUserInfo(request) == -1)
@@ -55,7 +57,8 @@ public class UpdatePrescription extends BaseController{
                 patient_id,
                 medicine_id,
                 dosage,
-                usage);
+                usage,
+                doctor_id);
         return Result.ok(prescription_id);
     }
 }
