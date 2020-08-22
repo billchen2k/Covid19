@@ -6,17 +6,18 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * 解决跨域访问的问题
+ * 解决跨域访问的问题 （2020.8 已弃用
  *
  * @author billchen
  * @version 1.0
  * @create 2020-06-17 01:24
  **/
+
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
-
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**");
-	}
+//
+//	@Override
+//	public void addCorsMappings(CorsRegistry registry) {
+//		registry.addMapping("/**");
+//	}
 }

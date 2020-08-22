@@ -31,9 +31,9 @@ public class UpdatePatient extends BaseController{
     @ApiOperation(value = "更新病人信息", notes = "可以更新病人信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "patient_id",value = "病人ID"),
-            @ApiImplicitParam(name = "name",value = "病人名称"),
-            @ApiImplicitParam(name = "gender",value = "病人性别"),
-            @ApiImplicitParam(name = "birthday",value = "病人生日"),
+            @ApiImplicitParam(name = "patient_name",value = "病人名称"),
+            @ApiImplicitParam(name = "patient_gender",value = "病人性别"),
+            @ApiImplicitParam(name = "patient_birthday",value = "病人生日"),
             @ApiImplicitParam(name = "onset_place",value = "发病地点"),
             @ApiImplicitParam(name = "onset_date",value = "发病时间"),
             @ApiImplicitParam(name = "confirm_date",value = "确诊时间"),
@@ -44,9 +44,9 @@ public class UpdatePatient extends BaseController{
     })
     public Result updatePatient(
             @RequestParam(value = "patient_id") long patient_id,
-            @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "gender",required = false)String gender,
-            @RequestParam(value = "birthday",required = false)String birthday,
+            @RequestParam(value = "patient_name", required = false) String patient_name,
+            @RequestParam(value = "patient_gender",required = false)String patient_gender,
+            @RequestParam(value = "patient_birthday",required = false)String patient_birthday,
             @RequestParam(value = "onset_place",required = false)String onset_place,
             @RequestParam(value = "onset_date",required = false)String onset_date,
             @RequestParam(value = "confirm_date",required = false)String confirm_date,
@@ -63,9 +63,9 @@ public class UpdatePatient extends BaseController{
 
         Patient new_patient = updatePatientService.updatePatient(
                 patient_id,
-                name,
-                gender,
-                birthday,
+                patient_name,
+                patient_gender,
+                patient_birthday,
                 onset_place,
                 onset_date,
                 confirm_date,
