@@ -14,7 +14,7 @@ public interface PrescriptionMapper {
     public Prescription selectPrescriptionByID(@Param("prescription_id") long prescription_id);
 
     @Select("SELECT * " +
-            "from prescription natural join doctor " +
+            "from prescription natural join doctor natural join medicine " +
             "where patient_id=#{patient_id}")
     public ArrayList<HashMap<String,String>> selectPrescriptionByPatientID(@Param("patient_id") String patient_id);
 
@@ -22,7 +22,7 @@ public interface PrescriptionMapper {
             "patient_id like concat('%',#{patient_id},'%')" +
             "and medicine_id like concat('%',#{medicine_id},'%')" +
             "and dosage like concat('%',#{dosage},'%') " +
-            "and usage like concat('%',#{usage},'%')" +
+            "and `usage` like concat('%',#{usage},'%')" +
             "and doctor_id like concat('%',#{doctor_id},'%')")
     public ArrayList<Prescription> selectPrescription(
             @Param("patient_id") String patient_id,
@@ -40,15 +40,13 @@ public interface PrescriptionMapper {
             "medicine_id, " +
             "doctor_id," +
             "dosage, " +
-            "usage, " +
-            "doctor_id) "+
+            "`usage`) " +
             "values (" +
             "#{patient_id}, " +
             "#{medicine_id}, " +
-            "#{doctor_id}," +
+            "#{doctor_id}, " +
             "#{dosage}, " +
-            "#{usage}, "+
-            "#{doctor_id})"
+            "#{usage})"
     )
     @SelectKey(statement = "SELECT LAST_INSERT_ID() as prescription_id", keyProperty = "prescription_id", before = false, resultType = long.class)
     long insertPrescription(Prescription prescription);
@@ -58,8 +56,7 @@ public interface PrescriptionMapper {
             "medicine_id=#{medicine_id}, " +
             "doctor_id=#{doctor_id}" +
             "dosage=#{dosage}, " +
-            "usage=#{usage}, " +
-            "doctor_id=#{doctor_id} "+
+            "`usage`=#{usage}, " +
             "where prescription_id=#{prescription_id}")
     void updatePrescription(Prescription prescription);
 

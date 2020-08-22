@@ -28,7 +28,7 @@ public class UpdateDiagnosisService extends BaseService{
     public int checkCurrentUserInfo(HttpServletRequest request)
     {
         Long uid = Authentication.getCurrentUid(request);
-        if (uid == null || uid != 0) return -1;
+        if (uid == null) return -1;
         return 0;
     }
 

@@ -38,7 +38,6 @@ public class CreatePrescription extends BaseController{
             @RequestParam(value = "doctor_id")String doctor_id,
             @RequestParam(value = "dosage",required = false)String dosage,
             @RequestParam(value = "usage",required = false)String usage,
-            @RequestParam(value = "doctor_id",required = false)String doctor_id,
             HttpServletRequest request)
     {
         if(createPrescriptionService.checkCurrentUserInfo(request) == -1)
@@ -47,9 +46,9 @@ public class CreatePrescription extends BaseController{
         Prescription new_prescription = createPrescriptionService.createPrescription(
                 patient_id,
                 medicine_id,
+                doctor_id,
                 dosage,
-                usage,
-                doctor_id);
+                usage);
         return Result.ok(new_prescription);
     }
 }

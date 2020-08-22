@@ -62,7 +62,7 @@ def new_prescription(patient_id):
     respre = s.post(api + '/prescription/createPrescription', data=prescript)
     log(json.loads(respre.text)['data'])
 
-START_POSITION = 138370
+START_POSITION = 139159
 
 for i in range(START_POSITION, 140342):
     for j in range(3):
