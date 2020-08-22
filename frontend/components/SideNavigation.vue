@@ -100,14 +100,15 @@ export default {
         {
           icon: 'mdi-account-search',
           title: '病患查询',
-          link: this.localePath('/query')
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: '分析报告',
-          link: this.localePath('/report'),
+          link: this.localePath('/query'),
           divider: true
         },
+        // {
+        //   icon: 'mdi-chart-bubble',
+        //   title: '分析报告',
+        //   link: this.localePath('/report'),
+        //   divider: true
+        // },
         {
           icon: 'mdi-pencil-circle-outline',
           title: '病患登记',
@@ -117,7 +118,7 @@ export default {
         {
           icon: 'mdi-bed-empty',
           title: '病患管理',
-          link: this.localePath('/'),
+          link: this.localePath('/manage'),
           need_login: true
         },
         {

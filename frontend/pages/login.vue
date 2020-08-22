@@ -95,6 +95,7 @@
         this.loading = true
         this.errormsg = ""
         var url = Config.apiurl + "/user/logIn"
+        axios.defaults.withCredentials = true;
         axios.post(url, null, {params:{
             identifier: this.username,
             password: this.password
@@ -102,17 +103,15 @@
           console.log(response.data)
           if(response.data.success){
             EventBus.$emit('setUid', response.data.data.user_id)
-
             EventBus.$emit('setUsername', response.data.data.username)
             this.$router.push({
               path: this.localePath('/')
             })
           }
           else{
-            this.errormsg = response.data.message
+            this.errormsg = response.data.message;
           }
-          this.loading = false
-
+          this.loading = false;
         })
           .catch(error => {
             console.error("Fail to reach server.")

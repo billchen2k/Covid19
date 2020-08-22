@@ -3,22 +3,23 @@ import json
 import random
 import time
 import traceback
-import faker
+# import faker
 import requests
-from tqdm import tqdm
+# from tqdm import tqdm
 import os
 
 # Data source:
 # https://raw.githubusercontent.com/BlankerL/DXY-COVID-19-Data/master/json/DXYArea-TimeSeries.json
 
-fake = faker.Factory.create("zh-CN")
-api = "http://8.210.248.203"
+# fake = faker.Factory.create("zh-CN")
+# api = "http://8.210.248.203"
+api = "http://localhost"
 s = requests.session()
-res = json.loads(s.post(api + "user/logIn?identifier=admin&password=admin").text)
+res = json.loads(s.post(api + "/user/logIn?identifier=admin&password=admin").text)
 print(res)
 
 
-logf = open('importer.log', 'a+')
+logf = open('prescriptionimporter.log', 'a+')
 def log(s, sender=''):
     global logf
     fs = "<{} {}>: {}".format(datetime.datetime.now().isoformat()[:-4], sender, s)
@@ -59,11 +60,10 @@ def new_prescription(patient_id):
         "doctor_id": random.choice(json.loads(resD.text)['data'])['doctor_id']
     }
     respre = s.post(api + '/prescription/createPrescription', data=prescript)
-    log(json.loads(respre.text))
+    log(json.loads(respre.text)['data'])
 
+START_POSITION = 138370
 
-START_POSITION = 0
-
-for i in range(START_POSITION, 138369):
+for i in range(START_POSITION, 140342):
     for j in range(3):
         new_prescription(i)

@@ -140,11 +140,16 @@
             no-data-text="无匹配数据"
             class="cardTable"
           >
+<!--            <template v-slot:item.detail="{ item }">-->
+<!--              <patient-detail-->
+<!--                :patient_id="item.patient_id"-->
+<!--                editable-->
+<!--                v-on:close="fetchData"-->
+<!--              ></patient-detail>-->
+<!--            </template>-->
             <template v-slot:item.detail="{ item }">
               <patient-detail
                 :patient_id="item.patient_id"
-                editable
-                v-on:close="fetchData"
               ></patient-detail>
             </template>
 
