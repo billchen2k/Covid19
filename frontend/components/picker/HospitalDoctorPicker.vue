@@ -60,7 +60,7 @@
 
             </v-list>
             <v-divider></v-divider>
-            <v-list dense class="scroll" height="450px">
+            <v-list dense class="scroll" height="400px">
               <div v-if="hospitals.length == 0" class="annotation px-3">无匹配数据，请键入正确的筛选条件，至少输入一些搜索内容。</div>
               <v-list-item-group v-model="selected_hospital" color="primary" mandatory>
                 <v-list-item
@@ -136,7 +136,7 @@
             </v-list>
             <v-divider></v-divider>
 
-            <v-list dense class="scroll" height="450px">
+            <v-list dense class="scroll" height="400px">
               <div v-if="doctors.length == 0" class="annotation px-3">正在加载数据...</div>
               <v-list-item-group v-model="selected_doctor" color="primary" mandatory>
                 <v-list-item
@@ -277,6 +277,10 @@
       },
 
       saveResult() {
+        if (this.hospital_id == 0) {
+          this.popSnack('未选择医院及医生。');
+          this.dialog = false;
+        }
         this.$emit('change', {
           new_hospital: this.selected_hospital_model,
           new_doctor: this.selected_doctor_model
@@ -296,6 +300,11 @@
     },
 
     mounted() {
+      if (this.hospital_id == 0) {
+        this.popSnack('请键入内容以搜索医院，并选择医院内的医生。');
+        this.loadingDoctor = this.loadingHospital = false;
+        return;
+      }
       axios.post(Config.apiurl + "/doctor/getDoctorInfoByID", null, {params: {
           doctor_id: this.doctor_id
         }}).then(response => {

@@ -50,8 +50,8 @@
         </v-toolbar>
 
           <v-row class="ma-2">
-            <v-col sm="3">
-              <v-card>
+            <v-col lg="3" md="4" sm="12">
+              <v-card :loading="loading">
                 <v-card-title>病人简历</v-card-title>
                 <v-list dense>
 <!--                    <v-subheader>ID: {{patient_id}}）</v-subheader>-->
@@ -111,64 +111,23 @@
                                                   :hospital_id="patientDatail.data.hospital_id"
                                                   :doctor_id="patientDatail.data.doctor_id"
                                                   v-on:change="updateHospitalDoctor"
-                                                  :allow_edit_hospital="false"
+                                                  :allow_edit_hospital="true"
                           ></hospital-doctor-picker>
                         </v-list-item-action>
                       </v-list-item>
                       <v-divider v-if="item.divider"></v-divider>
                     </template>
                   </v-list>
-
               </v-card>
 
-              <v-card class="my-6">
-                <v-card-title>处方信息</v-card-title>
-              </v-card>
+              <prescription-card class="my-6" :editable="editable" :patient_id="patient_id" ref="prescriptionCard"></prescription-card>
+
             </v-col>
 
-            <v-col sm="9">
-              <v-expansion-panels v-model="panel" class="mb-3">
-                <v-expansion-panel>
-                  <v-expansion-panel-header>体温曲线</v-expansion-panel-header>
-                  <v-expansion-panel-content>
-                    <v-fade-transition>
-                      <line-chart v-if="!loadingDiagnosis" :chart-data="temperatureLineChartData" height="80"></line-chart>
-                    </v-fade-transition>
-                  </v-expansion-panel-content>
+            <v-col lg="9" md="8" sm="12">
 
-                </v-expansion-panel>
-              </v-expansion-panels>
+              <diagnosis-card :editable="editable" :patient_id="patient_id" ref="diagnosisCard"></diagnosis-card>
 
-              <v-card>
-                <v-card-title>诊断记录</v-card-title>
-                  <v-data-table
-                    calculate-widths
-                    :loading="loadingDiagnosis"
-                    :headers="diagnosisHeaders"
-                    :items="patientDatail.diagnosis"
-                    :items-per-page="15"
-                    :sort-desc="true"
-                    item-key="diagnosis_id"
-                    loading-text="正在加载数据，请稍候"
-                    no-data-text="无匹配数据"
-                  >
-                    <template v-slot:item.doctor_name="{ item }">
-                      <v-fade-transition mode="out-in">
-                        <div :key="item.doctor_name">
-                          {{item.doctor_name}}
-                        </div>
-                      </v-fade-transition>
-
-                    </template>
-
-                    <template v-slot:item.nucleic_acid="{ item }" v-if="!loadingDiagnosis">
-                      <v-chip :color="item.nucleic_acid == '阳性' ? 'error' : 'green'" text-color="white" >
-                        {{item.nucleic_acid}}
-                      </v-chip>
-                    </template>
-
-                  </v-data-table>
-              </v-card>
             </v-col>
           </v-row>
 
@@ -202,11 +161,13 @@
   import Config from '../global/Config'
   import DatePicker from '../picker/DatePicker'
   import HospitalDoctorPicker from '../picker/HospitalDoctorPicker'
+  import PrescriptionCard from './PrescriptionCard'
+  import DiagnosisCard from './DiagnosisCard'
 
   export default {
 
     name: 'PatientDetail',
-    components: { HospitalDoctorPicker, DatePicker },
+    components: { DiagnosisCard, PrescriptionCard, HospitalDoctorPicker, DatePicker },
     props: {
       patient_id: {
         type: Number,
@@ -224,27 +185,13 @@
         dialog: false,
         confirm_dialog: false,
         loading: true,
-        panel: 0,
         snackbar: false,
         snackbar_text: "",
         loadingDiagnosis: true,
         patientDatail: {
           data: {},
-          diagnosis: [],
         },
-        diagnosisHeaders: [
-          { text: '#', value: 'diagnosis_id' },
-          {
-            text: '诊断医生',
-            value: 'doctor_name',
-          },
-          { text: '诊断时间', value: 'time' },
-          { text: '体温', value: 'temperature' },
-          { text: '核酸检测', value: 'nucleic_acid' },
-          { text: '症状', value: 'symptom' }
-        ],
-        detailListItems: [
-        ]
+        detailListItems: [],
       }
     },
     methods: {
@@ -331,54 +278,6 @@
         ]
       },
 
-      fillChart(){
-        let chartData = {
-          labels: [],
-          datasets: [
-            {
-              label: "体温",
-              backgroundColor: 'rgba(0,0,0,0)',
-              borderColor: 'rgba(199,0,0,0.6)',
-              cubicInterpolationMode: 'monotone',
-              data:[]
-            }
-          ]
-        };
-        this.patientDatail.diagnosis.forEach(one => {
-          chartData.labels.push(one.time.substring(5));
-          chartData.datasets[0].data.push(one.temperature);
-        })
-        this.temperatureLineChartData = chartData;
-      },
-
-      fetchDiagnosis() {
-        this.loadingDiagnosis = true;
-        axios.post(Config.apiurl + '/diagnosis/getDiagnosisInfo', null, {params: {
-            page: 1,
-            size: 200,
-            patient_id: this.patient_id
-          }})
-          .then(response => {
-            let diagnosisData = response.data.data;
-            diagnosisData.map(one => one.doctor_name="加载中...");
-            this.patientDatail.diagnosis = diagnosisData;
-            this.patientDatail.diagnosis.map(async function(one) {
-              one.nucleic_acid = one.nucleic_acid == 1 ? "阳性" : "阴性";
-              let res = await axios.post(Config.apiurl + '/doctor/getDoctorInfoByID', null, {params: {
-                  doctor_id: one.doctor_id
-                }});
-              one.doctor_name = res.data.data.doctor_name;
-              return one;
-            })
-            // this.patientDatail.diagnosis = diagnosisData;
-          })
-          .finally(() => {
-            this.loadingDiagnosis = false;
-            console.info(this.patientDatail.diagnosis);
-            this.fillChart();
-          })
-      },
-
       fetchDetail() {
         this.loading = true;
         axios.post(Config.apiurl + '/patient/getPatientInfoByID', null, {params: {
@@ -405,6 +304,7 @@
             this.fillList();
           });
       },
+
 
       updateHospitalDoctor(e) {
         this.patientDatail.data.hospital_id = e.new_hospital.hospital_id;
@@ -443,9 +343,6 @@
     },
 
     mounted() {
-      if(this.editable) {
-        this.diagnosisHeaders.push({ text: '操作', value: 'curd'})
-      }
 
     },
 
@@ -458,7 +355,9 @@
         handler() {
           if(this.dialog == true){
             this.fetchDetail();
-            this.fetchDiagnosis();
+            // this.$refs.prescreptionCard.fetchPrescription();
+            // this.$refs.diagnosisCard.fetchPrescription();
+            // this.fetchDiagnosis();
           }
           else {
             // Dialog closed

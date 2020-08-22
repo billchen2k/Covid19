@@ -6,8 +6,13 @@
       date=""
     />
     <TextCard title="简介">
-      <br />
-      这是一个 Covid-19 新冠疫情分析与管理项目，具有全球疫情可视化概览、病人诊断数据统计及编辑、诊断医院和医生管理等功能。
+      <p>
+        这是一个 Covid-19 新冠疫情分析与管理项目，为华东师范大学软件工程专业 2020 年数据库系统课程的期末项目。具有全球疫情可视化概览、病人诊断数据统计及编辑、诊断医院和医生管理等功能。
+      </p>
+      <p>
+        网站前端采用 <code>vue.js</code> 架构，使用 <code>vuetify</code> 作为主要的 UI 库。后端采用 <code>Spring Boot</code> 架构，使用 <code>Swagger UI</code> 生成 API 文档。
+        数据库采用 <code>MySQL Community Version 8.0.12</code>, 存有两万余医生数据，十三万患者数据，四十万余条处方数据，近四百万余条诊断记录。经过多重索引和外键优化，平均性能仍较优秀。
+      </p>
     </TextCard>
 
     <TextCard title="作者">
@@ -24,7 +29,8 @@
     </TextCard>
 
     <TextCard title="特别鸣谢">
-      本项目的前端部分参考了基于 MIT 协议的开源项目
+      <p>
+        本项目的前端部分参考了基于 MIT 协议的开源项目
         <a
           href="https://github.com/tokyo-metropolitan-gov/covid19"
           target="_blank"
@@ -33,13 +39,17 @@
         >
           「東京都 新型コロナウイルス感染症対策サイト」
         </a>
-      。数据主要来源为丁香园每日统计数据。
+        。原项目仅提供了日本疫情数据的可视化展示，我们在该项目的基础上，实现了针对每个具体病人的详细信息的增删改查、处方、诊断记录等的检索与修改功能，以及针对医生和医院的用户权限系统。
+      </p>
+      <p>
+        疫情数据主要来源为丁香园每日统计数据。除此之外的医院、医生、药物、诊断记录、处方信息均为由脚本生成的虚构数据。
+      </p>
+
     </TextCard>
 
 
     <TextCard title="关于浏览器">
-     本网站建议使用以下浏览器：<br />
-      <br />
+      网站使用 <code>vue.js</code> 架构。为了保证浏览体验和性能，建议使用以下浏览器：<br />
       <ul class="About-Browser-List">
         <li>{{ $t('Microsoft Edge 最新版') }}</li>
         <li>{{ $t('Mozilla Firefox 最新版') }}</li>
@@ -86,6 +96,11 @@
       }}
     </TextCard>
 
+    <v-row>
+      <v-spacer></v-spacer>
+      <span class="footnote">Crafted with ❤️ in 2020.3 - 2020.8</span>
+      <v-spacer></v-spacer>
+    </v-row>
 
 
   </div>
@@ -432,8 +447,8 @@ export default {
     // セレクタ指定が&-Browser-List のみだと
     // .v-application ul の設定が勝ってしまい padding-left が24px となってしまうため
     // このようなセレクタ指定としています
-    list-style: none;
-    padding: 12px 0;
+    /*list-style: none;*/
+    padding: 12px 36px;
   }
 }
 .cardTable {

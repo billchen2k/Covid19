@@ -1,7 +1,7 @@
 <template>
   <div>
     <page-header
-      icon="mdi-account-search"
+      icon="mdi-bed-empty"
       title="病患管理"
       date=""
     />

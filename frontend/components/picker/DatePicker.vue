@@ -11,8 +11,9 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-        :outlined="dense ? false : true"
         :dense="dense ? true : false"
+        :outlined="outlined"
+        :prepend-icon="prependIcon"
         :hide-details="dense ? true : false"
         v-model="date"
         :label="label"
@@ -47,6 +48,8 @@
         type: String,
         required: true
       },
+      prependIcon: String,
+      outlined: String,
       dense: {
         type: Boolean,
         required: false,

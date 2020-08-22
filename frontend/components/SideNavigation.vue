@@ -112,7 +112,7 @@ export default {
         {
           icon: 'mdi-pencil-circle-outline',
           title: '病患登记',
-          link: this.localePath('/parent'),
+          link: this.localePath('/checkin'),
           need_login: true,
         },
         {
