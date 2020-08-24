@@ -4,7 +4,11 @@
 
 <script>
   export default {
-    name: 'HospitalPicker'
+    name: 'HospitalPicker',
+    props: {
+      patient_id: Number,
+      doctor_id: Number
+    }
   }
 </script>
 

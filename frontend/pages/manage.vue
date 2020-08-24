@@ -155,7 +155,7 @@
                 v-bind="slotProps.bind"
                 v-on="slotProps.on"
               >
-                <v-icon small class="mr-2">mdi-arrow-expand</v-icon> 编辑
+                <v-icon small class="mr-2">mdi-clipboard-edit-outline</v-icon> 管理
               </v-btn>
             </template>
           </patient-detail>

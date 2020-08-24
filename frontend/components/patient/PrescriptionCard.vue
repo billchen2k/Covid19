@@ -1,11 +1,14 @@
 <template>
   <v-card :loading="loading">
-    <v-card-title>处方信息</v-card-title>
-    <v-card-text>该病人当前的正在使用的处方如下。</v-card-text>
-    <v-card-text>
-      <v-list dense three-line>
+    <v-card-title>处方信息
+    <v-spacer></v-spacer>
+    <prescription-creator v-if="editable"></prescription-creator>
+    </v-card-title>
+    <v-card-text>该病人当前的正在使用的处方如下：</v-card-text>
+
+      <v-list dense three-line class="pb-6">
         <template v-for="(item, index) in prescriptionItems">
-          <v-list-item v-on:click="">
+          <v-list-item>
             <v-list-item-avatar>
               <span class="medicine-avatar rounded">{{item.medicine_name.substring(0,1)}}</span>
             </v-list-item-avatar>
@@ -14,13 +17,16 @@
               <v-list-item-subtitle>{{item.usage + '用，' + item.dosage}}</v-list-item-subtitle>
               <v-list-item-subtitle>{{item.manufacturer}}</v-list-item-subtitle>
             </v-list-item-content>
-            <v-list-item-action>
-
+            <v-list-item-action v-if="editable">
+              <v-btn icon color="grey" @click="">
+                <v-icon>mdi-trash-can</v-icon>
+              </v-btn>
             </v-list-item-action>
           </v-list-item>
+          <v-divider v-if="index + 1 != prescriptionItems.length"></v-divider>
         </template>
       </v-list>
-    </v-card-text>
+
   </v-card>
 
 </template>
@@ -28,10 +34,11 @@
 <script>
   import axios from 'axios'
   import Config from '../global/Config'
+  import PrescriptionCreator from '../picker/PrescriptionCreator'
 
   export default {
     name: 'PrescriptionCard',
-
+    components: { PrescriptionCreator },
     data() {
       return {
         loading: true,

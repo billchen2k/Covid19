@@ -3,6 +3,7 @@
     <v-expansion-panel>
       <v-expansion-panel-header>体温曲线</v-expansion-panel-header>
       <v-expansion-panel-content>
+        <span class="text-body-2 grey--text">诊断中的体温记录将会被绘制在这里。</span>
         <v-fade-transition>
           <line-chart  v-if="diagnosisItems.length > 0":chart-data="chartData" height="80"></line-chart>
         </v-fade-transition>

@@ -3,7 +3,10 @@
     <temperature-chart :diagnosis-items="diagnosisItems"></temperature-chart>
 
     <v-card>
-      <v-card-title>诊断记录</v-card-title>
+      <v-card-title>诊断记录
+        <v-spacer></v-spacer>
+        <diagnosis-creator v-if="editable"></diagnosis-creator>
+      </v-card-title>
       <v-data-table
         calculate-widths
         :loading="loading"
@@ -31,6 +34,12 @@
           </v-chip>
         </template>
 
+        <template v-slot:item.curd="{ item }" v-if="editable">
+          <v-btn icon color="grey" @click="">
+            <v-icon>mdi-trash-can</v-icon>
+          </v-btn>
+        </template>
+
       </v-data-table>
     </v-card>
   </div>
@@ -41,10 +50,11 @@
   import axios from 'axios'
   import Config from '../global/Config'
   import TemperatureChart from './TemperatureChart'
+  import DiagnosisCreator from '../picker/DiagnosisCreator'
 
   export default {
     name: 'DiagnosisCard',
-    components: { TemperatureChart },
+    components: { DiagnosisCreator, TemperatureChart },
     props: {
       editable: Boolean,
       patient_id: String

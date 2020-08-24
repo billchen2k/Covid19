@@ -4,30 +4,31 @@
       <template v-slot:activator="{ on, attrs }">
         <slot name="activator" v-bind:on="on" v-bind:attrs="attrs">
           <v-btn
-            color="red darken-2"
+            color="green"
             small
             text
             v-bind="attrs"
             v-on="on"
           >
-            <v-icon small>mdi-arrow-expand</v-icon> 展开
+            <v-icon class="mr-1" small>mdi-arrow-expand</v-icon> 展开
           </v-btn>
         </slot>
       </template>
       <v-card>
-        <v-toolbar dark color="red darken-2">
+
+        <v-toolbar dark :color="editable ? 'red darken-2' : 'green'">
           <v-btn icon dark @click="dialog = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-toolbar-title>
             <span v-if="loading">正在加载...  </span>
             <v-progress-circular indeterminate v-if="loading"></v-progress-circular>
-            <span v-else>病人详情</span>
+            <span v-else>患者档案</span>
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
 
-            <v-dialog v-if="this.editable" v-model="confirm_delete_dialog" persistent max-width="290">
+            <v-dialog v-if="this.editable" v-model="confirm_delete_dialog" persistent max-width="360">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   text dark
@@ -38,7 +39,7 @@
                 </v-btn>
               </template>
               <v-card>
-                <v-card-title>确定删除病人「{{patientDatail.patient_name}}」吗？</v-card-title>
+                <v-card-title>确定删除病人「{{patientDatail.data.patient_name}}」吗？</v-card-title>
                 <v-card-text>此操作无法撤销。</v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -72,87 +73,102 @@
           </v-toolbar-items>
         </v-toolbar>
 
-          <v-row class="ma-2">
-            <v-col lg="3" md="4" sm="12">
-              <v-card :loading="loading">
-                <v-card-title>病人简历</v-card-title>
-                <v-list dense>
+        <v-row class="ma-2">
+          <v-col lg="3" md="4" sm="12">
+          <v-fade-transition leave-absolute mode="out-in">
+            <v-row :key="loading" v-if="!loading" class="mb-6">
+              <v-col sm="4">
+                <span :class="'avatar ' + (patientDatail.data.status == '已死亡' ? '' : (patientDatail.data.status == '已康复' ? 'green' : 'red'))">{{patientDatail.data.patient_name.substring(0,1)}}</span>
+              </v-col>
+              <v-col sm="8" class="pt-0 pl-6">
+                <div class="text-name">{{patientDatail.data.patient_name}}</div>
+                <div class="text-annotation">{{patientDatail.data.hospital_name}}，{{patientDatail.data.status}}</div>
+              </v-col>
+            </v-row>
+          </v-fade-transition>
+
+
+
+
+            <v-card :loading="loading">
+<!--              <v-card-title>病人简历</v-card-title>-->
+              <v-list dense>
 <!--                    <v-subheader>ID: {{patient_id}}）</v-subheader>-->
-                    <template v-for="(item, index) in detailListItems">
-                      <v-list-item two-line>
-                        <v-list-item-avatar>
-                          <v-fade-transition leave-absolute mode="out-in">
-                            <v-icon :key="item.icon">{{item.icon}}</v-icon>
-                          </v-fade-transition>
-                        </v-list-item-avatar>
-                        <v-list-item-content>
-                          <v-list-item-title>
-                            <v-slide-x-reverse-transition leave-absolute >
-                              <v- v-if="!item.editing">{{item.value}}</v->
-                              <v-select
-                                v-else-if="item.model.includes('gender')"
-                                :items="['男', '女']" dense class="py-2" label="选择性别" hide-details
-                                v-model="item.value"
-                                v-on:change="$data['patientDatail']['data'][item.model] = item.value;
-                                  item.icon = patientDatail.data.patient_gender == '男' ? 'mdi-gender-male' : 'mdi-gender-female'"
-                                color="red darken-2"
-                              >
-                              </v-select>
-                              <v-select
-                                v-else-if="item.model.includes('status')"
-                                :items="['治疗中', '已康复', '已死亡']" dense class="py-2" label="选择治疗状态" hide-details
-                                v-model="item.value"
-                                v-on:change="$data['patientDatail']['data'][item.model] = item.value;
-                                item.icon = patientDatail.data.status == '已死亡' ? 'mdi-emoticon-dead' : 'mdi-emoticon-happy';"
-                                color="red darken-2"
-                              >
-                              </v-select>
-                              <date-picker label="选择生日" dense :value="item.value"
-                                          v-else-if="item.model.includes('birth')"
-                                          v-on:change="(value) => {$data['patientDatail']['data'][item.model] = value;item.value = value;}"
-                              ></date-picker>
-                              <date-picker :label="'选择' + item.description" dense :value="item.value"
-                                           v-else-if="item.model.includes('date')"
-                                           v-on:change="(value) => {$data['patientDatail']['data'][item.model] = value;item.value = value;}"
-                              ></date-picker>
-                              <v-text-field v-else dense hide-details
-                                             v-model="item.value"  color="red darken-2"
-                                            v-on:change="$data['patientDatail']['data'][item.model] = item.value"
-                                             v-on:keydown.enter="item.editing = false"
-                                             class="py-2" :value="item.value" :label="'编辑'"></v-text-field>
-                            </v-slide-x-reverse-transition>
-                          </v-list-item-title>
-                          <v-list-item-subtitle>{{item.description}}</v-list-item-subtitle>
-                        </v-list-item-content>
-                        <v-list-item-action>
-                          <v-btn  v-if="editable && item.editable" icon v-on:click="detailListItems.forEach(one =>{if(one !== item) {one.editing = false}}); item.editing = !item.editing">
-                            <v-icon color="grey" v-if="!item.editing"
-                            >mdi-pencil-box</v-icon>
-                            <v-icon color="green light-2" v-else>mdi-checkbox-marked</v-icon>
-                          </v-btn>
-                          <hospital-doctor-picker v-else-if="item.model.includes('doctor') && editable"
-                                                  :hospital_id="patientDatail.data.hospital_id"
-                                                  :doctor_id="patientDatail.data.doctor_id"
-                                                  v-on:change="updateHospitalDoctor"
-                                                  :allow_edit_hospital="true"
-                          ></hospital-doctor-picker>
-                        </v-list-item-action>
-                      </v-list-item>
-                      <v-divider v-if="item.divider"></v-divider>
-                    </template>
-                  </v-list>
-              </v-card>
+                  <template v-for="(item, index) in detailListItems">
+                    <v-list-item two-line>
+                      <v-list-item-avatar>
+                        <v-fade-transition leave-absolute mode="out-in">
+                          <v-icon :key="item.icon">{{item.icon}}</v-icon>
+                        </v-fade-transition>
+                      </v-list-item-avatar>
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          <v-slide-x-reverse-transition leave-absolute >
+                            <v- v-if="!item.editing">{{item.value}}</v->
+                            <v-select
+                              v-else-if="item.model.includes('gender')"
+                              :items="['男', '女']" dense class="py-2" label="选择性别" hide-details
+                              v-model="item.value"
+                              v-on:change="$data['patientDatail']['data'][item.model] = item.value;
+                                item.icon = patientDatail.data.patient_gender == '男' ? 'mdi-gender-male' : 'mdi-gender-female'"
+                              color="red darken-2"
+                            >
+                            </v-select>
+                            <v-select
+                              v-else-if="item.model.includes('status')"
+                              :items="['治疗中', '已康复', '已死亡']" dense class="py-2" label="选择治疗状态" hide-details
+                              v-model="item.value"
+                              v-on:change="$data['patientDatail']['data'][item.model] = item.value;
+                              item.icon = patientDatail.data.status == '已死亡' ? 'mdi-emoticon-dead' : 'mdi-emoticon-happy';"
+                              color="red darken-2"
+                            >
+                            </v-select>
+                            <date-picker label="选择生日" dense :value="item.value"
+                                        v-else-if="item.model.includes('birth')"
+                                        v-on:change="(value) => {$data['patientDatail']['data'][item.model] = value;item.value = value;}"
+                            ></date-picker>
+                            <date-picker :label="'选择' + item.description" dense :value="item.value"
+                                         v-else-if="item.model.includes('date')"
+                                         v-on:change="(value) => {$data['patientDatail']['data'][item.model] = value;item.value = value;}"
+                            ></date-picker>
+                            <v-text-field v-else dense hide-details
+                                           v-model="item.value"  color="red darken-2"
+                                          v-on:change="$data['patientDatail']['data'][item.model] = item.value"
+                                           v-on:keydown.enter="item.editing = false"
+                                           class="py-2" :value="item.value" :label="'编辑'"></v-text-field>
+                          </v-slide-x-reverse-transition>
+                        </v-list-item-title>
+                        <v-list-item-subtitle>{{item.description}}</v-list-item-subtitle>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-btn  v-if="editable && item.editable" icon v-on:click="detailListItems.forEach(one =>{if(one !== item) {one.editing = false}}); item.editing = !item.editing">
+                          <v-icon color="grey" v-if="!item.editing"
+                          >mdi-pencil-box</v-icon>
+                          <v-icon color="green light-2" v-else>mdi-checkbox-marked</v-icon>
+                        </v-btn>
+                        <hospital-doctor-picker v-else-if="item.model.includes('doctor') && editable"
+                                                :hospital_id="patientDatail.data.hospital_id"
+                                                :doctor_id="patientDatail.data.doctor_id"
+                                                v-on:change="updateHospitalDoctor"
+                                                :allow_edit_hospital="true"
+                        ></hospital-doctor-picker>
+                      </v-list-item-action>
+                    </v-list-item>
+                    <v-divider v-if="item.divider"></v-divider>
+                  </template>
+                </v-list>
+            </v-card>
 
-              <prescription-card class="my-6" :editable="editable" :patient_id="patient_id" ref="prescriptionCard"></prescription-card>
+            <prescription-card class="my-6" :editable="editable" :patient_id="patient_id" ref="prescriptionCard"></prescription-card>
 
-            </v-col>
+          </v-col>
 
-            <v-col lg="9" md="8" sm="12">
+          <v-col lg="9" md="8" sm="12">
 
-              <diagnosis-card :editable="editable" :patient_id="patient_id" ref="diagnosisCard"></diagnosis-card>
+            <diagnosis-card :editable="editable" :patient_id="patient_id" ref="diagnosisCard"></diagnosis-card>
 
-            </v-col>
-          </v-row>
+          </v-col>
+        </v-row>
 
       </v-card>
     </v-dialog>
@@ -406,5 +422,28 @@
 </script>
 
 <style scoped>
+
+  .text-name {
+    font-size: 280%;
+    font-weight: bold;
+    color: #47494E;
+  }
+
+  .text-annotation {
+    font-size: 90%;
+    font-width: bold;
+    color: #47494E;
+  }
+
+  .avatar {
+    padding: 20px 25px;
+    border: #47494E 2px solid;
+    background-color: #47494E;
+    border-radius: 5%;
+    font-size: 350%;
+    font-weight: bold;
+    color: #F8F9FA;
+    transition-duration: 0.5s;
+  }
 
 </style>
