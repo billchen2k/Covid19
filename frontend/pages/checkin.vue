@@ -8,7 +8,7 @@
 
       <v-card>
         <v-card-title>新患者登记</v-card-title>
-        <v-card-subtitle>当前数据库内已有 {{totalPatientLength}} 位患者数据。</v-card-subtitle>
+        <v-card-subtitle>当前数据库内已有 {{totalPatientLength || '...'}} 位患者数据。</v-card-subtitle>
         <v-card-text>
           <v-card outlined class="px-6">
             <v-row>
@@ -75,8 +75,44 @@
             </v-btn>
           </v-card-actions>
         </v-card-text>
-
       </v-card>
+
+      <v-row>
+        <v-col sm="12" md="6">
+          <v-card>
+            <v-card-title>登记诊断记录</v-card-title>
+            <v-card-subtitle>当前数据库内已有 {{totalDiagnosisLength || '...'}} 条诊断记录。</v-card-subtitle>
+
+            <v-card-text class="pa-6">
+              <v-btn depressed block large color="red lighten-5 red--text"
+              @click="$router.push({path: localePath('/manage')})">
+                跳转到「<v-icon small class="mx-1">mdi-bed-empty</v-icon>病患管理」来选择病人并登记
+                <v-icon class="ml-2">mdi-arrow-right</v-icon>
+              </v-btn>
+            </v-card-text>
+
+          </v-card>
+        </v-col>
+
+        <v-col sm="12" md="6">
+          <v-card >
+            <v-card-title>登记新处方</v-card-title>
+            <v-card-subtitle>当前数据库内已有 {{totalPrescirptionLength || '...'}} 条处方记录。</v-card-subtitle>
+
+            <v-card-text class="pa-6">
+              <v-btn depressed block large color="red lighten-5 red--text"
+                     @click="$router.push({path: localePath('/manage')})">
+                跳转到「<v-icon small class="mx-1">mdi-bed-empty</v-icon>病患管理」来选择病人并登记
+                <v-icon class="ml-2">mdi-arrow-right</v-icon>
+              </v-btn>
+            </v-card-text>
+
+          </v-card>
+        </v-col>
+
+      </v-row>
+
+<!--      <medicine-picker></medicine-picker>-->
 
 
     </div>
@@ -86,9 +122,11 @@
   import PageHeader from '../components/PageHeader'
   import DatePicker from '../components/picker/DatePicker'
   import HospitalDoctorPicker from '../components/picker/HospitalDoctorPicker'
+  import MedicinePicker from '../components/picker/MedicinePicker'
+  import Config from '../components/global/Config'
   export default {
     name: 'checkin',
-    components: { HospitalDoctorPicker, DatePicker, PageHeader },
+    components: { MedicinePicker, HospitalDoctorPicker, DatePicker, PageHeader },
     data() {
       return {
         totalPatientLength: 0,
@@ -207,6 +245,38 @@
         console.log(p);
         setTimeout(() => this.loadingPatient = false, 1000);
       }
+    },
+
+    mounted() {
+      this.$axios.$post(Config.apiurl + "/patient/getPatientInfo", null, {params: {
+          page: 1,
+          size: 0
+        }}).then(response => {
+          this.totalPatientLength = response.totalCount;
+      })
+      .catch(error => {
+        alert('无法连接到服务器，刷新重试。\n' + error.message);
+      });
+      //
+      // this.$axios.$post(Config.apiurl + "/patient/getPrescriptionInfo", null, {params: {
+      //     page: 1,
+      //     size: 0
+      //   }}).then(response => {
+      //   this.totalPatientLength = response.totalCount;
+      // })
+      //   .catch(error => {
+      //     alert('无法连接到服务器，刷新重试。\n' + error.message);
+      //   });
+      //
+      // this.$axios.$post(Config.apiurl + "/patient/getPatientInfo", null, {params: {
+      //     page: 1,
+      //     size: 0
+      //   }}).then(response => {
+      //   this.totalPatientLength = response.totalCount;
+      // })
+      //   .catch(error => {
+      //     alert('无法连接到服务器，刷新重试。\n' + error.message);
+      //   });
     }
   }
 </script>

@@ -60,7 +60,7 @@
             this.prescriptionItems = response.data.data;
           })
           .catch(error => {
-            alert('无法连接到服务器，刷新重试。\n' + error.message);
+            alert('获取处方失败：无法连接到服务器，刷新重试。\n' + error.message);
           })
           .finally(() => {
             this.loading = false;
