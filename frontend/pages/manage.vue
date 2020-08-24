@@ -140,19 +140,25 @@
         no-data-text="无匹配数据"
         class="cardTable"
       >
-        <!--            <template v-slot:item.detail="{ item }">-->
-        <!--              <patient-detail-->
-        <!--                :patient_id="item.patient_id"-->
-        <!--                editable-->
-        <!--                v-on:close="fetchData"-->
-        <!--              ></patient-detail>-->
-        <!--            </template>-->
         <template v-slot:item.detail="{ item }">
           <patient-detail
-            v-on:close="fetchData"
+            v-on:save="fetchData(true)"
             :patient_id="item.patient_id"
             editable
-          ></patient-detail>
+          >
+            <template v-slot:activator="slotProps">
+              <v-btn
+                color="red darken-2"
+                small
+                dark
+                depressed
+                v-bind="slotProps.bind"
+                v-on="slotProps.on"
+              >
+                <v-icon small class="mr-2">mdi-arrow-expand</v-icon> 编辑
+              </v-btn>
+            </template>
+          </patient-detail>
         </template>
 
         <!--            <template v-slot:expanded-item="{ headers, item }">-->
@@ -230,7 +236,7 @@
             { text: '确诊医院', value: 'hospital_name' },
             { text: '负责医生', value: 'doctor_name' },
             { text: '患者状态', value: 'status' },
-            { text: '详细信息', align: 'center', sortable: false, value: 'detail'},
+            { text: '管理', align: 'center', sortable: false, value: 'detail'},
           ],
           data: [
             {}
@@ -251,9 +257,11 @@
         return one;
       }),
 
-      fetchData() {
+      fetchData(leaveResult = false) {
         this.loading = true;
-        this.patients.data = [];
+        if(!leaveResult){
+          this.patients.data = [];
+        }
         const { sortBy, sortDesc, page, itemsPerPage } = this.options
         let queryParams = {
           page: page,

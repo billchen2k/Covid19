@@ -27,14 +27,15 @@
     <v-date-picker
       v-model="date"
       :type="type"
-      no-title
       scrollable
+      @input="menu = false"
+      locale="zh-CN"
       color="red darken-2"
     >
-      <v-spacer></v-spacer>
-      <v-btn text color="red darken-2" @click="$refs.menu.save([]); date=''; menu = false;">清空</v-btn>
-      <v-btn text color="red darken-2" @click="menu = false">取消</v-btn>
-      <v-btn text color="red darken-2" @click="$refs.menu.save(date); menu = false;">确定</v-btn>
+<!--      <v-spacer></v-spacer>-->
+<!--      <v-btn text color="red darken-2" @click="$refs.menu.save([]); date=''; menu = false;">清空</v-btn>-->
+<!--      <v-btn text color="red darken-2" @click="menu = false">取消</v-btn>-->
+<!--      <v-btn text color="red darken-2" @click="$refs.menu.save(date); menu = false;">确定</v-btn>-->
     </v-date-picker>
   </v-menu>
 </template>

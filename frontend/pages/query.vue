@@ -140,28 +140,12 @@
             no-data-text="无匹配数据"
             class="cardTable"
           >
-<!--            <template v-slot:item.detail="{ item }">-->
-<!--              <patient-detail-->
-<!--                :patient_id="item.patient_id"-->
-<!--                editable-->
-<!--                v-on:close="fetchData"-->
-<!--              ></patient-detail>-->
-<!--            </template>-->
             <template v-slot:item.detail="{ item }">
               <patient-detail
                 :patient_id="item.patient_id"
               ></patient-detail>
             </template>
 
-<!--            <template v-slot:expanded-item="{ headers, item }">-->
-<!--              <td :colspan="headers.length">More info about {{ item.patient_name }}</td>-->
-<!--            </template>-->
-<!--            <template v-slot:item="{ item }">-->
-<!--              <v-icon-->
-<!--                small-->
-<!--                @click="displayDetail(item.patient_id)"-->
-<!--              >mdi-arrow-expand</v-icon>-->
-<!--            </template>-->
           </v-data-table>
 
         </v-card>

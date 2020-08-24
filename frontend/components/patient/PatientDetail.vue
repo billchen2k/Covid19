@@ -2,15 +2,17 @@
   <div>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="scale-transition" origin="center right">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="red darken-2"
-          small
-          text
-          v-bind="attrs"
-          v-on="on"
-        >
-          <v-icon small>mdi-arrow-expand</v-icon> 展开
-        </v-btn>
+        <slot name="activator" v-bind:on="on" v-bind:attrs="attrs">
+          <v-btn
+            color="red darken-2"
+            small
+            text
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon small>mdi-arrow-expand</v-icon> 展开
+          </v-btn>
+        </slot>
       </template>
       <v-card>
         <v-toolbar dark color="red darken-2">
@@ -24,8 +26,29 @@
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn v-if="this.editable" dark text @click="dialog = false"><v-icon class="pr-2">mdi-delete</v-icon>删除</v-btn>
-            <v-dialog v-model="confirm_dialog" persistent max-width="290">
+
+            <v-dialog v-if="this.editable" v-model="confirm_delete_dialog" persistent max-width="290">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  text dark
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon class="pr-2">mdi-delete</v-icon>删除
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>确定删除病人「{{patientDatail.patient_name}}」吗？</v-card-title>
+                <v-card-text>此操作无法撤销。</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="red darken-1" text @click="confirm_delete_dialog = false">取消</v-btn>
+                  <v-btn color="red darken-1" text @click="deletePatient">确定</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
+            <v-dialog v-if="this.editable" v-model="confirm_dialog" persistent max-width="290">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   text dark
@@ -173,6 +196,7 @@
         type: Number,
         required: true
       },
+
       editable: {
         type: Boolean,
         required: false,
@@ -184,6 +208,7 @@
         temperatureLineChartData: {},
         dialog: false,
         confirm_dialog: false,
+        confirm_delete_dialog: false,
         loading: true,
         snackbar: false,
         snackbar_text: "",
@@ -336,9 +361,14 @@
           alert('无法连接到服务器，刷新重试。\n' + error.message);
         })
         .finally(e => {
+          this.$emit('save', 'Dialog closed');
           this.loading = false;
         })
 
+      },
+
+      deletePatient() {
+        this.dialog = false;
       }
     },
 
@@ -361,7 +391,7 @@
           }
           else {
             // Dialog closed
-            this.$emit('close', 'Dialog closed');
+            // this.$emit('close', 'Dialog closed');
           }
         }
       },

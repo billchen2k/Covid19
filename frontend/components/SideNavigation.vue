@@ -66,6 +66,7 @@ import ListItem from '@/components/ListItem'
 import Config from '~/components/global/Config'
 import { EventBus} from '~/components/global/EventBus.js'
 // import LanguageSelector from '@/components/LanguageSelector'
+import axios from 'axios'
 
 export default {
   components: {
@@ -150,6 +151,10 @@ export default {
     },
   },
   mounted() {
+
+    axios.defaults.withCredentials = true;
+    this.$axios.defaults.withCredentials = true;
+
     if(localStorage.uid){
       this.uid = localStorage.uid
       this.username = localStorage.username

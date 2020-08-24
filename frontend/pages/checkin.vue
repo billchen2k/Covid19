@@ -61,6 +61,9 @@
           </v-card>
           <v-card-actions class="mt-3">
             <v-spacer></v-spacer>
+            <v-slide-x-reverse-transition mode="out-in">
+              <strong v-if="showError" class="red--text mr-2 text-body2 text--darken-2">请完整填写所有信息。</strong>
+            </v-slide-x-reverse-transition>
             <v-btn color="red darken-2" outlined
                    v-on:click="checkInPatient"
                    :disabled="loadingPatient"
@@ -84,7 +87,7 @@
             <v-card-subtitle>当前数据库内已有 {{totalDiagnosisLength || '...'}} 条诊断记录。</v-card-subtitle>
 
             <v-card-text class="pa-6">
-              <v-btn depressed block large color="red lighten-5 red--text"
+              <v-btn depressed block large color="red darken-2" outlined dark
               @click="$router.push({path: localePath('/manage')})">
                 跳转到「<v-icon small class="mx-1">mdi-bed-empty</v-icon>病患管理」来选择病人并登记
                 <v-icon class="ml-2">mdi-arrow-right</v-icon>
@@ -100,7 +103,7 @@
             <v-card-subtitle>当前数据库内已有 {{totalPrescirptionLength || '...'}} 条处方记录。</v-card-subtitle>
 
             <v-card-text class="pa-6">
-              <v-btn depressed block large color="red lighten-5 red--text"
+              <v-btn depressed block large color="red darken-2" outlined dark
                      @click="$router.push({path: localePath('/manage')})">
                 跳转到「<v-icon small class="mx-1">mdi-bed-empty</v-icon>病患管理」来选择病人并登记
                 <v-icon class="ml-2">mdi-arrow-right</v-icon>
@@ -115,6 +118,46 @@
 <!--      <medicine-picker></medicine-picker>-->
 
 
+      <v-snackbar
+        vertical
+        elevation="24"
+        top
+        v-model="snackbar"
+        :timeout="30000"
+        color="primary"
+      >
+
+          {{ snackbar_text }}
+
+        <v-row>
+          <v-spacer></v-spacer>
+
+        </v-row>
+
+        <template v-slot:action="{ attrs }">
+          <patient-detail v-if="createdPatientId != -1" editable :patient_id="createdPatientId">
+            <template v-slot:activator="slotProps">
+              <v-btn
+                color="white--text"
+                text
+                v-bind="slotProps.bind"
+                v-on="slotProps.on"
+              >
+                <v-icon small class="mr-3">mdi-arrow-expand</v-icon> 展开病人详情...
+              </v-btn>
+            </template>
+          </patient-detail>
+
+          <v-btn class="ml-3"
+            color="white"
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+          >
+            确定
+          </v-btn>
+        </template>
+      </v-snackbar>
     </div>
 </template>
 
@@ -124,13 +167,22 @@
   import HospitalDoctorPicker from '../components/picker/HospitalDoctorPicker'
   import MedicinePicker from '../components/picker/MedicinePicker'
   import Config from '../components/global/Config'
+  import PatientDetail from '../components/patient/PatientDetail'
+  import error from '../layouts/error'
+
   export default {
     name: 'checkin',
-    components: { MedicinePicker, HospitalDoctorPicker, DatePicker, PageHeader },
+    components: { PatientDetail, MedicinePicker, HospitalDoctorPicker, DatePicker, PageHeader },
     data() {
       return {
-        totalPatientLength: 0,
+        showError: false,
+        snackbar_text: "",
+        snackbar: false,
+        totalPatientLength: null,
+        totalPrescirptionLength: null,
+        totalDiagnosisLength: null,
         loadingPatient: false,
+        createdPatientId: -1,
         formItems: [
           {
             icon: "mdi-account",
@@ -151,7 +203,7 @@
             icon: "mdi-balloon",
             description: "生日",
             model: "birthday",
-            value: "",
+            value: "2000-01-01",
             type: "date"
           },
           {
@@ -165,14 +217,14 @@
             icon: "mdi-calendar-arrow-right",
             description: "发病日期",
             model: "onset_date",
-            value: "",
+            value: "2020-02-01",
             type: "date"
           },
           {
             icon: "mdi-calendar-alert",
             description: "确诊日期",
             model: "confirm_date",
-            value: "",
+            value: "2020-02-01",
             type: "date"
           },
           {
@@ -225,6 +277,11 @@
     },
 
     methods: {
+      popSnack(msg) {
+        this.snackbar_text = msg;
+        this.snackbar = true;
+      },
+
       updateHospitalDoctor(e) {
         this.formItems.map(one => {
           if(one.model == 'hospital'){
@@ -238,45 +295,79 @@
           return one;
         })
       },
+      updateCount() {
+        this.$axios.$post(Config.apiurl + "/patient/getPatientInfo", null, {params: {
+            page: 1,
+            size: 0
+          }}).then(response => {
+          this.totalPatientLength = response.totalCount;
+        })
+          .catch(error => {
+            alert('无法连接到服务器，刷新重试。\n' + error.message);
+          });
+        //
+        // this.$axios.$post(Config.apiurl + "/patient/getPrescriptionInfo", null, {params: {
+        //     page: 1,
+        //     size: 0
+        //   }}).then(response => {
+        //   this.totalPatientLength = response.totalCount;
+        // })
+        //   .catch(error => {
+        //     alert('无法连接到服务器，刷新重试。\n' + error.message);
+        //   });
+        //
+        // this.$axios.$post(Config.apiurl + "/patient/getPatientInfo", null, {params: {
+        //     page: 1,
+        //     size: 0
+        //   }}).then(response => {
+        //   this.totalPatientLength = response.totalCount;
+        // })
+        //   .catch(error => {
+        //     alert('无法连接到服务器，刷新重试。\n' + error.message);
+        //   });
+      },
 
       checkInPatient() {
         let p = this.new_patient;
-        this.loadingPatient = true;
         console.log(p);
+        for (let one in p) {
+          if (p[one] === "" || p[one] == undefined){
+            this.showError = true;
+            setTimeout(() => {
+              this.showError = false;
+            }, 1500);
+            return;
+          }
+        }
+        this.loadingPatient = true;
+        this.$axios.$post(Config.apiurl + '/patient/createPatient', null, {params: p})
+        .then(response => {
+          console.log(response);
+          if(response.success){
+            this.createdPatientId = response.data.patient_id;
+            this.popSnack(`已创建病人${response.data.patient_name}。您可以立即展开病人以开始登记诊断和处方。`);
+
+            this.updateCount();
+          }
+          else{
+            throw new Error(response.message);
+          }
+        })
+        .catch(error => {
+          alert('创建失败。\n' + error.message);
+        })
+        .finally(e => {
+          this.loadingPatient = false;
+        })
         setTimeout(() => this.loadingPatient = false, 1000);
       }
     },
 
+
+
+
     mounted() {
-      this.$axios.$post(Config.apiurl + "/patient/getPatientInfo", null, {params: {
-          page: 1,
-          size: 0
-        }}).then(response => {
-          this.totalPatientLength = response.totalCount;
-      })
-      .catch(error => {
-        alert('无法连接到服务器，刷新重试。\n' + error.message);
-      });
-      //
-      // this.$axios.$post(Config.apiurl + "/patient/getPrescriptionInfo", null, {params: {
-      //     page: 1,
-      //     size: 0
-      //   }}).then(response => {
-      //   this.totalPatientLength = response.totalCount;
-      // })
-      //   .catch(error => {
-      //     alert('无法连接到服务器，刷新重试。\n' + error.message);
-      //   });
-      //
-      // this.$axios.$post(Config.apiurl + "/patient/getPatientInfo", null, {params: {
-      //     page: 1,
-      //     size: 0
-      //   }}).then(response => {
-      //   this.totalPatientLength = response.totalCount;
-      // })
-      //   .catch(error => {
-      //     alert('无法连接到服务器，刷新重试。\n' + error.message);
-      //   });
+      this.updateCount();
     }
   }
 </script>

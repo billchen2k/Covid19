@@ -3,6 +3,8 @@
 </template>
 
 <script>
+
+  /** Allow Credentials Globally **/
   export default {
     name: 'config',
     // apiurl: 'http://8.210.248.203'

@@ -96,6 +96,7 @@
         this.errormsg = ""
         var url = Config.apiurl + "/user/logIn"
         axios.defaults.withCredentials = true;
+        this.$axios.defaults.withCredentials = true;
         axios.post(url, null, {params:{
             identifier: this.username,
             password: this.password

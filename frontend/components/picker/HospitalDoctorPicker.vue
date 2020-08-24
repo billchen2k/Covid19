@@ -32,7 +32,7 @@
       <v-row>
         <v-col sm="6">
 
-          <v-text-field :label="allow_edit_hospital ? '键入名称以筛选医院' : '已选定医院：'" prepend-icon="mdi-magnify"
+          <v-text-field :label="allow_edit_hospital ? '键入名称以筛选医院' : '已选定医院：'" prepend-icon="mdi-magnify" color="red darken-2"
                         placeholder="至少输入一些内容来进行搜索" v-model="searchHospitalText"
                         :disabled="!allow_edit_hospital"
           ></v-text-field>
@@ -104,7 +104,7 @@
         </v-col>
         <v-col sm="6">
 
-          <v-text-field label="搜索医院内的医生" prepend-icon="mdi-magnify" placeholder="过滤科室及姓名"
+          <v-text-field label="搜索医院内的医生" prepend-icon="mdi-magnify" placeholder="过滤科室及姓名" color="red darken-2"
                         v-model="searchDoctorText"
                         clearable
           ></v-text-field>
@@ -196,12 +196,12 @@
 
     props: {
       doctor_id: {
-        type: String,
+        type: Number,
         required: false,
         default: 0
       },
       hospital_id: {
-        type: String,
+        type: Number,
         required: false,
         default: 0
       },
