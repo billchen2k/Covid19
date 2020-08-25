@@ -208,7 +208,7 @@
       allow_edit_hospital: {
         type: Boolean,
         required: false,
-        default: true
+        default: false
       }
     },
 

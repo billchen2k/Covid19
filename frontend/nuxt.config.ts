@@ -3,10 +3,10 @@ const purgecss = require('@fullhuman/postcss-purgecss')
 const autoprefixer = require('autoprefixer')
 
 const config: Configuration = {
-  // server: {
-  //   port: 80, // default: 3000
-  //   host: '0.0.0.0' // default: localhost
-  // },
+  server: {
+    port: 3000, // default: 3000
+    // host: '0.0.0.0' // default: localhost
+  },
   mode: 'universal',
   /*
    ** Headers of the page
@@ -120,10 +120,7 @@ const config: Configuration = {
       'nuxt-i18n',
       {
         strategy: 'prefix_except_default',
-        detectBrowserLanguage: {
-          useCookie: true,
-          cookieKey: 'i18n_redirected'
-        },
+
         locales: [
           {
             code: 'ja',
@@ -154,8 +151,8 @@ const config: Configuration = {
         ],
         defaultLocale: 'zh-cn',
         vueI18n: {
-          fallbackLocale: 'ja',
-          formatFallbackMessages: true
+          fallbackLocale: 'zh-cn',
+          formatFallbackMessages: false
         },
         vueI18nLoader: true
       }

@@ -104,7 +104,12 @@
                       <v-list-item-content>
                         <v-list-item-title>
                           <v-slide-x-reverse-transition leave-absolute >
-                            <v- v-if="!item.editing">{{item.value}}</v->
+                            <span v-if="!item.editing">
+                              <span v-if="item.model.includes('doctor')">
+                                {{item.value}} （{{patientDatail.data.department}}）
+                              </span>
+                              <span v-else>{{item.value}}</span>
+                            </span>
                             <v-select
                               v-else-if="item.model.includes('gender')"
                               :items="['男', '女']" dense class="py-2" label="选择性别" hide-details
@@ -165,7 +170,9 @@
 
           <v-col lg="9" md="8" sm="12">
 
-            <diagnosis-card :editable="editable" :patient_id="patient_id" ref="diagnosisCard"></diagnosis-card>
+            <diagnosis-card :editable="editable" :patient_id="patient_id" ref="diagnosisCard"
+                            :patient-model="patientDatail.data"
+            ></diagnosis-card>
 
           </v-col>
         </v-row>
@@ -352,6 +359,7 @@
         this.patientDatail.data.hospital_name = e.new_hospital.hospital_name;
         this.patientDatail.data.doctor_id = e.new_doctor.doctor_id;
         this.patientDatail.data.doctor_name = e.new_doctor.doctor_name;
+        this.patientDatail.data.department = e.new_doctor.department;
         this.fillList();
       },
 

@@ -27,6 +27,7 @@
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
     "cross-env": "^5.2.0",
+    "date-fns": "^2.15.0",
     "dayjs": "^1.8.21",
     "express": "^4.16.4",
     "js-cookie": "^2.2.1",

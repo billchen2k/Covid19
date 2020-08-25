@@ -135,7 +135,7 @@
         :server-items-length="patients.total_length"
         :items-per-page="100"
         :sort-desc="true"
-        item-key="patient_name"
+        item-key="patient_id"
         loading-text="正在加载数据，请稍候"
         no-data-text="无匹配数据"
         class="cardTable"
@@ -207,6 +207,7 @@
         loading: true,
         search: "",
         date: "",
+        timer : -1,
         menu: false,
         rawdata: {},
         conditions: {
@@ -308,8 +309,13 @@
       },
       search: {
         handler() {
+          this.loading = true;
           this.conditions.patient_name = "";
-          this.fetchData();
+          clearTimeout(this.timer);
+          this.timer = setTimeout(() => {
+            this.fetchData();
+          }, 300);
+          // this.fetchData();
         }
       },
       expanded_patient_id: {

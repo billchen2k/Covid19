@@ -145,3 +145,10 @@ $z-index-map: (
   display: block !important;
   visibility: visible !important;
 }
+
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+
+$body-font-family: 'Ubuntu';
+$title-font: 'Comfortaa';

@@ -5,7 +5,9 @@
     <v-card>
       <v-card-title>诊断记录
         <v-spacer></v-spacer>
-        <diagnosis-creator v-if="editable"></diagnosis-creator>
+        <diagnosis-creator v-if="editable" :patient-model="patientModel"
+                           v-on:change="fetchDiagnosis"
+        ></diagnosis-creator>
       </v-card-title>
       <v-data-table
         calculate-widths
@@ -28,7 +30,7 @@
 
         </template>
 
-        <template v-slot:item.nucleic_acid="{ item }" v-if="!loadingDiagnosis">
+        <template v-slot:item.nucleic_acid="{ item }" v-if="!loading">
           <v-chip :color="item.nucleic_acid == '阳性' ? 'error' : 'green'" text-color="white" >
             {{item.nucleic_acid}}
           </v-chip>
@@ -57,7 +59,8 @@
     components: { DiagnosisCreator, TemperatureChart },
     props: {
       editable: Boolean,
-      patient_id: String
+      patient_id: String,
+      patientModel: Object
     },
 
     data() {
@@ -81,7 +84,7 @@
         this.loading = true;
         axios.post(Config.apiurl + '/diagnosis/getDiagnosisInfo', null, {params: {
             page: 1,
-            size: 200,
+            size: 250,
             patient_id: this.patient_id
           }})
           .then(response => {
