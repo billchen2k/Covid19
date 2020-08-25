@@ -27,7 +27,7 @@
       </v-toolbar>
 
       <v-card-title>
-        <v-row>
+        <v-row >
 <!--          <v-col sm="2">选择药物</v-col>-->
           <v-col sm="5">
             <v-list nav dense>
@@ -43,8 +43,8 @@
               </v-list-item-group>
             </v-list>
           </v-col>
-          <v-col sm="7">
-            <v-text-field prepend-icon="mdi-magnify" v-model="searchText"
+          <v-col sm="7"  class="pb-0">
+            <v-text-field prepend-icon="mdi-magnify" v-model="searchText" color="red darken-2"
                           placeholder="筛选药物"></v-text-field>
           </v-col>
         </v-row>
@@ -88,7 +88,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="red darken-1" outlined text @click="dialog = false; selectedMedicine = {}">取消</v-btn>
+        <v-btn color="red darken-1" outlined text @click="dialog = false; selectedMedicine = {}; $emit('change', {})">取消</v-btn>
         <v-btn color="red darken-1" outlined text :disabled="!selectedMedicine.medicine_id" @click="saveResult">保存</v-btn>
       </v-card-actions>
     </v-card>
@@ -119,14 +119,23 @@
   export default {
     name: 'MedicinePicker',
 
+    model: {
+      prop: "value",
+      event: "change"
+    },
+
+    props: {
+
+    },
+
     data() {
       return {
         dialog: false,
+        selectedMedicine: {},
         snackbar_text: "",
         snackbar: false,
         loading: true,
         searchText: "",
-        selectedMedicine: {},
         medicineList: [],
         medicineHeaders: [
           { text: "#", value: "medicine_id" },
@@ -174,7 +183,7 @@
       },
 
       saveResult() {
-        this.$emit('change', selectedMedicine);
+        this.$emit('change', this.selectedMedicine);
         this.dialog = false;
       }
     },

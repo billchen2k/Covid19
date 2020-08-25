@@ -6,13 +6,37 @@
       date=""
     />
     <TextCard title="简介">
-      <p>
-        这是一个 Covid-19 新冠疫情分析与管理项目，为华东师范大学软件工程专业 2020 年数据库系统课程的期末项目。具有全球疫情可视化概览、病人诊断数据统计及编辑、诊断医院和医生管理等功能。
-      </p>
-      <p>
-        网站前端采用 <code>vue.js</code> 架构，使用 <code>vuetify</code> 作为主要的 UI 库。后端采用 <code>Spring Boot</code> 架构，使用 <code>Swagger UI</code> 生成 API 文档。
-        数据库采用 <code>MySQL Community Version 8.0.12</code>, 存有两万余医生数据，十三万患者数据，四十万余条处方数据，近四百万余条诊断记录。经过多重索引和外键优化，平均性能仍较优秀。
-      </p>
+      <v-row>
+        <v-col sm="12" md="6">
+          <p>
+            这是一个 Covid-19 新冠疫情分析与管理项目，为华东师范大学软件工程专业 2020 年数据库系统课程的期末项目。具有全球疫情可视化概览、病人诊断数据统计及编辑、诊断医院和医生管理等功能。
+          </p>
+          <p>
+            网站前端采用 <code>vue.js</code> 架构，基于 <code>nuxt.js</code> 实现高性能的 SSR （服务端渲染）。使用 <code>vuetify</code> 作为主要的 UI 库。后端采用 <code>Spring Boot</code> 架构，使用 <code>Swagger UI</code> 生成 API 文档。
+            数据库采用 <code>MySQL Community Version 8.0.12</code>, 存有两万余医生数据，十三万患者数据，四十万余条处方数据，近四百万余条诊断记录。经过多重索引和外键优化，平均性能仍较优秀。
+          </p>
+          <p>
+            你可以在 <a href="http://8.210.248.203/docs.html" target="_blank">http://8.210.248.203/docs.html</a> 查阅由 <code>knif4j</code> 生成的后端 API 文档，含有调用参数、返回信息等数据。
+          </p>
+          <p>
+            你可以在 <a href="https://github.com/billchen2k/Covid19" target="_blank">https://github.com/billchen2k/Covid19</a> 获取项目的源代码，或通过 commit 来回顾本项目的开发进度。
+          </p>
+          <p>
+            另外，由于服务器假设在香港，在某些情况下项目的访问速度可能比较缓慢。
+          </p>
+        </v-col>
+        <v-col sm="12" md="6">
+          <v-card outlined rounded class="pa-2">
+            <v-card-text>数据库 ER 图</v-card-text>
+            <v-row>
+              <v-spacer></v-spacer>
+              <img class="px-8" src="/er.png" width="80%" />
+              <v-spacer></v-spacer>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+
     </TextCard>
 
     <TextCard title="作者">
@@ -25,8 +49,14 @@
         :fixed-header="true"
         :mobile-breakpoint="0"
         class="cardTable"
-      />
+      >
+        <template v-slot:item.contact = {item}>
+          <a :href="`mailto:${item.contact}`">{{item.contact}}</a>
+        </template>
+      </v-data-table>
     </TextCard>
+
+
 
     <TextCard title="特别鸣谢">
       <p>
@@ -98,7 +128,7 @@
 
     <v-row>
       <v-spacer></v-spacer>
-      <span class="footnote">Crafted with ❤️ in 2020.3 - 2020.8</span>
+      <span class="grey--text">Crafted with ❤️, 2020.3 - 2020.8</span>
       <v-spacer></v-spacer>
     </v-row>
 
@@ -387,6 +417,10 @@
 }
 </i18n>
 
+<script>
+  import VueMarkdown from 'vue-markdown'
+
+</script>
 <script lang="ts">
 import TextCard from '@/components/TextCard.vue'
 import PageHeader from '@/components/PageHeader.vue'

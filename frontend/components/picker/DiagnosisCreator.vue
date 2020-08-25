@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600" transition="scale-transition">
+  <v-dialog v-model="dialog" max-width="700" transition="scale-transition">
     <template v-slot:activator="{ on: dialog }">
       <v-tooltip left>
         <template v-slot:activator="{ on: tooltip }">
@@ -19,7 +19,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-toolbar-title>
-          <span v-if="loading" class="center">正在加载...  </span>
+          <span v-if="loading" class="center">正在处理...  </span>
           <v-progress-circular indeterminate v-if="loading" size="32" class="ml-2"></v-progress-circular>
           <span v-else>新增诊断</span>
         </v-toolbar-title>
@@ -128,6 +128,7 @@
   import HospitalDoctorPicker from './HospitalDoctorPicker'
   import DateTimePicker from './DateTimePicker'
   import axios from 'axios'
+  import { format} from 'date-fns'
   import Config from '../global/Config'
 
   export default {
@@ -169,7 +170,8 @@
           doctor_id: this.formItems.doctor.doctor_id,
           patient_id: this.patientModel.patient_id,
           symptom: this.formItems.symptom,
-          time: this.formItems.datetime.toISOString().substring(0,19).replace('T', ' '),
+          // time: this.formItems.datetime.toISOString().substring(0,19).replace('T', ' '),
+          time: format(this.formItems.datetime, 'yyyy-MM-dd HH:mm:ss'),
           temperature: this.formItems.temperature,
           nucleic_acid: this.formItems.nucleic_acid == "阳性" ? 1 : 0
         }

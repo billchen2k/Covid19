@@ -22,6 +22,7 @@
   </v-app>
 </template>
 <script lang="ts">
+
 import Vue from 'vue'
 import { MetaInfo } from 'vue-meta'
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
@@ -56,10 +57,10 @@ export default Vue.extend({
   },
   head():
     MetaInfo {
-    const { htmlAttrs } = this.$nuxtI18nSeo()
+    // const { htmlAttrs } = this.$nuxtI18nSeo()
     return {
       title: 'Covid-19 疫情分析与管理系统 | 数据库 2020 期末项目',
-      htmlAttrs,
+
       link: [
         {
           rel: 'canonical',

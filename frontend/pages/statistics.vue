@@ -310,7 +310,7 @@ export default {
   },
   head() {
     return {
-      title: 'Covid-19 疫情分析与管理系统 | 数据库 2020 期末项目'
+      title: '统计数据'
     }
   }
 }

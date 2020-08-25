@@ -2,6 +2,7 @@
   <v-dialog v-model="display" :width="dialogWidth">
     <template v-slot:activator="{ on }">
       <v-text-field
+        color="red darken-2"
         prepend-icon="mdi-clock"
         v-bind="textFieldProps"
         :disabled="disabled"

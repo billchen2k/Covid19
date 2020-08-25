@@ -16,7 +16,7 @@
             label="用户名"
             prepend-icon="mdi-account"
             color="red darken-2"
-
+            v-on:keypress.enter="logIn"
 
           ></v-text-field>
 
@@ -36,6 +36,8 @@
               <v-progress-circular
                 v-if="loading"
                 indeterminate
+                class="mr-3"
+                color="red darken-2"
               ></v-progress-circular>
 
 <!--            <v-col cols="4" v-if="loading">-->
@@ -45,7 +47,6 @@
             <v-btn outlined
                    color="#C70000"
                    width="200"
-
                    v-on:click="logIn()">
 
               登录
@@ -119,6 +120,11 @@
             this.errormsg = "无法连接到服务器。"
             this.loading = false
           })
+      }
+    },
+    head() {
+      return {
+        title: '登录'
       }
     }
   }

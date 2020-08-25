@@ -314,7 +314,7 @@
           clearTimeout(this.timer);
           this.timer = setTimeout(() => {
             this.fetchData();
-          }, 300);
+          }, 600);
           // this.fetchData();
         }
       },
@@ -326,6 +326,11 @@
     },
     mounted() {
 
+    },
+    head() {
+      return {
+        title: '病患管理'
+      }
     }
   }
 

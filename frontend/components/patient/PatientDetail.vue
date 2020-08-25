@@ -28,7 +28,7 @@
           <v-spacer></v-spacer>
           <v-toolbar-items>
 
-            <v-dialog v-if="this.editable" v-model="confirm_delete_dialog" persistent max-width="360">
+            <v-dialog v-if="this.editable" v-model="confirm_delete_dialog" persistent max-width="450">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   text dark
@@ -39,8 +39,11 @@
                 </v-btn>
               </template>
               <v-card>
-                <v-card-title>确定删除病人「{{patientDatail.data.patient_name}}」吗？</v-card-title>
-                <v-card-text>此操作无法撤销。</v-card-text>
+                <v-card-title>确定删除患者「{{patientDatail.data.patient_name}}」吗？</v-card-title>
+                <v-card-text>
+                  <p>此操作将删除该患者，<strong class="error--text">同时一并删除和此患者相关联的诊断记录、处方记录、肺部扫描影像记录。</strong><br></p>
+                  <p>该操作无法撤销。</p>
+                  </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="red darken-1" text @click="confirm_delete_dialog = false">取消</v-btn>
@@ -86,8 +89,6 @@
               </v-col>
             </v-row>
           </v-fade-transition>
-
-
 
 
             <v-card :loading="loading">
@@ -164,7 +165,10 @@
                 </v-list>
             </v-card>
 
-            <prescription-card class="my-6" :editable="editable" :patient_id="patient_id" ref="prescriptionCard"></prescription-card>
+            <prescription-card  class="my-6" :editable="editable" :patient_id="patient_id"
+                                :patient-model="patientDatail.data"
+                                v-on:snack="e => popSnack(e)"
+            ></prescription-card>
 
           </v-col>
 
@@ -172,6 +176,7 @@
 
             <diagnosis-card :editable="editable" :patient_id="patient_id" ref="diagnosisCard"
                             :patient-model="patientDatail.data"
+                            v-on:snack="e => popSnack(e)"
             ></diagnosis-card>
 
           </v-col>
@@ -180,19 +185,11 @@
       </v-card>
     </v-dialog>
 
-    <v-snackbar
-      v-model="snackbar"
-      :timeout="3000"
-    >
+    <v-snackbar v-model="snackbar" :timeout="3000">
       {{ snackbar_text }}
       <template v-slot:action="{ attrs }">
-        <v-btn
-          color="red"
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
-          Close
+        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+          CLOSE
         </v-btn>
       </template>
     </v-snackbar>
@@ -388,11 +385,34 @@
           this.$emit('save', 'Dialog closed');
           this.loading = false;
         })
-
       },
 
       deletePatient() {
-        this.dialog = false;
+        this.loading = true;
+        this.confirm_delete_dialog = false;
+        axios.post(Config.apiurl + '/patient/deletePatientByID', null, { params: {
+          patient_id: this.patient_id
+          }})
+        .then(response => {
+          if(response.data.success == true) {
+            this.popSnack("已删除。");
+            this.dialog = false;
+          }
+          else if(response.data.code == 401) {
+            this.popSnack("登录信息已失效，请重新登录。");
+            this.$router.push({path: this.localePath('/login')});
+          }
+          else {
+            throw new Error(response.data.message);
+          }
+        })
+        .catch(error => {
+          alert('删除失败：无法连接到服务器，刷新重试。\n' + error.message);
+        })
+        .finally(e => {
+          this.$emit('save', 'Dialog closed');
+          this.loading = false;
+        })
       }
     },
 
