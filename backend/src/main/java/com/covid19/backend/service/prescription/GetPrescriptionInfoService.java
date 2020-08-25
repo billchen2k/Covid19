@@ -16,8 +16,12 @@ public class GetPrescriptionInfoService extends BaseService{
     /**
      * 根据用药ID获取用药信息
      */
-    public Prescription gePrescriptionInfoByID(long prescription_id){
+    public Prescription getPrescriptionInfoByID(long prescription_id){
         return prescriptionMapper.selectPrescriptionByID(prescription_id);
+    }
+
+    public Integer getPrescriptionNumber(){
+        return prescriptionMapper.getNumber();
     }
 
     /**

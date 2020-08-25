@@ -13,6 +13,10 @@ public interface PrescriptionMapper {
     @Select("SELECT * from prescription where prescription_id=#{prescription_id}")
     public Prescription selectPrescriptionByID(@Param("prescription_id") long prescription_id);
 
+    @Select("SELECT count(*) " +
+            "from prescription")
+    public Integer getNumber();
+
     @Select("SELECT * " +
             "from prescription natural join doctor natural join medicine " +
             "where patient_id=#{patient_id}")

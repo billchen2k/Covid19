@@ -1,6 +1,7 @@
 package com.covid19.backend.controller.diagnosis;
 
 import com.covid19.backend.controller.BaseController;
+import com.covid19.backend.model.Prescription;
 import com.covid19.backend.model.Result;
 import com.covid19.backend.model.Diagnosis;
 import com.covid19.backend.service.diagnosis.GetDiagnosisInfoService;
@@ -35,6 +36,13 @@ public class GetDiagnosisInfo {
         Diagnosis diagnosis = getDiagnosisInfoService.getDiagnosisInfoByID(diagnosis_id);
         if(diagnosis == null) return Result.error(2012,"不存在该诊断");
         return Result.ok(diagnosis);
+    }
+
+    @PostMapping("/diagnosis/getDiagnosisNumber")
+    @ApiOperation(value = "获取当前数据库诊断数量", notes = "可以获取当前数据库诊断数量")
+    public Result<Prescription> getDiagnosisNumber()
+    {
+        return Result.ok(getDiagnosisInfoService.getDiagnosisNumber());
     }
 
     @PostMapping("/diagnosis/getDiagnosisInfo")
