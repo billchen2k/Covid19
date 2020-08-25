@@ -34,7 +34,7 @@ public class DeletePrescription {
             HttpServletRequest request)
     {
         if(deletePrescriptionService.checkCurrentUserInfo(request) == -1) return Result.error(Result.CODE_UNAUTHORIZED, "账号信息错误。");
-        Prescription prescription = getPrescriptionInfoService.gePrescriptionInfoByID(prescription_id);
+        Prescription prescription = getPrescriptionInfoService.getPrescriptionInfoByID(prescription_id);
         if(prescription == null) return Result.error(2012,"不存在该用药记录");
         deletePrescriptionService.deletePrescriptionByID(prescription_id);
         return Result.ok();

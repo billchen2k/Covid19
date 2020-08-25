@@ -49,7 +49,7 @@ public class UpdatePrescription extends BaseController{
     {
         if(updatePrescriptionService.checkCurrentUserInfo(request) == -1)
             return Result.error(Result.CODE_UNAUTHORIZED, "账号信息错误。");
-        Prescription prescription = getPrescriptionInfoService.gePrescriptionInfoByID(prescription_id);
+        Prescription prescription = getPrescriptionInfoService.getPrescriptionInfoByID(prescription_id);
         if(prescription == null) return Result.error(2012,"不存在该用药信息");
 
         Prescription new_prescription = updatePrescriptionService.updatePrescription(

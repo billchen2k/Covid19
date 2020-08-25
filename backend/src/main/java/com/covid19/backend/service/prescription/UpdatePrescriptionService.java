@@ -48,7 +48,7 @@ public class UpdatePrescriptionService extends BaseService{
             String doctor_id
     )
     {
-        Prescription prescription = getPrescriptionInfoService.gePrescriptionInfoByID(prescription_id);
+        Prescription prescription = getPrescriptionInfoService.getPrescriptionInfoByID(prescription_id);
         prescription.setPatient_id(patient_id).setMedicine_id(medicine_id).setDosage(dosage).setUsage(usage).setDoctor_id(doctor_id);
         prescriptionMapper.updatePrescription(prescription);
         return prescription;
