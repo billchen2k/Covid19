@@ -41,6 +41,11 @@
             }
           ]
         };
+        this.diagnosisItems.sort((a, b) => {
+          let dateA = new Date(a.time);
+          let dateB = new Date(b.time);
+          return dateA - dateB;
+        })
         this.diagnosisItems.forEach(one => {
           chartData.labels.push(one.time.substring(5));
           chartData.datasets[0].data.push(one.temperature);

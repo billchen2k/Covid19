@@ -45,7 +45,7 @@ const config: Configuration = {
         hid: 'og:description',
         property: 'og:description',
         content:
-          '当サイトは新型コロナウイルス感染症（COVID-19）に関する最新情報を提供するために、東京都が開設したものです。'
+          '数据库分析系统'
       },
       {
         hid: 'og:image',
