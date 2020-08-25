@@ -35,9 +35,16 @@ public class GetPrescriptionInfo {
             @RequestParam(value = "prescription_id") long prescription_id
     )
     {
-        Prescription prescription = getPrescriptionInfoService.gePrescriptionInfoByID(prescription_id);
+        Prescription prescription = getPrescriptionInfoService.getPrescriptionInfoByID(prescription_id);
         if(prescription == null) return Result.error(2012,"不存在该处方记录");
         return Result.ok(prescription);
+    }
+
+    @PostMapping("/prescription/getPrescriptionNumber")
+    @ApiOperation(value = "获取当前数据库处方数量", notes = "可以获取当前数据库处方数量")
+    public Result<Prescription> getPrescriptionNumber()
+    {
+        return Result.ok(getPrescriptionInfoService.getPrescriptionNumber());
     }
 
     @PostMapping("/prescription/getPrescriptionInfoByPatientID")

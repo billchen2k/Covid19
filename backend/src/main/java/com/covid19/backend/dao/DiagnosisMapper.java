@@ -13,6 +13,11 @@ import java.util.List;
 public interface DiagnosisMapper {
     @Select("SELECT * from diagnosis where diagnosis_id=#{diagnosis_id}")
     public Diagnosis selectDiagnosisByID(@Param("diagnosis_id") long diagnosis_id);
+
+    @Select("SELECT count(*) " +
+            "from prescription")
+    public Integer getNumber();
+
 //
 //    @Select("SELECT * from diagnosis where patient_id=#{pati_id}")
 //    public ArrayList<Diagnosis> selectDiagnosisByPatientID(@Param("patinet_id") long patient_id);

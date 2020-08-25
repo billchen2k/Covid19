@@ -18,6 +18,9 @@ public class GetDiagnosisInfoService extends BaseService{
         return diagnosisMapper.selectDiagnosisByID(diagnosis_id);
     }
 
+    public Integer getDiagnosisNumber(){
+        return diagnosisMapper.getNumber();
+    }
 
     public ArrayList<Diagnosis> getDiagnosisInfo(Diagnosis diagnosis) {
         if(diagnosis.getPatient_id() == null) diagnosis.setPatient_id("%");
