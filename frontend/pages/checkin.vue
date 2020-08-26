@@ -305,26 +305,26 @@
           .catch(error => {
             alert('无法连接到服务器，刷新重试。\n' + error.message);
           });
-        //
-        // this.$axios.$post(Config.apiurl + "/patient/getPrescriptionInfo", null, {params: {
-        //     page: 1,
-        //     size: 0
-        //   }}).then(response => {
-        //   this.totalPatientLength = response.totalCount;
-        // })
-        //   .catch(error => {
-        //     alert('无法连接到服务器，刷新重试。\n' + error.message);
-        //   });
-        //
-        // this.$axios.$post(Config.apiurl + "/patient/getPatientInfo", null, {params: {
-        //     page: 1,
-        //     size: 0
-        //   }}).then(response => {
-        //   this.totalPatientLength = response.totalCount;
-        // })
-        //   .catch(error => {
-        //     alert('无法连接到服务器，刷新重试。\n' + error.message);
-        //   });
+
+        this.$axios.$post(Config.apiurl + "/prescription/getPrescriptionNumber", null, {params: {
+            page: 1,
+            size: 0
+          }}).then(response => {
+          this.totalPrescirptionLength = response.data;
+        })
+          .catch(error => {
+            alert('无法连接到服务器，刷新重试。\n' + error.message);
+          });
+
+        this.$axios.$post(Config.apiurl + "/diagnosis/getDiagnosisNumber", null, {params: {
+            page: 1,
+            size: 0
+          }}).then(response => {
+          this.totalDiagnosisLength = response.data;
+        })
+          .catch(error => {
+            alert('无法连接到服务器，刷新重试。\n' + error.message);
+          });
       },
 
       checkInPatient() {

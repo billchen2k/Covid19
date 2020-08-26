@@ -15,7 +15,7 @@ public interface DiagnosisMapper {
     public Diagnosis selectDiagnosisByID(@Param("diagnosis_id") long diagnosis_id);
 
     @Select("SELECT count(*) " +
-            "from prescription")
+            "from diagnosis")
     public Integer getNumber();
 
 //
