@@ -233,6 +233,12 @@ frontend
 
 使用 `axios` 来实现和后端的异步请求，使用 `chart.js` 来绘制项目中使用的可视化图表。在开发过程中还使用到 `date-fns`、`mdi-icons`、`vue-spinner`等 depencency。用户的认证信息存储在浏览器的本地 cookie 中，同时使用了 sessionid 来后端作为请求凭据，双重认证用户身份，确保没有登录的用户不能对病患做出非法修改。
 
+使用 `vuetify` 的响应式布局系统，本项目支持从移动设备上访问，并同样能够取得较好效果。
+
+<img src="https://billc.oss-cn-shanghai.aliyuncs.com/img/2020-08-26-kJT1td.png" alt="image-20200826175215394" style="zoom:50%;" />
+
+<img src="https://billc.oss-cn-shanghai.aliyuncs.com/img/2020-08-26-XCsj0G.png" alt="image-20200826175254181" style="zoom:50%;" />
+
 #### Backend & Database
 
 后端使用经典的 Java 框架 SpringBoot 编写。主要文件结构图：
