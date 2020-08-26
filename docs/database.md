@@ -12,6 +12,8 @@
 
 ### 二、E-R图
 
+本项目使用的数据库的 ER 图如下：
+
 <img src="https://covid19.billc.io/er.png" alt="ER" style="zoom: 33%;" />
 
 ---

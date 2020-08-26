@@ -1,12 +1,24 @@
 ## Covid 19 疫情分析系统部署文档
 
+### 获取项目
+
+确保网络通信良好，使用
+
+```bash
+git clone https://github.com/BillChen2K/covid19
+```
+
+来讲项目保存到本地。前端和后端的源代码分别位于 `frontend` 目录和 `backend` 目录下。
+
 ### 安装数据库
+
+先初始化服务器，接下来使用
 
 ```bash
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.15-1_all.deb
 dpkg -i mysql-apt-config_0.8.15-1_all.deb
 ```
-在这里选择 8.0 版本：
+安装 MySQL。在这里选择 8.0 版本：
 
 ![](https://billc.oss-cn-shanghai.aliyuncs.com/img/2020-04-17-034545.jpg)
 
@@ -70,7 +82,15 @@ yarn
 npm install
 ```
 
-然后配置后端 API 的地址。在 `component/global/Config.vue` 下有 `apiurl` 导出项，将该地址修改为后端地址。地址不应以斜线结尾。接下来使用 `nuxt-ts` 生成静态的文件：
+然后配置后端 API 的地址。在 `component/global/Config.vue` 下有 `apiurl` 导出项：
+
+```js
+export {
+  apiurl: https://covid19api.billc.io
+}
+```
+
+该地址修改为后端地址。**地址不应以斜线结尾。**接下来使用 `nuxt-ts` 生成静态的文件：
 
 ```bash
 nuxt-ts generate
