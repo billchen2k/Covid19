@@ -36,6 +36,13 @@
 | hospital_id      | int          | 治疗医院编号   |
 | is_doctor        | int          | 本人是否是医生 |
 
+外键约束：
+
+| 字段        | 数据类型 | 被参照关系 |
+| ----------- | -------- | ---------- |
+| doctor_id   | int      | doctor     |
+| hospital_id | int      | hospital   |
+
 #### 2、doctor
 
 存储医生信息。
@@ -48,6 +55,12 @@
 | doctor_birthday | datetime     | 医生生日     |
 | department      | varchar(255) | 所在部门     |
 | hospital_id     | int          | 工作医院编号 |
+
+外键约束：
+
+| 字段        | 数据类型 | 被参照关系 |
+| ----------- | -------- | ---------- |
+| hospital_id | int      | hospital   |
 
 #### 3、hospital
 
@@ -85,6 +98,13 @@
 | temperature  | varchar(255) | 患者体温     |
 | nucleic_acid | varchar(255) | 核酸检验结果 |
 
+外键约束：
+
+| 字段       | 数据类型 | 被参照关系 |
+| ---------- | -------- | ---------- |
+| doctor_id  | int      | doctor     |
+| patient_id | int      | patient    |
+
 #### 6、image
 
 存储肺部成像信息。
@@ -99,6 +119,13 @@
 | conclusion_doctor_id | int          | 结论医生编号 |
 | scanning_doctor_id   | int          | 扫描一生编号 |
 
+外键约束：
+
+| 字段       | 数据类型 | 被参照关系 |
+| ---------- | -------- | ---------- |
+| doctor_id  | int      | doctor     |
+| patient_id | int      | patient    |
+
 #### 7、prescription
 
 存储处方信息。
@@ -112,6 +139,14 @@
 | usage             | varchar(255) | 用法         |
 | doctor_id         | int          | 诊治医生编号 |
 | prescription_date | datetime     | 处方开具日期 |
+
+外键约束：
+
+| 字段        | 数据类型 | 被参照关系 |
+| ----------- | -------- | ---------- |
+| doctor_id   | int      | doctor     |
+| patient_id  | int      | patient    |
+| medicine_id | int      | medicine   |
 
 #### 8、user
 
@@ -128,3 +163,41 @@
 | gender               | varchar(255) | 姓名             |
 | password_change_date | datetime     | 上次密码修改日期 |
 | registration_ip      | varchar(255) | 注册时IP地址     |
+
+----
+
+### 四、索引情况
+
+#### 1、patient
+
+| 名称             | 域                      | 类型   | 方式  |
+| :--------------- | ----------------------- | ------ | ----- |
+| index_hospital   | patient_id, hospital_id | NORMAL | BTREE |
+| index_doctor     | patient_id, doctor_id   | NORMAL | BTREE |
+| patient_hospital | hospital_id             | NORMAL | BTREE |
+| patient_doctor   | doctor_id               | NORMAL | BTREE |
+| index_patient    | patient_id              | NORMAL | BTREE |
+
+#### 2、doctor
+
+| 名称            | 域                     | 类型   | 方式  |
+| :-------------- | ---------------------- | ------ | ----- |
+| main            | doctor_id, hospital_id | NORMAL | BTREE |
+| doctor_hospital | hospital_id            | NORMAL | BTREE |
+| doctor_id       | doctor_id              | NORMAL | BTREE |
+
+#### 3、diagnosis
+
+| 名称              | 域         | 类型   | 方式  |
+| :---------------- | ---------- | ------ | ----- |
+| diagnosis_patient | patient_id | NORMAL | BTREE |
+| diagnosis_doctor  | doctor_id  | NORMAL | BTREE |
+
+#### 4、prescription
+
+| 名称                  | 域          | 类型   | 方式  |
+| :-------------------- | ----------- | ------ | ----- |
+| prescription_doctor   | doctor_id   | NORMAL | BTREE |
+| prescription_medicine | medicine_id | NORMAL | BTREE |
+| prescription_patient  | patient_id  | NORMAL | BTREE |
+
